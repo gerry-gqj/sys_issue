@@ -1,147 +1,161 @@
 <template>
-  <div id="centre">
-    <h1>issue 查询</h1>
-    <el-container>
-      <!-- Issue No输入框 -->
-      <div class="inputFrame">
-        Issue No:
-        <el-input
-          v-model="input1"
-          placeholder="请输入Issue No"
-          style="width: 200px; height: 22.5px"
-        ></el-input>
-      </div>
+  <div>
+    <h2>Issue</h2>
+    <hr style="border: 1px dashed #000; height: 1px" />
+    <el-row :gutter="50">
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>Issue No</p>
+          <p>
+            <el-input v-model="issueid" placeholder=""></el-input>
+          </p>
+        </div>
+      </el-col>
 
-      <!-- Issue状态选择框 -->
-      <div class="selectFrame">
-        Issue状态：
-        <el-select v-model="value" placeholder="请选择">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-      </div>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>Issue等级</p>
+          <p>
+            <el-select v-model="issuserank" filterable placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </p>
+        </div>
+      </el-col>
 
-      <!-- 创建时间选择框 -->
-      <div class="createDate">
-        <span class="demonstration">创建时间：</span>
-        <el-date-picker v-model="value1" type="date" placeholder="">
-        </el-date-picker>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>创建时间</p>
+          <p>
+            <el-input v-model="createtime" placeholder=""></el-input>
+          </p>
+        </div>
+      </el-col>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>至</p>
+          <p>
+            <el-input
+              v-model="issusetype"
+              placeholder=""
+              maxlength="30"
+            ></el-input>
+          </p>
+        </div>
+      </el-col>
+    </el-row>
 
-        <span>&nbsp;至 &nbsp;</span>
+    <el-row :gutter="50">
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>创建人</p>
+          <p>
+            <el-input v-model="version"></el-input>
+          </p>
+        </div>
+      </el-col>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>修改人</p>
+          <p>
+            <el-input v-model="planTime" style="width: 100%"></el-input>
+          </p>
+        </div>
+      </el-col>
 
-        <el-date-picker v-model="value2" type="date" placeholder="">
-        </el-date-picker>
-      </div>
-    </el-container>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>修改时间</p>
+          <p>
+            <el-date-picker
+              v-model="planTime"
+              type="date"
+              placeholder="选择日期"
+              :picker-options="pickerOptions0"
+              style="width: 100%"
+            ></el-date-picker>
+          </p>
+        </div>
+      </el-col>
 
-    <!-- 创建人输入框 -->
-    <el-container style="margin-left: 100px; margin-top: 50px">
-      <div>
-        &nbsp;&nbsp;&nbsp;&nbsp;创建人:
-        <el-input
-          v-model="input2"
-          placeholder="请输入创建人"
-          style="width: 200px; height: 22.5px"
-        ></el-input>
-      </div>
-
-      <!-- 修改人输入框 -->
-      <div class="changer">
-        修改人：
-        <el-input
-          v-model="input3"
-          placeholder="请输入修改人"
-          style="width: 200px; height: 22.5px"
-        ></el-input>
-      </div>
-
-      <!-- 修改时间选择框 -->
-      <div class="modifyDate">
-        <span class="demonstration">修改时间：</span>
-        <el-date-picker v-model="value3" type="date" placeholder="">
-        </el-date-picker>
-        <span>&nbsp;至 &nbsp;</span>
-        <el-date-picker v-model="value4" type="date" placeholder="">
-        </el-date-picker>
-      </div>
-    </el-container>
-
-    <div class="button">
-      <el-button type="primary" @click="golist">查询</el-button>
-      <el-button>清空</el-button>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content">
+          <p>至</p>
+          <p>
+            <el-date-picker
+              v-model="planTime"
+              type="date"
+              placeholder="选择日期"
+              :picker-options="pickerOptions0"
+              style="width: 100%"
+              maxlength="30"
+            ></el-date-picker>
+          </p>
+        </div>
+      </el-col>
+    </el-row>
+    <div>
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="24"
+        :lg="24"
+        :xl="24"
+        style="text-align: center"
+      >
+        <div class="button">
+          <el-button type="primary" @click="golist">查询</el-button>
+          <el-button>清空</el-button>
+        </div>
+      </el-col>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "centre",
-  date() {
-    return {};
-  },
-};
-</script>
-
-
-<style>
-.selectFrame {
-  margin-left: 100px;
-}
-.inputFrame {
-  margin-left: 100px;
-}
-.creator {
-}
-.changer {
-  margin-left: 120px;
-}
-.createDate {
-  margin-left: 100px;
-}
-.modifyDate {
-  margin-left: 115px;
-}
-.button {
-  margin-top: 50px;
-  text-align: center;
-}
-</style>
-<script>
-export default {
-  date() {
+  data() {
     return {
-      input1: "", //Issue No
-      input2: "", //创建人
-      input3: "", //修改人
-      //Issue状态选择框
       options: [
         {
           value: "选项1",
-          label: "待修改",
+          label: "最高",
         },
         {
           value: "选项2",
-          label: "待验证",
+          label: "较高",
         },
         {
           value: "选项3",
-          label: "已关闭",
+          label: "一般",
+        },
+        {
+          value: "选项4",
+          label: "低",
         },
       ],
+      title: "",
+      issueid: "",
+      createtime: "",
+      issuserank: "",
+      issusetype: "",
+      version: "",
+      planTime: "",
+      realtime: "",
+      textarea: "",
+      userid: "",
       value: "",
-      //创建日期：起始日期选择
-      value1: "",
-      //创建日期：结束日期选额
-      value2: "",
-      //修改日期：起始日期选择
-      value3: "",
-      //修改日期：结束日期选择
-      value4: "",
+      pickerOptions0: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;
+        },
+      },
     };
   },
   methods: {
@@ -151,3 +165,26 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.el-col {
+  border-radius: 4px;
+}
+
+#create {
+  width: 1000px;
+  margin: 50px 150px;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+</style>
+
+
+
+
+
+

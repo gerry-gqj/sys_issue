@@ -2,26 +2,26 @@
   <div>
     <el-container>
       <el-header>GBA Issue管理系统</el-header>
-      <el-row>
-        <el-button @click="FormRegistered()"
-                   round>注册</el-button>
-        <el-button round
-                   @click="FormLogin()">登陆</el-button>
-      </el-row>
+      <el-main>
+        <el-row>
+          <el-button @click="FormRegistered()" round>注册</el-button>
+          <el-button round @click="FormLogin()">登陆</el-button>
+        </el-row>
+      </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
   },
   methods: {
-    FormLogin () {
+    FormLogin() {
       window.location.href = "./Login";
     },
-    FormRegistered () {
+    FormRegistered() {
       window.location.href = "./Registered";
     },
   },
@@ -29,26 +29,22 @@ export default {
 </script>
 
 <style>
+* {
+  background: #e9eef3;
+}
 .el-header {
-  color: #333;
+  background: rgb(231, 193, 193);
+  color: rgb(63, 24, 24);
   text-align: center;
   line-height: 80px;
   font-style: inherit;
   font-size: 35px;
 }
 
-.el-footer {
+.el-main {
+  background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 60px;
-  font-style: inherit;
-  font-size: 30px;
-}
-
-.el-main {
-  /* background-color: #e9eef3; */
-  color: #333;
-  /* text-align: center; */
   line-height: 160px;
 }
 

@@ -47,8 +47,8 @@
 export default {
   data() {
     return {
-      UserId: "",
-      UserName: "",
+      // UserId: "",
+      // UserName: "",
       tableData: [
         {
           id: "20201117",
@@ -97,60 +97,78 @@ export default {
     };
   },
   methods: {
-    querySearch1(queryString, cb) {
-      const IDs = this.IDs;
-      const results = queryString
-        ? IDs.filter(this.createFilter(queryString))
-        : IDs;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.currentPage = 1;
+      this.pageSize = val;
     },
-    querySearch2(queryString, cb) {
-      const names = this.names;
-      const results = queryString
-        ? names.filter(this.createFilter(queryString))
-        : names;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
+    //当前页改变时触发 跳转其他页
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.currentPage = val;
     },
-    createFilter(queryString) {
-      return (ID) => {
-        return ID.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
-      };
+    getRowClass({ rowIndex }) {
+      if (rowIndex == 0) {
+        return "background:#81BEF7";
+      } else {
+        return "";
+      }
     },
-    loadAll1() {
-      return [
-        { value: "1" },
-        { value: "2" },
-        { value: "3" },
-        { value: "11" },
-        { value: "111" },
-        { value: "6" },
-        { value: "77" },
-      ];
-    },
-    loadAll2() {
-      return [
-        { value: "Tony" },
-        { value: "LaoWang" },
-        { value: "Pm" },
-        { value: "BA" },
-        { value: "Java" },
-        { value: "C" },
-        { value: "Tom" },
-      ];
-    },
-    handleSelect(item) {
-      console.log(item);
-    },
-  },
-  // resetForm() {
-  //     this.resetFields();
-  //    },
 
-  mounted() {
-    this.IDs = this.loadAll1();
-    this.names = this.loadAll2();
+    //   querySearch1(queryString, cb) {
+    //     const IDs = this.IDs;
+    //     const results = queryString
+    //       ? IDs.filter(this.createFilter(queryString))
+    //       : IDs;
+    //     // 调用 callback 返回建议列表的数据
+    //     cb(results);
+    //   },
+    //   querySearch2(queryString, cb) {
+    //     const names = this.names;
+    //     const results = queryString
+    //       ? names.filter(this.createFilter(queryString))
+    //       : names;
+    //     // 调用 callback 返回建议列表的数据
+    //     cb(results);
+    //   },
+    //   createFilter(queryString) {
+    //     return (ID) => {
+    //       return ID.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
+    //     };
+    //   },
+    //   loadAll1() {
+    //     return [
+    //       { value: "1" },
+    //       { value: "2" },
+    //       { value: "3" },
+    //       { value: "11" },
+    //       { value: "111" },
+    //       { value: "6" },
+    //       { value: "77" },
+    //     ];
+    //   },
+    //   loadAll2() {
+    //     return [
+    //       { value: "Tony" },
+    //       { value: "LaoWang" },
+    //       { value: "Pm" },
+    //       { value: "BA" },
+    //       { value: "Java" },
+    //       { value: "C" },
+    //       { value: "Tom" },
+    //     ];
+    //   },
+    //   handleSelect(item) {
+    //     console.log(item);
+    //   },
+    // },
+    // // resetForm() {
+    // //     this.resetFields();
+    // //    },
+    // mounted() {
+    //   this.IDs = this.loadAll1();
+    //   this.names = this.loadAll2();
+    // },
   },
 };
 </script>
