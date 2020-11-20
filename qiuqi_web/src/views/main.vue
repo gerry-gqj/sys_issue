@@ -27,7 +27,7 @@ export default {
     navtop,
     leftNav,
   },
-  data() {
+  data () {
     return {};
   },
   methods: {},
@@ -36,7 +36,7 @@ export default {
 
 <style>
 .el-main {
-  background-color: #d2a8f5;
+  background-color: #f5eff5cc;
 }
 
 .el-header,

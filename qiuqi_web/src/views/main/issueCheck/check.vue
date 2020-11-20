@@ -1,117 +1,155 @@
 <template>
   <div>
-    <h2>Issue</h2>
+    <h2 style="text-align: center;">Issue 查询</h2>
     <hr style="border: 1px dashed #000; height: 1px" />
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <!-- issue no -->
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue No</p>
           <p>
-            <el-input v-model="issueid" placeholder=""></el-input>
+            <el-input v-model="issueno"
+                      placeholder=""></el-input>
           </p>
         </div>
       </el-col>
-
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <!-- issue等级 -->
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue等级</p>
           <p>
-            <el-select v-model="issuserank" filterable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+            <el-select v-model="issuserank"
+                       filterable
+                       placeholder="请选择"
+                       maxlength="30">
+              <el-option v-for="item in options"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value">
               </el-option>
             </el-select>
           </p>
         </div>
       </el-col>
 
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>创建时间</p>
           <p>
-            <el-input v-model="createtime" placeholder=""></el-input>
+
+            <el-date-picker v-model="createtime"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            style="width: 100%"></el-date-picker>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>至</p>
           <p>
-            <el-input
-              v-model="issusetype"
-              placeholder=""
-              maxlength="30"
-            ></el-input>
+
+            <el-date-picker v-model="createtimeto"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            style="width: 100%"></el-date-picker>
+
           </p>
         </div>
       </el-col>
     </el-row>
 
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>创建人</p>
           <p>
-            <el-input v-model="version"></el-input>
+            <el-input v-model="createtor"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>修改人</p>
           <p>
-            <el-input v-model="planTime" style="width: 100%"></el-input>
+            <el-input v-model="modifier"
+                      style="width: 100%"></el-input>
           </p>
         </div>
       </el-col>
 
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>修改时间</p>
           <p>
-            <el-date-picker
-              v-model="planTime"
-              type="date"
-              placeholder="选择日期"
-              :picker-options="pickerOptions0"
-              style="width: 100%"
-            ></el-date-picker>
+            <el-date-picker v-model="changetime"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            style="width: 100%"></el-date-picker>
           </p>
         </div>
       </el-col>
 
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>至</p>
           <p>
-            <el-date-picker
-              v-model="planTime"
-              type="date"
-              placeholder="选择日期"
-              :picker-options="pickerOptions0"
-              style="width: 100%"
-              maxlength="30"
-            ></el-date-picker>
+            <el-date-picker v-model="changetimeto"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            style="width: 100%"
+                            maxlength="30"></el-date-picker>
           </p>
         </div>
       </el-col>
     </el-row>
     <div>
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="24"
-        :xl="24"
-        style="text-align: center"
-      >
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24"
+              style="text-align: center">
         <div class="button">
-          <el-button type="primary" @click="golist">查询</el-button>
-          <el-button>清空</el-button>
+          <el-button type="primary"
+                     @click="golist">查询</el-button>
+          <el-button @click="clearvalues">清空</el-button>
         </div>
       </el-col>
     </div>
@@ -120,7 +158,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       options: [
         {
@@ -140,28 +178,33 @@ export default {
           label: "低",
         },
       ],
-      title: "",
-      issueid: "",
-      createtime: "",
+      issueno: "",
       issuserank: "",
-      issusetype: "",
-      version: "",
-      planTime: "",
-      realtime: "",
-      textarea: "",
-      userid: "",
+      createtime: "",
+      createtimeto: "",
+      createtor: "",
+      modifier: "",
+      changetime: "",
+      changetimeto: "",
       value: "",
       pickerOptions0: {
-        disabledDate(time) {
-          return time.getTime() < Date.now() - 8.64e7;
-        },
       },
     };
   },
   methods: {
-    golist() {
+    golist () {
       window.location.href = "./list";
     },
+    clearvalues () {
+      this.issueno = "";
+      this.issuserank = "";
+      this.createtime = "";
+      this.createtimeto = "";
+      this.createtor = "";
+      this.modifier = "";
+      this.changetime = "";
+      this.changetimeto = "";
+    }
   },
 };
 </script>

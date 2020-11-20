@@ -1,25 +1,30 @@
 
 <template>
   <el-container>
-    <el-aside width="auto" class="header-logo tap">
-      <img class="logo" src="../assets/imgs/logo.png" alt="Logo" />
+    <el-aside width="auto"
+              class="header-logo tap">
+      <img class="logo"
+           src="../assets/imgs/user2.jpg"
+           alt="Logo" />
     </el-aside>
     <h1>GBA Issue管理系统</h1>
-    <el-aside width="auto" class="header-logo tap">
-      <el-avatar icon="el-icon-user-solid" class="headerLogo"></el-avatar>
+    <el-aside width="auto"
+              class="header-logo tap">
+      <el-avatar icon="el-icon-user-solid"
+                 class="headerLogo"></el-avatar>
     </el-aside>
   </el-container>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       activeIndex: "1",
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
+    handleSelect (key, keyPath) {
       console.log(key, keyPath);
     },
   },
