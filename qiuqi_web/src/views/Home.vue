@@ -17,7 +17,6 @@
        <el-button @click="FormRegistered()"
                    round>注册</el-button>
     </el-tab-pane> -->
-
         <h2 class="title">登录</h2>
         <!-- 登录模块 -->
         <!-- <el-tab-pane label="登录" name="second"> -->
@@ -58,11 +57,8 @@
 export default {
   data () {
     const validatePass = (rule, value, callback) => {
-
       if (value === '') {
         callback(new Error('请输入密码'));
-
-
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass');
@@ -132,31 +128,24 @@ export default {
             }).catch(function (error) {
               console.log(error);
             });
-
         }
       });
     },
-
     resetForm (formName) {
       this.$refs[formName].resetFields();
     }
   },
 };
-
-
-
-
 </script>
 
 <style>
 .el-header {
   color: #333;
   text-align: center;
-  line-height: 80px;
+  line-height: 150px;
   font-style: inherit;
   font-size: 35px;
 }
-
 .el-footer {
   color: #333;
   text-align: center;
@@ -164,23 +153,19 @@ export default {
   font-style: inherit;
   font-size: 30px;
 }
-
 .el-main {
   /* background-color: #e9eef3; */
   color: #333;
   /* text-align: center; */
   line-height: 160px;
 }
-
 body > .el-container {
   margin-bottom: 40px;
 }
-
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
   line-height: 260px;
 }
-
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
@@ -200,5 +185,3 @@ body > .el-container {
   text-align: center;
 }
 </style>
-
-
