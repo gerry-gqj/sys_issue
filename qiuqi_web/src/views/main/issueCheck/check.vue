@@ -14,7 +14,9 @@
           <p>Issue No</p>
           <p>
             <el-input v-model="issueno"
-                      placeholder=""></el-input>
+                      placeholder=""
+                      style="text-align:center;"
+                      maxlength="1"></el-input>
           </p>
         </div>
       </el-col>

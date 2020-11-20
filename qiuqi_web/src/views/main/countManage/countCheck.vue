@@ -9,19 +9,16 @@
                  :inline="true"
                  :model="formInline"
                  class="demo-form-inline">
-          <el-form-item label="用户ID">
+          <el-form-item label="">
             <el-input v-model="formInline.UserId"
                       :fetch-suggestions="querySearch1"
                       placeholder="请输入用户ID"
-                      style="width: 250px; height:auto"
-                      @select="handleSelect"
-                      maxlength="30"></el-input>
+                      @select="handleSelect"></el-input>
           </el-form-item>
-          <el-form-item label="用户姓名">
+          <el-form-item label="">
             <el-input v-model="formInline.UserName"
                       :fetch-suggestions="querySearch2"
                       placeholder="请输入用户姓名"
-                      style="width: 250px; height:auto"
                       @select="handleSelect"
                       maxlength="30"></el-input>
           </el-form-item>

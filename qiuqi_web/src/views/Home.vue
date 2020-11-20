@@ -4,8 +4,10 @@
       <el-header>GBA Issue管理系统</el-header>
       <el-main>
         <el-row>
-          <el-button @click="FormRegistered()" round>注册</el-button>
-          <el-button round @click="FormLogin()">登陆</el-button>
+          <el-button @click="FormRegistered()"
+                     round>注册</el-button>
+          <el-button round
+                     @click="FormLogin()">登陆</el-button>
         </el-row>
       </el-main>
     </el-container>
@@ -14,14 +16,14 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {};
   },
   methods: {
-    FormLogin() {
+    FormLogin () {
       window.location.href = "./Login";
     },
-    FormRegistered() {
+    FormRegistered () {
       window.location.href = "./Registered";
     },
   },
@@ -44,11 +46,11 @@ export default {
 .el-main {
   background-color: #e9eef3;
   color: #333;
-  text-align: center;
+  /* text-align: center; */
   line-height: 160px;
 }
 
-body > .el-container {
+/* body > .el-container {
   margin-bottom: 40px;
 }
 
@@ -59,7 +61,7 @@ body > .el-container {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
-}
+} */
 </style>
 
 

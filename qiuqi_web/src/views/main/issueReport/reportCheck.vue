@@ -1,20 +1,18 @@
 <template>
   <div>
-
     <h4 style="text-align:center;width:1200px">Issue报表查询</h4>
     <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
     <hr>
-
     <el-container>
       <div style="width:1200px;text-align:center">
         <el-form :inline="true"
                  :model="formInline"
                  class="demo-form-inline">
-          <el-form-item label="用户ID">
+          <el-form-item label="">
             <el-input v-model="formInline.UserId"
                       placeholder="请输入用户ID"></el-input>
           </el-form-item>
-          <el-form-item label="用户名">
+          <el-form-item label="">
             <el-input v-model="
                       formInline.UserName"
                       placeholder="请输入用户姓名">
@@ -41,7 +39,7 @@ export default {
     return {
       formInline: {
         UserId: "",
-        UserName: "",
+        UserName: ""
       }
     };
   },
@@ -53,11 +51,6 @@ export default {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
     }
-  },
+  }
 };
 </script>
-
-
-
-
-

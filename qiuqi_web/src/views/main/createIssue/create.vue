@@ -3,65 +3,73 @@
     <div>
       <h2>Issue题目</h2>
 
-      <el-input
-        type="text"
-        placeholder="内容"
-        v-model="title"
-        maxlength="80"
-        show-word-limit
-      ></el-input>
+      <el-input type="text"
+                placeholder="内容"
+                v-model="title"
+                maxlength="80"
+                show-word-limit></el-input>
     </div>
     <!-- 基本信息栏 -->
     <h2>基本信息</h2>
     <hr style="border: 1px dashed #000; height: 1px" />
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue No.</p>
           <p>
-            <el-input
-              v-model="issueid"
-              placeholder="系统自动生成"
-              :disabled="true"
-            ></el-input>
+            <el-input v-model="issueid"
+                      placeholder="系统自动生成"
+                      :disabled="true"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>创建时间</p>
           <p>
-            <el-input
-              v-model="createtime"
-              placeholder="系统自动生成"
-              :disabled="true"
-            ></el-input>
+            <el-input v-model="createtime"
+                      placeholder="系统自动生成"
+                      :disabled="true"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue类型</p>
           <p>
-            <el-input
-              v-model="issusetype"
-              placeholder="内容"
-              maxlength="30"
-            ></el-input>
+            <el-input v-model="issusetype"
+                      placeholder="内容"
+                      maxlength="30"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue等级</p>
           <p>
-            <el-select v-model="issuserank" filterable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+            <el-select v-model="issuserank"
+                       filterable
+                       placeholder="请选择">
+              <el-option v-for="item in options"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value">
               </el-option>
             </el-select>
           </p>
@@ -69,7 +77,11 @@
       </el-col>
     </el-row>
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>影响版本</p>
           <p>
@@ -77,17 +89,19 @@
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>计划修改时间</p>
           <p>
-            <el-date-picker
-              v-model="planTime"
-              type="date"
-              placeholder="选择日期"
-              :picker-options="pickerOptions0"
-              style="width: 100%"
-            ></el-date-picker>
+            <el-date-picker v-model="planTime"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            style="width: 100%"></el-date-picker>
           </p>
         </div>
       </el-col>
@@ -95,39 +109,44 @@
     <!-- 重现步骤栏 -->
     <div style="margin-bottom: 100px">
       <h2>重现步骤</h2>
-      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24">
         <div class="grid-content">
-          <el-input
-            type="textarea"
-            placeholder="请输入内容"
-            rows="5"
-            v-model="textarea"
-            maxlength="2000"
-            show-word-limit
-          ></el-input>
+          <el-input type="textarea"
+                    placeholder="请输入内容"
+                    rows="5"
+                    v-model="textarea"
+                    maxlength="2000"
+                    show-word-limit></el-input>
         </div>
       </el-col>
     </div>
     <!-- 指派修改人栏 -->
     <div>
       <h2>指派修改人栏</h2>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
-          <el-input v-model="userid" placeholder="内容"></el-input>
+          <el-input v-model="userid"
+                    placeholder="内容"></el-input>
         </div>
       </el-col>
       <br /><br />
     </div>
     <!-- 提交按钮 -->
     <div>
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="24"
-        :xl="24"
-        style="text-align: center"
-      >
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24"
+              style="text-align: center">
         <el-button round>提交</el-button>
       </el-col>
     </div>
@@ -136,7 +155,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       options: [
         {
@@ -168,7 +187,7 @@ export default {
       userid: "",
       value: "",
       pickerOptions0: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() < Date.now() - 8.64e7;
         },
       },

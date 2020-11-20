@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-dialog title="登录"
                :visible.sync="dialogVisible2"
                width="30%"
@@ -30,7 +29,6 @@
       </el-form>
     </el-dialog>
   </div>
-
 </template>
 
 <script>
