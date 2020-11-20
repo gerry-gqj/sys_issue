@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-dialog title="登录"
-               :visible.sync="dialogVisible2"
+    <el-dialog title="账号注册"
+               :visible.sync="dialogVisible1"
                width="30%"
                :before-close="handleClose">
       <el-form :model="ruleForm"
@@ -9,21 +9,37 @@
                ref="ruleForm"
                label-width="100px"
                class="demo-ruleForm">
-        <el-form-item label="系统ID："
-                      prop="id">
-          <el-input v-model="ruleForm.id"></el-input>
+        <el-form-item label="登录ID："
+                      prop="loginid">
+          <el-input v-model="ruleForm.loginid"></el-input>
+        </el-form-item>
+        <el-form-item label="姓名："
+                      prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱："
+                      prop="mail">
+          <el-input v-model="ruleForm.mail"></el-input>
         </el-form-item>
         <el-form-item label="输入密码："
-                      prop="pass1">
+                      prop="pass">
           <el-input type="password"
-                    v-model="ruleForm.pass1"
+                    v-model="ruleForm.pass"
+                    autocomplete="off"
+                    maxlength="30"
+                    show-password></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码"
+                      prop="checkPass">
+          <el-input type="password"
+                    v-model="ruleForm.checkPass"
                     autocomplete="off"
                     maxlength="30"
                     show-password></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary"
-                     @click="submitForm('ruleForm')">登录</el-button>
+                     @click="submitForm('ruleForm')">注册</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -58,9 +74,8 @@ export default {
       }
     };
     return {
-      dialogVisible1: false,
-      dialogVisible2: true,
-      dialogVisible3: false,
+      dialogVisible1: true,
+
       ruleForm: {
         name: '',
         pass: '',
@@ -81,7 +96,8 @@ export default {
         ],
         pass: [
           { required: true, validator: validatePass, trigger: 'blur' },
-          { pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/, message: '密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位' }],
+          // { pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/, message: '密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位' }
+        ],
         pass1: [
           { required: true, validator: validatePass, trigger: 'blur' }],
         checkPass: [
@@ -107,18 +123,46 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // alert('登陆成功!');
-          window.location.href = "/";
-          //  this.$refs[formName].resetFields();
+          this.$axios.post('http://120.78.176.2:8080/loginregister/register',
+            this.$qs.stringify({
+              email: this.ruleForm.mail,
+              name: this.ruleForm.name,
+              password: this.ruleForm.pass,
+              userID: this.ruleForm.loginid
+            }))
+            .then(function (res) {
+              if (res.data.status == "注册成功") {
+                alert('注册成功，现在返回登录页面');
+                window.location.href = "./";
+              }
+              else if (res.data.status == "用户名已存在") {
+                alert('用户名已存在！请重新输入');
+                window.location.href = "./Registered";
+              }
+              else {
+                alert('输入信息有误!请重新输入');
+                window.location.href = "/Registered";
+              }
+            }).catch(function (error) {
+              console.log(error);
+            });
 
         } else {
-          alert('登陆失败!');
+          alert('注册失败!');
           return false;
         }
       });
     },
     resetForm (formName) {
       this.$refs[formName].resetFields();
+    },
+    handleClose (done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+          window.location.href = "./";
+        })
+
     }
   }
 }

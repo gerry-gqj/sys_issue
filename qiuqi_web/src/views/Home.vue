@@ -1,8 +1,15 @@
 <template>
   <div>
-    <el-container>
-      <el-header>GBA Issue管理系统</el-header>
-      <!-- <el-main>
+    <div class="background">
+      <img :src="imgSrc"
+           width="100%"
+           height="100%"
+           alt="" />
+    </div>
+    <div class="front">
+      <el-container>
+        <el-header>GBA Issue管理系统</el-header>
+        <!-- <el-main>
         <el-row>
           <el-button @click="FormRegistered()"
                      round>注册</el-button>
@@ -10,46 +17,47 @@
                      @click="FormLogin()">登陆</el-button>
         </el-row>
       </el-main> -->
-      <el-card class="box-card">
-        <!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
+        <el-card class="box-card">
+          <!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
 
-        <!-- <el-tab-pane label="注册" name="first">
+          <!-- <el-tab-pane label="注册" name="first">
        <el-button @click="FormRegistered()"
                    round>注册</el-button>
     </el-tab-pane> -->
-        <h2 class="title">登录</h2>
-        <!-- 登录模块 -->
-        <!-- <el-tab-pane label="登录" name="second"> -->
-        <el-form :model="ruleForm"
-                 :rules="rules"
-                 ref="ruleForm"
-                 label-width="100px"
-                 class="demo-ruleForm">
-          <el-form-item label="用户名："
-                        prop="id">
-            <el-input v-model="ruleForm.id"></el-input>
-          </el-form-item>
-          <el-form-item label="输入密码："
-                        prop="pass1">
-            <el-input type="password"
-                      v-model="ruleForm.pass1"
-                      autocomplete="off"
-                      maxlength="30"
-                      show-password></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary"
-                       @click="Login('ruleForm')">登录</el-button>
-            <el-button @click="FormRegistered()">注册</el-button>
-            <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
-          </el-form-item>
-        </el-form>
-        <!-- <el-button round
+          <h2 class="title">登录</h2>
+          <!-- 登录模块 -->
+          <!-- <el-tab-pane label="登录" name="second"> -->
+          <el-form :model="ruleForm"
+                   :rules="rules"
+                   ref="ruleForm"
+                   label-width="100px"
+                   class="demo-ruleForm">
+            <el-form-item label="用户名："
+                          prop="id">
+              <el-input v-model="ruleForm.id"></el-input>
+            </el-form-item>
+            <el-form-item label="输入密码："
+                          prop="pass1">
+              <el-input type="password"
+                        v-model="ruleForm.pass1"
+                        autocomplete="off"
+                        maxlength="30"
+                        show-password></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary"
+                         @click="Login('ruleForm')">登录</el-button>
+              <el-button @click="FormRegistered()">注册</el-button>
+              <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+            </el-form-item>
+          </el-form>
+          <!-- <el-button round
                    @click="FormLogin()">登陆</el-button> -->
-        <!-- </el-tab-pane> -->
-        <!-- </el-tabs> -->
-      </el-card>
-    </el-container>
+          <!-- </el-tab-pane> -->
+          <!-- </el-tabs> -->
+        </el-card>
+      </el-container>
+    </div>
   </div>
 </template>
 
@@ -67,6 +75,8 @@ export default {
       }
     };
     return {
+
+      imgSrc: require('../assets/imgs/5.gif'),/*用来设置背景图片 */
       activeName: 'second',
       // dialogVisible2: true,
       // dialogVisible3: false,
@@ -183,5 +193,26 @@ body > .el-container {
 }
 .title {
   text-align: center;
+}
+
+/* 图片背景样式 */
+.background {
+  width: 100%;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
+  /* filter: alpha(Opacity=85);
+  -moz-opacity: 0.85;
+  opacity: 0.85; */
+}
+
+/* 图片和内容的层叠显示 */
+.front {
+  z-index: 1;
+  /* position: absolute; */
+  /* 设置透明度 */
+  filter: alpha(Opacity=85); /*兼容ie*/
+  -moz-opacity: 0.85;
+  opacity: 0.9;
 }
 </style>
