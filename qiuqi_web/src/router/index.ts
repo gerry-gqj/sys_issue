@@ -15,8 +15,6 @@ import VueRouter, { RouteConfig } from "vue-router";
 // import Table from '../views/main/table.vue'
 
 Vue.use(VueRouter);
-
-
 const routes: Array<RouteConfig> = [
   {
     path: "/",
@@ -25,12 +23,12 @@ const routes: Array<RouteConfig> = [
       import("../views/Home.vue")
   },
 
-  {
-    path: "/Login",
-    name: "Login",
-    component: () =>
-      import("../views/Login.vue")
-  },
+  // {
+  //   path: "/Login",
+  //   name: "Login",
+  //   component: () =>
+  //     import("../views/Login.vue")
+  // },
   {
     path: "/Registered",
     name: "Registered",

@@ -2,14 +2,54 @@
   <div>
     <el-container>
       <el-header>GBA Issue管理系统</el-header>
-      <el-main>
+      <!-- <el-main>
         <el-row>
           <el-button @click="FormRegistered()"
                      round>注册</el-button>
           <el-button round
                      @click="FormLogin()">登陆</el-button>
         </el-row>
-      </el-main>
+      </el-main> -->
+      <el-card class="box-card">
+        <!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
+
+        <!-- <el-tab-pane label="注册" name="first">
+       <el-button @click="FormRegistered()"
+                   round>注册</el-button>
+    </el-tab-pane> -->
+
+        <h2 class="title">登录</h2>
+        <!-- 登录模块 -->
+        <!-- <el-tab-pane label="登录" name="second"> -->
+        <el-form :model="ruleForm"
+                 :rules="rules"
+                 ref="ruleForm"
+                 label-width="100px"
+                 class="demo-ruleForm">
+          <el-form-item label="用户名："
+                        prop="id">
+            <el-input v-model="ruleForm.id"></el-input>
+          </el-form-item>
+          <el-form-item label="输入密码："
+                        prop="pass1">
+            <el-input type="password"
+                      v-model="ruleForm.pass1"
+                      autocomplete="off"
+                      maxlength="30"
+                      show-password></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary"
+                       @click="Login('ruleForm')">登录</el-button>
+            <el-button @click="FormRegistered()">注册</el-button>
+            <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+          </el-form-item>
+        </el-form>
+        <!-- <el-button round
+                   @click="FormLogin()">登陆</el-button> -->
+        <!-- </el-tab-pane> -->
+        <!-- </el-tabs> -->
+      </el-card>
     </el-container>
   </div>
 </template>
@@ -17,40 +57,122 @@
 <script>
 export default {
   data () {
-    return {};
+    const validatePass = (rule, value, callback) => {
+
+      if (value === '') {
+        callback(new Error('请输入密码'));
+
+
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass');
+        }
+        callback();
+      }
+    };
+    return {
+      activeName: 'second',
+      // dialogVisible2: true,
+      // dialogVisible3: false,
+      ruleForm: {
+        // name: '',
+        // pass: '',
+        // checkPass: '',
+        // mail: '',
+        delivery: false,
+        type: [],
+        // resource: '',
+        // desc: '',
+        id: '',
+        loginid: '',
+        pass1: ''
+      },
+      rules: {
+        id: [
+          { required: true, message: '请输入系统ID', trigger: 'blur' },
+          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+        ],
+
+        pass1: [
+          { required: true, validator: validatePass, trigger: 'blur' }],
+
+        name: [
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+        ],
+
+      }
+    };
   },
   methods: {
     FormLogin () {
-      window.location.href = "./Login";
+      window.location.href = "./main";
     },
     FormRegistered () {
       window.location.href = "./Registered";
     },
+    handleClick (tab, event) {
+      console.log(tab, event);
+    },
+    Login (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('http://120.78.176.2:8080/loginregister/login',
+            this.$qs.stringify({
+              name: this.ruleForm.id,
+              password: this.ruleForm.pass1
+            }))
+            .then(function (res) {
+              if (res.data.status == "登陆成功") {
+                window.location.href = "./main";
+              } else {
+                alert('输入信息有误!请重新输入');
+                // window.location.href = "/Login";
+              }
+            }).catch(function (error) {
+              console.log(error);
+            });
+
+        }
+      });
+    },
+
+    resetForm (formName) {
+      this.$refs[formName].resetFields();
+    }
   },
 };
+
+
+
+
 </script>
 
 <style>
-* {
-  background: #e9eef3;
-}
 .el-header {
-  background: rgb(231, 193, 193);
-  color: rgb(63, 24, 24);
+  color: #333;
   text-align: center;
   line-height: 80px;
   font-style: inherit;
   font-size: 35px;
 }
 
+.el-footer {
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+  font-style: inherit;
+  font-size: 30px;
+}
+
 .el-main {
-  background-color: #e9eef3;
+  /* background-color: #e9eef3; */
   color: #333;
   /* text-align: center; */
   line-height: 160px;
 }
 
-/* body > .el-container {
+body > .el-container {
   margin-bottom: 40px;
 }
 
@@ -61,7 +183,22 @@ export default {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
-} */
+}
+.box-card {
+  width: 480px;
+  height: 300px;
+  margin: 100px;
+  align-self: center;
+  /* position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto; */
+}
+.title {
+  text-align: center;
+}
 </style>
 
 
