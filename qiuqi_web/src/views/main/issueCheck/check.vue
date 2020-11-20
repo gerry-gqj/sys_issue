@@ -48,7 +48,6 @@
         <div class="grid-content">
           <p>创建时间</p>
           <p>
-
             <el-date-picker v-model="createtime"
                             type="date"
                             placeholder="选择日期"

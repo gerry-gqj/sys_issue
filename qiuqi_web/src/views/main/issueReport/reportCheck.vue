@@ -1,34 +1,31 @@
 <template>
   <div>
-    <p>issue报表查询</p>
-    <el-container>
-      <!-- Issue No输入框 -->
-      <div class="inputFrame">
-        用户ID:
-        <el-autocomplete
-          v-model="UserId"
-          :fetch-suggestions="querySearch1"
-          placeholder="请输入用户ID"
-          style="width: 200px; height: 22.5px"
-          @select="handleSelect"
-          maxlength="30"
-        ></el-autocomplete>
-      </div>
-      <div class="inputFrame">
-        用户姓名:
-        <el-autocomplete
-          v-model="UserName"
-          :fetch-suggestions="querySearch2"
-          placeholder="请输入用户姓名"
-          style="width: 200px; height: 22.5px"
-          @select="handleSelect"
-          maxlength="30"
-        ></el-autocomplete>
-      </div>
 
-      <div class="button">
-        <el-button type="primary" @click="goreport">查询</el-button>
-        <el-button>清空</el-button>
+    <h4 style="text-align:center;width:1200px">Issue报表查询</h4>
+    <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
+    <hr>
+
+    <el-container>
+      <div style="width:1200px;text-align:center">
+        <el-form :inline="true"
+                 :model="formInline"
+                 class="demo-form-inline">
+          <el-form-item label="用户ID">
+            <el-input v-model="formInline.UserId"
+                      placeholder="请输入用户ID"></el-input>
+          </el-form-item>
+          <el-form-item label="用户名">
+            <el-input v-model="
+                      formInline.UserName"
+                      placeholder="请输入用户姓名">
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary"
+                       @click="goreport">查询</el-button>
+            <el-button @click="clearvalues">清空</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </el-container>
   </div>
@@ -36,13 +33,27 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {
+      formInline: {
+        UserId: "",
+        UserName: "",
+      }
+    };
   },
   methods: {
-    goreport() {
+    goreport () {
       window.location.href = "./report";
     },
+    clearvalues () {
+      this.formInline.UserId = "";
+      this.formInline.UserName = "";
+    }
   },
 };
 </script>
+
+
+
+
+
