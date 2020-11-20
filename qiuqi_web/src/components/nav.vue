@@ -2,35 +2,31 @@
   <el-aside width="200px">
     <el-row class="tac">
       <el-col>
-        <el-menu
-          default-active="1"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-        >
-          <el-menu-item index="1" @click="goPage1">
+        <el-menu default-active="this.$route.path"
+                 class="el-menu-vertical-demo"
+                 background-color="#545c64"
+                 text-color="#fff"
+                 active-text-color="#ffd04b"
+                 router>
+
+          <el-menu-item index="/main/create">
             <i class="el-icon-menu"></i>
             <span slot="title">创建新 Issue</span>
           </el-menu-item>
-
-          <el-menu-item index="2" @click="goPage2">
-            <i class="el-icon-s-order"></i>
+          <el-menu-item index="/main/reportCheck">
+            <i class="el-icon-document"></i>
             <span slot="title">Issue 报表</span>
           </el-menu-item>
-
-          <el-menu-item index="3" @click="goPage3">
-            <i class="el-icon-s-order"></i>
+          <el-menu-item index="/main/countCheck">
+            <i class="el-icon-location"></i>
             <span slot="title">账户管理</span>
           </el-menu-item>
-
-          <el-menu-item index="3" @click="goPage4">
-            <i class="el-icon-s-order"></i>
+          <el-menu-item index="/main/check">
+            <i class="el-icon-setting"></i>
             <span slot="title">Issue 查询</span>
           </el-menu-item>
         </el-menu>
+
       </el-col>
     </el-row>
   </el-aside>
@@ -39,31 +35,10 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {};
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-
-    goPage1() {
-      window.location.href = "./create";
-    },
-    goPage2() {
-      window.location.href = "./reportCheck";
-    },
-
-    goPage3() {
-      window.location.href = "./countCheck";
-    },
-
-    goPage4() {
-      window.location.href = "./check";
-    },
   },
 };
 </script>
@@ -76,10 +51,11 @@ export default {
 
 .el-menu {
   border-right: none;
+  height: 100%;
 }
 .el-aside {
-  background: #545c64;
-  border-right: 1px solid #f5f1f1;
-  height: 800px;
+  height: 2000px;
+  background-color: #545c64 !important;
 }
 </style>
+

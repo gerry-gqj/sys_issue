@@ -45,50 +45,56 @@ const routes: Array<RouteConfig> = [
     children: [
       // 创建issue
       {
-        path: '/create',
+        path: '/main/create',
         name: 'Create',
         component: () =>
           import("../views/main/createIssue/create.vue"),
       },
       // issue查询
       {
-        path: '/check',
+        path: '/main/check',
         name: 'Check',
         component: () =>
-          import("../views/main/issueCheck/check.vue"),
-      },
-      {
-        path: '/list',
-        name: 'List',
-        component: () =>
-          import("../views/main/issueCheck/list.vue"),
+          import("../views/main/issueCheck/check.vue"), children: [
+            {
+              path: '/main/check/list',
+              name: 'List',
+              component: () =>
+                import("../views/main/issueCheck/list.vue"),
+            },
+
+          ]
       },
 
       // 账户管理
       {
-        path: '/count',
-        name: 'Count',
-        component: () =>
-          import("../views/main/countManage/count.vue"),
-      },
-      {
-        path: '/countcheck',
+        path: '/main/countcheck',
         name: 'Countcheck',
         component: () =>
-          import("../views/main/countManage/countCheck.vue"),
+          import("../views/main/countManage/countCheck.vue"), children: [
+            {
+              path: '/main/countcheck/count',
+              name: 'Count',
+              component: () =>
+                import("../views/main/countManage/count.vue"),
+            },
+          ]
       },
+
       // issue报表
       {
-        path: '/report',
-        name: 'Report',
-        component: () =>
-          import("../views/main/issueReport/report.vue"),
-      },
-      {
-        path: '/reportcheck',
+        path: '/main/reportcheck',
         name: 'Reportcheck',
         component: () =>
           import("../views/main/issueReport/reportCheck.vue"),
+        children: [
+          {
+            path: '/main/reportcheck/report',
+            name: 'Report',
+            component: () =>
+              import("../views/main/issueReport/report.vue"),
+          },
+        ]
       },
     ]
   },

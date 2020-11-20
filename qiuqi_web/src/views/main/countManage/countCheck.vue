@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 style="text-align:center;">账户管理</h4>
+    <h4 style="text-align:center;width:1200px;">账户管理</h4>
     <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
     <hr>
     <el-container>
@@ -33,7 +33,10 @@
         </el-form>
       </div>
     </el-container>
-
+    <div>
+      <!-- 路由容器 -->
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -50,7 +53,7 @@ export default {
   },
   methods: {
     gocount () {
-      window.location.href = "./count";
+      window.location.href = "/main/countcheck/count";
     },
     clearvalues () {
       this.formInline.UserId = "";

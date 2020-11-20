@@ -28,6 +28,10 @@
         </el-form>
       </div>
     </el-container>
+    <div>
+      <!-- 路由容器 -->
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -43,7 +47,7 @@ export default {
   },
   methods: {
     goreport () {
-      window.location.href = "./report";
+      window.location.href = "/main/reportcheck/report";
     },
     clearvalues () {
       this.formInline.UserId = "";

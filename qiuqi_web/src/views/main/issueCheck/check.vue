@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2 style="text-align: center;">Issue 查询</h2>
-    <hr style="border: 1px dashed #000; height: 1px" />
+    <h3 style="text-align: center;">Issue 查询</h3>
+    <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
+    <hr>
     <el-row :gutter="50">
       <!-- issue no -->
       <el-col :xs="12"
@@ -152,6 +153,10 @@
         </div>
       </el-col>
     </div>
+    <div>
+      <!-- 路由容器 -->
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -192,7 +197,7 @@ export default {
   },
   methods: {
     golist () {
-      window.location.href = "./list";
+      window.location.href = "/main/check/list";
     },
     clearvalues () {
       this.issueno = "";
