@@ -4,7 +4,7 @@
       <img :src="imgSrc"
            width="100%"
            height="100%"
-           alt=""/>
+           alt="" />
     </div>
     <div class="front">
       <el-container>
@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -96,16 +96,16 @@ export default {
       },
       rules: {
         id: [
-          {required: true, message: '请输入系统ID', trigger: 'blur'},
-          {max: 30, message: '长度在 30 个字符', trigger: 'blur'}
+          { required: true, message: '请输入系统ID', trigger: 'blur' },
+          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
         ],
 
         pass1: [
-          {required: true, validator: validatePass, trigger: 'blur'}],
+          { required: true, validator: validatePass, trigger: 'blur' }],
 
         name: [
-          {required: true, message: '请输入姓名', trigger: 'blur'},
-          {max: 30, message: '长度在 30 个字符', trigger: 'blur'}
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
         ],
 
       }
@@ -116,38 +116,52 @@ export default {
     //   this.$router.push("main");
     //   // window.location.href = "./main";
     // },
-    FormRegistered() {
+    FormRegistered () {
       // 路由跳转到注册页面
-      this.$router.push("Registered");
-      // window.location.href = "./Registered";
+      // this.$router.push("Registered");
+      window.location.href = "/Registered";
     },
     // handleClick (tab, event) {
     //   console.log(tab, event);
     // },
 
     //用户登录
-    Login(formName) {
+    Login (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post('http://120.78.176.2:8080/loginregister/login',
-              this.$qs.stringify({
-                name: this.ruleForm.id,
-                password: this.ruleForm.pass1
-              }))
-              .then((res) => {
-                if (res.data.status == "登陆成功") {
-                  //登录成功后路由到主页面
-                  this.$router.push("main");
-                  // window.location.href = "./main";
-                } else {
-                  alert('输入信息有误!请重新输入');
-                  // 密码错误返回登录页面
-                  this.$router.push("/");
-                  // window.location.href = "/Login";
-                }
-              }).catch(function (error) {
-            console.log(error);
-          });
+            this.$qs.stringify({
+              name: this.ruleForm.id,
+              password: this.ruleForm.pass1
+            }))
+            .then((res) => {
+              if (res.data.status == "登陆成功") {
+                //登录成功后路由到主页面
+                this.$message(
+                  {
+                    type: 'error',
+                    message: '登录失败，请检查账号密码!'
+                  },
+                  // window.location.href = "/",
+                  this.$router.push("main"),
+                );
+                // window.location.href = "./main";
+              } else {
+                this.$message(
+                  {
+                    type: 'error',
+                    message: '登录失败，请检查账号密码!'
+                  },
+                  // window.location.href = "/",
+                );
+                // alert('输入信息有误!请重新输入');
+                // 密码错误返回登录页面
+                // this.$router.push("/");
+                // window.location.href = "/Login";
+              }
+            }).catch(function (error) {
+              console.log(error);
+            });
         }
       });
     },

@@ -23,12 +23,12 @@ const routes: Array<RouteConfig> = [
       import("../views/Home.vue")
   },
 
-  // {
-  //   path: "/Login",
-  //   name: "Login",
-  //   component: () =>
-  //     import("../views/Login.vue")
-  // },
+  {
+    path: "/userinfo",
+    name: "Userinfo",
+    component: () =>
+      import("../views/userinfo.vue")
+  },
   {
     path: "/Registered",
     name: "Registered",

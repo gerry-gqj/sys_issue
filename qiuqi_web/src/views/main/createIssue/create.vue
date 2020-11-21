@@ -147,7 +147,8 @@
               :lg="24"
               :xl="24"
               style="text-align: center">
-        <el-button round>提交</el-button>
+        <el-button round
+                   @click="onsubmit">提交</el-button>
       </el-col>
     </div>
   </div>
@@ -191,8 +192,32 @@ export default {
           return time.getTime() < Date.now() - 8.64e7;
         },
       },
+
     };
   },
+  methods: {
+    onsubmit () {
+      // this.$router.go(-1);
+      this.$confirm('是否提交表单创建?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '提交成功!'
+        },
+          // this.$router.go(-1),
+        );
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消提交'
+        });
+      });
+    },
+  }
 };
 </script>
 

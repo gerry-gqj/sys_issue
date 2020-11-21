@@ -19,7 +19,7 @@
             <span class="username">{{user}}</span>
           </a></span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>修改用户信息</el-dropdown-item>
+          <el-dropdown-item @click.native="userinfo">修改用户信息</el-dropdown-item>
           <el-dropdown-item @click.native="logout"
                             divided>退出登录</el-dropdown-item>
         </el-dropdown-menu>
@@ -46,10 +46,33 @@ export default {
     ModifyUserInformation () {
       this.user = 'User';
     },
+    userinfo () {
+      window.location.href = "/userinfo";
+    },
     logout () {
       // this.$router.push('/');
       // 实现页面跳转和刷新页面
-      window.location.href = "/";
+
+      this.$confirm('是否注销登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      }).then(() => {
+        this.$message(
+          //   {
+          //   type: 'success',
+          //   message: '取消注册!'
+          // },
+          window.location.href = "/",
+        );
+        // }).catch(() => {
+        //   this.$message({
+        //     type: 'info',
+        //     // message: '已取消删除'
+        //   });
+      });
+
     },
   },
 };

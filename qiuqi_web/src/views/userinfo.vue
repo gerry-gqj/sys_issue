@@ -1,15 +1,19 @@
 <template>
   <div>
-    <!-- <el-dialog title=""
-               :visible.sync="dialogVisible1"
-               width="30%"
-               :before-close="handleClose"> -->
+
+    <!-- <el-dialog title="账号注册"
+                 :visible.sync="dialogVisible1"
+                 width="30%"
+                 :before-close="handleClose"> -->
+
     <div class="main">
       <el-row>
         <el-col :span="12"
                 :offset="12">
+          <div class="grid-content"></div>
+
           <el-card class="box-card">
-            <h2 class="title">新用户注册</h2>
+            <h2 class="title">修改用户信息</h2>
             <el-form :model="ruleForm"
                      :rules="rules"
                      ref="ruleForm"
@@ -45,17 +49,16 @@
               </el-form-item>
               <el-form-item>
                 <el-button type="primary"
-                           @click="submitForm('ruleForm')">注册</el-button>
-                <el-button @click="goback">返回</el-button>
+                           @click="submitForm('ruleForm')">提交</el-button>
+                <el-button @click="goback">取消</el-button>
               </el-form-item>
             </el-form>
-            <!-- </el-dialog> -->
           </el-card>
+          <!-- </el-dialog> -->
         </el-col>
       </el-row>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -147,8 +150,7 @@ export default {
               }
               else if (res.data.status == "用户名已存在") {
                 alert('用户名已存在！请重新输入');
-                this.$router.push("/Registered");
-                // window.location.href = "./Registered";
+                window.location.href = "./Registered";
               }
               else {
                 alert('输入信息有误!请重新输入');
@@ -168,8 +170,7 @@ export default {
     //   this.$refs[formName].resetFields();
     // },
     goback () {
-      // this.$router.go(-1);
-      this.$confirm('是否取消注册?', '提示', {
+      this.$confirm('此操作将会放弃修改，是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
@@ -177,8 +178,9 @@ export default {
       }).then(() => {
         this.$message({
           type: 'success',
-          message: '取消注册!'
-        }, this.$router.go(-1),
+          message: '修改失败，成功返回!'
+        },
+          this.$router.go(-1),
         );
         // }).catch(() => {
         //   this.$message({
@@ -187,6 +189,8 @@ export default {
         //   });
       });
     },
+
+
     // handleClose (done) {
     //   this.$confirm('确认关闭？')
     //     .then(_ => {
@@ -196,8 +200,46 @@ export default {
     // }
   }
 }
+
 </script>
+
 <style>
+.el-header {
+  color: #333;
+  text-align: center;
+  line-height: 150px;
+  font-style: inherit;
+  font-size: 35px;
+}
+
+.el-footer {
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+  font-style: inherit;
+  font-size: 30px;
+}
+
+.el-main {
+  /* background-color: #e9eef3; */
+  color: #333;
+  /* text-align: center; */
+  line-height: 160px;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
+
 .box-card {
   width: 480px;
   height: 100%;
@@ -214,6 +256,7 @@ export default {
 .title {
   text-align: center;
 }
+
 .main {
   background-color: #4654cccc;
 }
