@@ -11,15 +11,12 @@
                  class="demo-form-inline">
           <el-form-item label="">
             <el-input v-model="formInline.UserId"
-                      :fetch-suggestions="querySearch1"
                       placeholder="请输入用户ID"
-                      @select="handleSelect"></el-input>
+            ></el-input>
           </el-form-item>
           <el-form-item label="">
             <el-input v-model="formInline.UserName"
-                      :fetch-suggestions="querySearch2"
                       placeholder="请输入用户姓名"
-                      @select="handleSelect"
                       maxlength="30"></el-input>
           </el-form-item>
           <el-form-item>
