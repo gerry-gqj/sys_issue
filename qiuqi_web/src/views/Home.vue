@@ -139,8 +139,8 @@ export default {
                 //登录成功后路由到主页面
                 this.$message(
                   {
-                    type: 'error',
-                    message: '登录失败，请检查账号密码!'
+                    type: 'success',
+                    message: '登录成功'
                   },
                   // window.location.href = "/",
                   this.$router.push("main"),
@@ -193,7 +193,7 @@ export default {
   /* background-color: #e9eef3; */
   color: #333;
   /* text-align: center; */
-  line-height: 160px;
+  /*line-height: 160px;*/
 }
 
 body > .el-container {
