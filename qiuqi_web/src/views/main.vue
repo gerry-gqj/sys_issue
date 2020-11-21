@@ -36,16 +36,16 @@ export default {
 
 <style>
 .el-main {
-  background-color: #f5eff5cc;
+  margin: 0px;
+  padding: 0px;
+  background-color: #fafafafd;
 }
-
 .el-header,
 .el-footer {
-  background-color: #545c64;
+  background-color: white;
   box-sizing: border-box;
-  /* border-bottom: 1px solid #f5f1f1; */
+  border-bottom: 1px solid #f5f1f1;
 }
-
 .el-container {
   height: 100%;
 }

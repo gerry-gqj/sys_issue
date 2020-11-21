@@ -1,32 +1,33 @@
-
 <template>
-  <el-container>
-    <el-aside width="auto"
-              class="header-logo tap">
-      <img class="logo"
-           src="../assets/imgs/user2.jpg"
-           alt="Logo" />
-    </el-aside>
-    <h1>GBA Issue管理系统</h1>
-    <el-aside width="auto"
-              class="header-logo tap">
-      <el-dropdown><span>
-          <a class="user"
-             @click="ModifyUserInformation"><span class="userimg">
-              <el-avatar icon="el-icon-user-solid"
-                         class="headerLogo"></el-avatar>
-            </span>
-            <span class="username">{{user}}</span>
-          </a></span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="userinfo">修改用户信息</el-dropdown-item>
-          <el-dropdown-item @click.native="logout"
-                            divided>退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+  <div class="main">
+    <el-container>
+      <el-aside width="auto"
+                class="header-logo tap">
+        <img class="logo"
+             src=""
+             alt="Logo" />
+      </el-aside>
+      <h1>GBA Issue管理系统</h1>
+      <el-aside width="auto"
+                class="header-logo tap">
+        <el-dropdown><span>
+            <a class="user"
+               @click="ModifyUserInformation"><span class="userimg">
+                <el-avatar icon="el-icon-user-solid"
+                           class="headerLogo"></el-avatar>
+              </span>
+              <span class="username">{{user}}</span>
+            </a></span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="userinfo">修改用户信息</el-dropdown-item>
+            <el-dropdown-item @click.native="logout"
+                              divided>退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
-    </el-aside>
-  </el-container>
+      </el-aside>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -72,12 +73,10 @@ export default {
         //     // message: '已取消删除'
         //   });
       });
-
     },
   },
 };
 </script>
-
 
 <style scoped>
 .el-aside {
@@ -85,24 +84,20 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 section {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0px 20px;
 }
-
 .logo {
-  width: 80px;
+  width: 200px;
 }
-
 .headerLogo,
 .logo {
   cursor: pointer;
 }
-
 .user {
   font-size: 12px;
   min-height: 31px;
@@ -124,7 +119,6 @@ section {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 } */
-
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
@@ -132,4 +126,7 @@ section {
 .el-icon-arrow-down {
   font-size: 12px;
 }
+/* .main {
+  height: 1000px;
+} */
 </style>
