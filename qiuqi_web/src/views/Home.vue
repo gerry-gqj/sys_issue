@@ -4,7 +4,7 @@
       <img :src="imgSrc"
            width="100%"
            height="100%"
-           alt="" />
+           alt=""/>
     </div>
     <div class="front">
       <el-container>
@@ -46,7 +46,8 @@
             </el-form-item>
             <el-form-item>
               <el-button type="primary"
-                         @click="Login('ruleForm')">登录</el-button>
+                         @click="Login('ruleForm')">登录
+              </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
               <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
             </el-form-item>
@@ -63,7 +64,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -95,16 +96,16 @@ export default {
       },
       rules: {
         id: [
-          { required: true, message: '请输入系统ID', trigger: 'blur' },
-          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+          {required: true, message: '请输入系统ID', trigger: 'blur'},
+          {max: 30, message: '长度在 30 个字符', trigger: 'blur'}
         ],
 
         pass1: [
-          { required: true, validator: validatePass, trigger: 'blur' }],
+          {required: true, validator: validatePass, trigger: 'blur'}],
 
         name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' },
-          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+          {required: true, message: '请输入姓名', trigger: 'blur'},
+          {max: 30, message: '长度在 30 个字符', trigger: 'blur'}
         ],
 
       }
@@ -115,7 +116,7 @@ export default {
     //   this.$router.push("main");
     //   // window.location.href = "./main";
     // },
-    FormRegistered () {
+    FormRegistered() {
       // 路由跳转到注册页面
       this.$router.push("Registered");
       // window.location.href = "./Registered";
@@ -125,28 +126,28 @@ export default {
     // },
 
     //用户登录
-    Login (formName) {
+    Login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post('http://120.78.176.2:8080/loginregister/login',
-            this.$qs.stringify({
-              name: this.ruleForm.id,
-              password: this.ruleForm.pass1
-            }))
-            .then(function (res) {
-              if (res.data.status == "登陆成功") {
-                //登录成功后路由到主页面
-                this.$router.push("main");
-                // window.location.href = "./main";
-              } else {
-                alert('输入信息有误!请重新输入');
-                // 密码错误返回登录页面
-                this.$router.push("/");
-                // window.location.href = "/Login";
-              }
-            }).catch(function (error) {
-              console.log(error);
-            });
+              this.$qs.stringify({
+                name: this.ruleForm.id,
+                password: this.ruleForm.pass1
+              }))
+              .then((res) => {
+                if (res.data.status == "登陆成功") {
+                  //登录成功后路由到主页面
+                  this.$router.push("main");
+                  // window.location.href = "./main";
+                } else {
+                  alert('输入信息有误!请重新输入');
+                  // 密码错误返回登录页面
+                  this.$router.push("/");
+                  // window.location.href = "/Login";
+                }
+              }).catch(function (error) {
+            console.log(error);
+          });
         }
       });
     },
@@ -165,6 +166,7 @@ export default {
   font-style: inherit;
   font-size: 35px;
 }
+
 .el-footer {
   color: #333;
   text-align: center;
@@ -172,22 +174,27 @@ export default {
   font-style: inherit;
   font-size: 30px;
 }
+
 .el-main {
   /* background-color: #e9eef3; */
   color: #333;
   /* text-align: center; */
   line-height: 160px;
 }
+
 body > .el-container {
   margin-bottom: 40px;
 }
+
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
   line-height: 260px;
 }
+
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
+
 .box-card {
   width: 480px;
   height: 300px;
@@ -200,6 +207,7 @@ body > .el-container {
     top: 0;
     margin: auto; */
 }
+
 .title {
   text-align: center;
 }
