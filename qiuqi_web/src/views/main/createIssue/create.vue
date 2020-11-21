@@ -118,7 +118,7 @@
           <el-input type="textarea"
                     placeholder="请输入内容"
                     rows="5"
-                    v-model="textarea"
+                    v-model="step"
                     maxlength="2000"
                     show-word-limit></el-input>
         </div>
@@ -147,8 +147,7 @@
               :lg="24"
               :xl="24"
               style="text-align: center">
-        <el-button round
-                   @click="onsubmit">提交</el-button>
+        <el-button round @click="createIssue()">提交</el-button>
       </el-col>
     </div>
   </div>
@@ -176,6 +175,7 @@ export default {
           label: "低",
         },
       ],
+      username:"",
       title: "",
       issueid: "",
       createtime: "",
@@ -184,7 +184,7 @@ export default {
       version: "",
       planTime: "",
       realtime: "",
-      textarea: "",
+      step: "",
       userid: "",
       value: "",
       pickerOptions0: {
@@ -192,31 +192,58 @@ export default {
           return time.getTime() < Date.now() - 8.64e7;
         },
       },
-
     };
   },
-  methods: {
-    onsubmit () {
-      // this.$router.go(-1);
-      this.$confirm('是否提交表单创建?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-        center: true
-      }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '提交成功!'
-        },
-          // this.$router.go(-1),
-        );
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消提交'
-        });
-      });
+  mounted() {
+    this.username = localStorage.getItem('username')
+    console.log(this.username)
+  },
+  methods:{
+    //获取当前时间
+    gettime(){
+      const date = new Date();
+      let month = date.getMonth() + 1;
+      let strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      return date.getFullYear() + "-" + month + "-" + strDate
+          + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     },
+    //新增Issue接口--post
+    createIssue(){
+      const time = this.gettime();
+      this.$axios.post('http://120.78.176.2:8080/issue/createIssue',
+          this.$qs.stringify({
+            creater: this.username,
+            level: this.issuserank,
+            plantime:time,
+            step:this.step,
+            title:this.title,
+            type:this.issusetype,
+            userID:parseInt(this.userid),
+            version:this.version
+          }))
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.status === "创建成功") {
+              this.$message({
+                type: 'success',
+                message: '创建成功'
+              });
+            }else {
+              this.$message({
+                type: 'error',
+                message: '创建失败'
+              });
+            }
+          }).catch(function (error) {
+        console.log(error);
+      });
+    }
   }
 };
 </script>
