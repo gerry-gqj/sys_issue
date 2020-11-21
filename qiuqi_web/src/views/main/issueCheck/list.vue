@@ -11,15 +11,15 @@
       >
         <el-table-column type="selection"></el-table-column>
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column prop="id" label="Issue ID"> </el-table-column>
+        <el-table-column prop="issueID" label="Issue ID"> </el-table-column>
         <el-table-column prop="title" label="Issue 标题"> </el-table-column>
-        <el-table-column prop="founder" label="创建人"> </el-table-column>
-        <el-table-column prop="timecreate" label="创建时间"> </el-table-column>
-        <el-table-column prop="modifier" label="修改人"> </el-table-column>
-        <el-table-column prop="statement" label="Issue 状态"> </el-table-column>
-        <el-table-column prop="cmptplan" label="计划完成时间">
+        <el-table-column prop="creater" label="创建人"> </el-table-column>
+        <el-table-column prop="creation" label="创建时间"> </el-table-column>
+        <el-table-column prop="userID" label="修改人"> </el-table-column>
+        <el-table-column prop="issuestate" label="Issue 状态"> </el-table-column>
+        <el-table-column prop="plantime" label="计划完成时间">
         </el-table-column>
-        <el-table-column prop="cmpttrue" label="实际完成时间">
+        <el-table-column prop="acttime" label="实际完成时间">
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
@@ -139,7 +139,26 @@ export default {
       pageSize: 20, // 每页的数据条数
     };
   },
+  mounted() {
+    this.getIssues(this)
+  },
   methods: {
+    getIssues(that){
+      this.$axios.get('http://120.78.176.2:8080/issue/issuecount',
+          {
+            params:
+                {
+                  pageNum: this.currentPage,
+                  pageSize: this.pageSize
+                }
+          })
+          .then(function (res) {
+            that.tableData = res.data
+            console.log(res.data)
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
