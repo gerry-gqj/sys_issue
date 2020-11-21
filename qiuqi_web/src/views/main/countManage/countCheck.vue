@@ -50,7 +50,8 @@ export default {
   },
   methods: {
     gocount () {
-      window.location.href = "/main/countcheck/count";
+      this.$router.push("/main/countcheck/count");
+      // window.location.href = "/main/countcheck/count";
     },
     clearvalues () {
       this.formInline.UserId = "";

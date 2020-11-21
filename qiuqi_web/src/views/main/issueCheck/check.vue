@@ -199,7 +199,8 @@ export default {
   },
   methods: {
     golist () {
-      window.location.href = "/main/check/list";
+      this.$router.push("/main/check/list");
+      // window.location.href = "/main/check/list";
     },
     clearvalues () {
       this.issueno = "";

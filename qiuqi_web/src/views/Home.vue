@@ -111,15 +111,20 @@ export default {
     };
   },
   methods: {
-    FormLogin () {
-      window.location.href = "./main";
-    },
+    // FormLogin () {
+    //   this.$router.push("main");
+    //   // window.location.href = "./main";
+    // },
     FormRegistered () {
-      window.location.href = "./Registered";
+      // 路由跳转到注册页面
+      this.$router.push("Registered");
+      // window.location.href = "./Registered";
     },
-    handleClick (tab, event) {
-      console.log(tab, event);
-    },
+    // handleClick (tab, event) {
+    //   console.log(tab, event);
+    // },
+
+    //用户登录
     Login (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -130,9 +135,13 @@ export default {
             }))
             .then(function (res) {
               if (res.data.status == "登陆成功") {
-                window.location.href = "./main";
+                //登录成功后路由到主页面
+                this.$router.push("main");
+                // window.location.href = "./main";
               } else {
                 alert('输入信息有误!请重新输入');
+                // 密码错误返回登录页面
+                this.$router.push("/");
                 // window.location.href = "/Login";
               }
             }).catch(function (error) {
@@ -141,9 +150,9 @@ export default {
         }
       });
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields();
-    }
+    // resetForm (formName) {
+    //   this.$refs[formName].resetFields();
+    // }
   },
 };
 </script>

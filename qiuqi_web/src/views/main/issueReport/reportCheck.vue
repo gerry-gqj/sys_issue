@@ -45,7 +45,8 @@ export default {
   },
   methods: {
     goreport () {
-      window.location.href = "/main/reportcheck/report";
+      this.$router.push("/main/reportcheck/report");
+      // window.location.href = "/main/reportcheck/report";
     },
     clearvalues () {
       this.formInline.UserId = "";
