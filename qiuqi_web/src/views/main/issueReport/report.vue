@@ -13,13 +13,13 @@
       >
         <el-table-column type="selection"></el-table-column>
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column prop="id" label="用户 ID"> </el-table-column>
+        <el-table-column prop="userID" label="用户 ID"> </el-table-column>
         <el-table-column prop="name" label="用户姓名"> </el-table-column>
-        <el-table-column prop="createIs" label="创建Issue数"> </el-table-column>
-        <el-table-column prop="receiveIs" label="收到Issue数">
+        <el-table-column prop="creation" label="创建Issue数"> </el-table-column>
+        <el-table-column prop="recived" label="收到Issue数">
         </el-table-column>
-        <el-table-column prop="changeIs" label="修改Issue数"> </el-table-column>
-        <el-table-column prop="complete" label="完成率"> </el-table-column>
+        <el-table-column prop="resolved" label="修改Issue数"> </el-table-column>
+        <el-table-column prop="completion" label="完成率"> </el-table-column>
       </el-table>
     </el-container>
     <div class="paginationClass">
@@ -84,7 +84,26 @@ export default {
       pageSize: 5, // 每页的数据条数
     };
   },
+  mounted() {
+    this.getIssues(this)
+  },
   methods: {
+    getIssues(that){
+      this.$axios.get('http://120.78.176.2:8080/issue/selectissuecount',
+          {
+            params:
+                {
+                  pageNum: this.currentPage,
+                  pageSize: this.pageSize
+                }
+          })
+          .then(function (res) {
+            that.tableData = res.data
+            console.log(res.data)
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
