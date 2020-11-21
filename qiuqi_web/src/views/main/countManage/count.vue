@@ -158,7 +158,7 @@ export default {
             }))
             .then((res) => {
               console.log(res.data)
-              if(res.data.status=="用户名已被注销，不能修改为经理"){
+              if(res.data.status==="用户名已被注销，不能修改为经理"){
                 this.$message({
                   type: 'error',
                   message: '用户名已被注销，不能修改为经理!'
@@ -199,7 +199,7 @@ export default {
       this.currentPage = val;
     },
     getRowClass({rowIndex}) {
-      if (rowIndex == 0) {
+      if (rowIndex === 0) {
         return "background:#81BEF7";
       } else {
         return "";
@@ -266,8 +266,4 @@ export default {
 
 
 <style>
-.button {
-  margin-top: 50px;
-  text-align: center;
-}
 </style>
