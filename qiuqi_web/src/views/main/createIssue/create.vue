@@ -64,7 +64,6 @@
           <p>Issue等级</p>
           <p>
             <el-select v-model="issuserank"
-                       filterable
                        placeholder="请选择">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -101,7 +100,9 @@
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
-                            style="width: 100%"></el-date-picker>
+                            style="width: 100%"
+                            format="yyyy 年 MM 月 dd 日"
+                            value-format="yyyy-MM-dd 00:00:00"></el-date-picker>
           </p>
         </div>
       </el-col>
@@ -127,14 +128,16 @@
     <!-- 指派修改人栏 -->
     <div>
       <h2>指派修改人栏</h2>
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <el-input v-model="userid"
-                    placeholder="内容"></el-input>
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+        <div class="grid-content ">
+          <el-select v-model="modifier" filterable placeholder="请选择">
+            <el-option
+                v-for="item in modifierOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
         </div>
       </el-col>
       <br /><br />
@@ -157,24 +160,26 @@
 export default {
   data () {
     return {
+      modifierOptions:'',
       options: [
         {
-          value: "选项1",
+          value: "最高",
           label: "最高",
         },
         {
-          value: "选项2",
+          value: "较高",
           label: "较高",
         },
         {
-          value: "选项3",
+          value: "一般",
           label: "一般",
         },
         {
-          value: "选项4",
+          value: "低",
           label: "低",
         },
       ],
+      modifier:"",
       username:"",
       title: "",
       issueid: "",
@@ -189,42 +194,80 @@ export default {
       value: "",
       pickerOptions0: {
         disabledDate (time) {
-          return time.getTime() < Date.now() - 8.64e7;
+          return time.getTime() < Date.now() ;
         },
       },
     };
   },
   mounted() {
     this.username = localStorage.getItem('username')
-    console.log(this.username)
+    this.$axios.get('http://120.78.176.2:8080/user/selectalluser',
+        {params:
+              {
+                pageNum: 1,
+                pageSize: 99
+              }})
+        .then( (res)=> {
+          let newOptions = []
+          for (let obj in res.data) {
+            let newobj = {value: '', label: 0}
+            newobj.value = parseInt(res.data[obj].userID)
+            newobj.label = res.data[obj].name
+            newOptions.push(newobj)
+          }
+          this.modifierOptions = newOptions
+        }).catch(function (error) {
+      console.log(error)
+    })
+
   },
   methods:{
-    //获取当前时间
-    gettime(){
-      const date = new Date();
-      let month = date.getMonth() + 1;
-      let strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-        month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      return date.getFullYear() + "-" + month + "-" + strDate
-          + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    },
     //新增Issue接口--post
     createIssue(){
-      const time = this.gettime();
+      //验证是否为空
+      let msg='';
+      if(this.username==null){
+        msg='账号过期，请重新登录'
+        setTimeout(()=>{
+          window.location.href = "/"
+        },1000)
+        this.$message(
+            {
+              type: 'error',
+              message: msg
+            },
+        );
+      } else if(this.issuserank == '' || this.planTime == '' ||this.planTime==null|| this.step == '' || this.title == '' || this.modifier == ''||this.version==''){
+        msg='请填写完整信息'
+        this.$message(
+            {
+              type: 'error',
+              message: msg
+            },
+        );
+        return
+      }
+      console.log(this.planTime)
+      console.log(this.issuserank =='')
+
+
+          // console.log(this.username)
+      // console.log(this.issuserank)
+      // console.log(this.planTime)
+      // console.log(this.step)
+      // console.log(this.title)
+      // console.log(this.issuserank)
+      // console.log(this.modifier)
+      // console.log(this.version)
       this.$axios.post('http://120.78.176.2:8080/issue/createIssue',
           this.$qs.stringify({
             creater: this.username,
             level: this.issuserank,
-            plantime:time,
+            plantime:this.planTime,
             step:this.step,
             title:this.title,
-            type:this.issusetype,
-            userID:parseInt(this.userid),
+            type:this.issuserank,
+            userID:this.modifier,
             version:this.version
           }))
           .then((res) => {
