@@ -7,17 +7,32 @@
       <el-col :span="6"
               offset="1">
         <div class="grid-content bg-purple">
-          Issue No
+          <!-- Issue No
           <el-input v-model="issueno"
                     placeholder=""
                     style="text-align:center; width:150px"
                     maxlength="30"
-                    clearable></el-input>
+                    clearable></el-input> -->
+
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign">
+            <el-form-item label="Issue No">
+              <el-input v-model="formLabelAlign.issueno"
+                        placeholder="请输入"
+                        style="text-align:center; width:200px"></el-input>
+            </el-form-item>
+            <el-form-item label="创建人">
+              <el-input v-model="formLabelAlign.createtor"
+                        placeholder="请输入"
+                        style="text-align:center; width:200px"></el-input>
+            </el-form-item>
+          </el-form>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple">
-          <span>Issue状态<el-select v-model="issuserank"
+          <!-- <span>Issue状态<el-select v-model="issuserank"
                        placeholder="请选择"
                        style="text-align:center; width:150px"
                        clearable>
@@ -26,12 +41,34 @@
                          :label="item.label"
                          :value="item.value">
               </el-option>
-            </el-select></span>
+            </el-select></span> -->
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign">
+            <el-form-item label="Issue状态">
+              <el-select v-model="issuserank"
+                         placeholder="请选择"
+                         style="text-align:center; width:200px"
+                         clearable>
+                <el-option v-for="item in options"
+                           :key="item.value"
+                           :label="item.label"
+                           :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="修改人">
+              <el-input v-model="formLabelAlign.modifier"
+                        placeholder="请输入"
+                        style="text-align:center; width:200px"
+                        disabled></el-input>
+            </el-form-item>
+          </el-form>
         </div>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="3">
         <div class="grid-content bg-purple">
-          <span>
+          <!-- <span>
             创建时间
             <el-date-picker v-model="createtime"
                             type="date"
@@ -39,24 +76,66 @@
                             :picker-options="pickerOptions0"
                             style="text-align:center; width:150px"
                             clearable></el-date-picker>
-          </span>
+          </span> -->
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign">
+            <el-form-item label="创建时间">
+              <el-date-picker v-model="formLabelAlign.createtime"
+                              type="date"
+                              placeholder="选择日期"
+                              :picker-options="pickerOptions0(formLabelAlign.createtimeto)"
+                              style="text-align:center; width:150px"
+                              clearable></el-date-picker>
+            </el-form-item>
+            <el-form-item label="修改时间">
+              <el-date-picker v-model="formLabelAlign.changetime"
+                              type="date"
+                              placeholder="选择日期"
+                              :picker-options="pickerOptions0(formLabelAlign.changetimeto)"
+                              style="text-align:center; width:150px"
+                              clearable></el-date-picker>
+            </el-form-item>
+          </el-form>
+
         </div>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="3">
         <div class="grid-content bg-purple">
-          <span>至
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign">
+            <el-form-item label="至">
+              <el-date-picker v-model="formLabelAlign.createtimeto"
+                              type="date"
+                              placeholder="至"
+                              :picker-options="pickerOptione0(formLabelAlign.createtime)"
+                              style="text-align:center; width:150px"
+                              clearable></el-date-picker>
+            </el-form-item>
+            <el-form-item label="至">
+              <el-date-picker v-model="formLabelAlign.changetimeto"
+                              type="date"
+                              placeholder="至"
+                              :picker-options="pickerOptione0(formLabelAlign.changetime)"
+                              style="text-align:center; width:150px"
+                              clearable
+                              maxlength="30"></el-date-picker>
+            </el-form-item>
+          </el-form>
+          <!-- <span>至
             <el-date-picker v-model="createtimeto"
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
                             style="text-align:center; width:150px"
                             clearable></el-date-picker>
-          </span>
+          </span> -->
         </div>
       </el-col>
-
     </el-row>
-    <el-row :gutter="0">
+
+    <!-- <el-row :gutter="0">
       <el-col :span="6"
               offset="1">
         <div class="grid-content bg-purple">
@@ -103,7 +182,7 @@
           </span>
         </div>
       </el-col>
-    </el-row>
+    </el-row> -->
     <div>
       <el-col :xs="20"
               :sm="20"
@@ -146,17 +225,32 @@ export default {
           label: "低",
         },
       ],
-      issueno: "",
-      issuserank: "",
-      createtime: "",
-      createtimeto: "",
-      createtor: "",
-      modifier: "",
-      changetime: "",
-      changetimeto: "",
-      value: "",
-      pickerOptions0: {
+      formLabelAlign: {
+        issueno: "",
+        issuserank: "",
+        createtime: "",
+        createtimeto: "",
+        createtor: "",
+        modifier: "",
+        changetime: "",
+        changetimeto: "",
       },
+      labelPosition: 'left',
+      value: "",
+      pickerOptions0 (val) {
+        return {
+          disabledDate (time) {
+            return time.getTime() > new Date(val).getTime();
+          },
+        };
+      },
+      pickerOptione0 (val) {
+        return {
+          disabledDate (time) {
+            return time.getTime() < new Date(val).getTime();
+          },
+        };
+      }
     };
   },
   methods: {
@@ -194,31 +288,3 @@ export default {
   min-height: 36px;
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-<el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-  <el-form-item label="Issue No">
-    <el-input v-model="formLabelAlign.name"></el-input>
-  </el-form-item>
-  <el-form-item label="创建人">
-    <el-input v-model="formLabelAlign.region"></el-input>
-  </el-form-item>
-</el-form>
-
-
-
-
-
-
-
-
-
-
