@@ -4,7 +4,7 @@
       <el-aside width="auto"
                 class="header-logo tap">
         <img class="logo"
-             src=""
+             src="../assets/imgs/user2.jpg"
              alt="Logo" />
       </el-aside>
       <h1>GBA Issue管理系统</h1>
@@ -93,6 +93,7 @@ section {
 }
 .logo {
   width: 200px;
+  height: 50px;
 }
 .headerLogo,
 .logo {

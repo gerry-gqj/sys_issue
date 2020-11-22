@@ -3,150 +3,113 @@
     <h3 style="text-align: center;">Issue 查询</h3>
     <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
     <hr>
-    <el-row :gutter="50">
-      <!-- issue no -->
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>Issue No</p>
-          <p>
-            <el-input v-model="issueno"
-                      placeholder=""
-                      style="text-align:center;"
-                      maxlength="1"></el-input>
-          </p>
+    <el-row :gutter="1">
+      <el-col :span="6"
+              offset="1">
+        <div class="grid-content bg-purple">
+          Issue No
+          <el-input v-model="issueno"
+                    placeholder=""
+                    style="text-align:center; width:150px"
+                    maxlength="30"
+                    clearable></el-input>
         </div>
       </el-col>
-      <!-- issue等级 -->
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>Issue等级</p>
-          <p>
-            <el-select v-model="issuserank"
-                       filterable
+      <el-col :span="6">
+        <div class="grid-content bg-purple">
+          <span>Issue状态<el-select v-model="issuserank"
                        placeholder="请选择"
-                       maxlength="30">
+                       style="text-align:center; width:150px"
+                       clearable>
               <el-option v-for="item in options"
                          :key="item.value"
                          :label="item.label"
                          :value="item.value">
               </el-option>
-            </el-select>
-          </p>
+            </el-select></span>
         </div>
       </el-col>
-
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>创建时间</p>
-          <p>
+      <el-col :span="5">
+        <div class="grid-content bg-purple">
+          <span>
+            创建时间
             <el-date-picker v-model="createtime"
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
-                            style="width: 100%"></el-date-picker>
-          </p>
+                            style="text-align:center; width:150px"
+                            clearable></el-date-picker>
+          </span>
         </div>
       </el-col>
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>至</p>
-          <p>
-
+      <el-col :span="5">
+        <div class="grid-content bg-purple">
+          <span>至
             <el-date-picker v-model="createtimeto"
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
-                            style="width: 100%"></el-date-picker>
-
-          </p>
+                            style="text-align:center; width:150px"
+                            clearable></el-date-picker>
+          </span>
         </div>
       </el-col>
+
     </el-row>
-
-    <el-row :gutter="50">
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>创建人</p>
-          <p>
-            <el-input v-model="createtor"></el-input>
-          </p>
+    <el-row :gutter="0">
+      <el-col :span="6"
+              offset="1">
+        <div class="grid-content bg-purple">
+          <span>创建人
+            <el-input v-model="createtor"
+                      style="text-align:center; width:150px"
+                      clearable
+                      maxlength="30px"></el-input>
+          </span>
         </div>
       </el-col>
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>修改人</p>
-          <p>
+      <el-col :span="6">
+        <div class="grid-content bg-purple">
+          <span><span>修改人</span>
             <el-input v-model="modifier"
-                      style="width: 100%"></el-input>
-          </p>
+                      style="text-align:center; width:150px"
+                      clearable
+                      maxlength="10"></el-input>
+          </span>
         </div>
       </el-col>
-
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>修改时间</p>
-          <p>
+      <el-col :span="5">
+        <div class="grid-content bg-purple">
+          <span>修改时间&#12288;
             <el-date-picker v-model="changetime"
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
-                            style="width: 100%"></el-date-picker>
-          </p>
+                            style="text-align:center; width:150px"
+                            clearable></el-date-picker>
+          </span>
         </div>
       </el-col>
-
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
-        <div class="grid-content">
-          <p>至</p>
-          <p>
+      <el-col :span="5">
+        <div class="grid-content bg-purple">
+          <span>至
             <el-date-picker v-model="changetimeto"
                             type="date"
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
-                            style="width: 100%"
+                            style="text-align:center; width:150px"
+                            clearable
                             maxlength="30"></el-date-picker>
-          </p>
+          </span>
         </div>
       </el-col>
     </el-row>
     <div>
-      <el-col :xs="24"
-              :sm="24"
-              :md="24"
-              :lg="24"
-              :xl="24"
+      <el-col :xs="20"
+              :sm="20"
+              :md="20"
+              :lg="20"
+              :xl="20"
               style="text-align: center">
         <div class="button">
           <el-button type="primary"
@@ -156,7 +119,6 @@
       </el-col>
     </div>
     <div>
-      <!-- 路由容器 -->
       <router-view />
     </div>
   </div>
@@ -232,6 +194,28 @@ export default {
   min-height: 36px;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+<el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+  <el-form-item label="Issue No">
+    <el-input v-model="formLabelAlign.name"></el-input>
+  </el-form-item>
+  <el-form-item label="创建人">
+    <el-input v-model="formLabelAlign.region"></el-input>
+  </el-form-item>
+</el-form>
+
+
+
+
 
 
 
