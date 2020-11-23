@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     getIssues(that){
-      this.$axios.get('http://120.78.176.2:8080/issue/issuecount',
+      this.$axios.get('http://120.78.176.2:8080/issue/selectIssuetask',
           {
             params:
                 {
@@ -152,8 +152,9 @@ export default {
                   pageSize: this.pageSize
                 }
           })
-          .then(function (res) {
-            that.tableData = res.data
+          .then( (res)=> {
+            this.total=res.data.total
+            this.tableData = res.data.list
             console.log(res.data)
           }).catch(function (error) {
         console.log(error)
