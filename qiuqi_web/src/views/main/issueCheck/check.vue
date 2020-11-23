@@ -280,30 +280,27 @@ export default {
       // window.location.href = "/main/check/list";
     },
     clearvalues() {
-      this.issueno = "";
-      this.issuserank = "";
-      this.createtime = "";
-      this.createtimeto = "";
-      this.createtor = "";
-      this.modifier = "";
-      this.changetime = "";
-      this.changetimeto = "";
+      this.formLabelAlign.issueno = "";
+      this.formLabelAlign.issuserank = "";
+      this.formLabelAlign.createtime = "";
+      this.formLabelAlign.createtimeto = "";
+      this.formLabelAlign.createtor = "";
+      this.formLabelAlign.modifier = "";
+      this.formLabelAlign.changetime = "";
+      this.formLabelAlign.changetimeto = "";
     },
   },
 };
 </script>
 
-
 <style>
 .el-col {
   border-radius: 4px;
 }
-
 #create {
   width: 1000px;
   margin: 50px 150px;
 }
-
 .grid-content {
   border-radius: 4px;
   min-height: 36px;

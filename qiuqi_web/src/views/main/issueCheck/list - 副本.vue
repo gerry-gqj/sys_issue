@@ -22,40 +22,10 @@
         <el-table-column prop="acttime" label="实际完成时间">
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
-          <template >
-            <el-button @click="dialogVisible = true" type="text" size="small"
-              >详情</el-button>
-              <el-dialog
-                title="提示"
-                :visible.sync="dialogVisible"
-                width="30%"
-                :append-to-body="true">
-  
-  
-  <div>
-  <!-- <div class="radio">
-    排序：
-    <el-radio-group v-model="reverse">
-      <el-radio :label="true">倒序</el-radio>
-      <el-radio :label="false">正序</el-radio>
-    </el-radio-group>
-   
-  </div> -->
-  <el-timeline :reverse="reverse">
-    <el-timeline-item
-      v-for="(activity, index) in activities"
-      :key="index"
-      :timestamp="activity.timestamp">
-      {{activity.content}}
-    </el-timeline-item>
-  </el-timeline>
-  </div>
-  
-  <span slot="footer" class="dialog-footer">
-    
-    <el-button type="primary" @click="dialogVisible = false">关 闭</el-button>
-  </span>
-</el-dialog>
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small"
+              >详情</el-button
+            >
             <el-button type="text" size="small">修改</el-button>
           </template>
         </el-table-column>
@@ -78,23 +48,10 @@
 </template>
 
 <script>
-import { Dialog } from 'element-ui';
 export default {
   name: "list",
   data() {
     return {
-      dialogVisible: false,
-        reverse: true,
-        activities: [{
-          content: '已关闭',
-          timestamp: '2018-04-15'
-        }, {
-          content: '目前状态：',
-          timestamp: '2018-04-13'
-        }, {
-          content: '创建issue',
-          timestamp: '2018-04-11'
-        }],
       tableData: [
         {
           id: "20201117",
@@ -187,7 +144,7 @@ export default {
   },
   methods: {
     getIssues(that){
-      this.$axios.get('http://120.78.176.2:8080/issue/issuecount',
+      this.$axios.get('http://120.78.176.2:8080/issue/selectIssuetask',
           {
             params:
                 {
@@ -195,8 +152,9 @@ export default {
                   pageSize: this.pageSize
                 }
           })
-          .then(function (res) {
-            that.tableData = res.data
+          .then( (res)=> {
+            this.total=res.data.total
+            this.tableData = res.data.list
             console.log(res.data)
           }).catch(function (error) {
         console.log(error)
@@ -207,7 +165,6 @@ export default {
       this.currentPage = 1;
       this.pageSize = val;
     },
-    
     //当前页改变时触发 跳转其他页
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
