@@ -247,7 +247,7 @@
             <el-table-column prop="issueID" label="Issue ID"> </el-table-column>
             <el-table-column prop="title" label="Issue 标题"> </el-table-column>
             <el-table-column prop="creater" label="创建人"> </el-table-column>
-            <el-table-column prop="creation" label="创建时间">
+            <el-table-column prop="createtime" label="创建时间">
             </el-table-column>
             <el-table-column prop="userID" label="修改人"> </el-table-column>
             <el-table-column prop="issuestate" label="Issue 状态">
@@ -389,6 +389,8 @@ export default {
           cmpttrue: "2020-11-17",
         },
       ],
+      userid:'',
+      username:'',
       currentPage: 1, // 当前页码
       total: 0, // 总条数
       pageSize: 20, // 每页的数据条数
@@ -409,25 +411,50 @@ export default {
     };
   },
   mounted() {
+    this.userid=localStorage.getItem('userID')
+    this.username=localStorage.getItem('username')
     this.getIssues(this);
   },
   methods: {
     getIssues(that) {
       this.$axios
-        .get("http://120.78.176.2:8080/issue/issuecount", {
+        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
           params: {
             pageNum: this.currentPage,
-            pageSize: this.pageSize,
+            pageSize: 999,
           },
         })
         .then(function (res) {
-          that.tableData = res.data;
-          console.log(res.data);
+          that.tableData = res.data.list;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
+  searchIssue() {
+    this.$axios
+        .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
+          params: {
+            issueID: this.formLabelAlign.issueno,
+            level:this.formLabelAlign.issuserank,
+            creater:this.formLabelAlign.createtor,
+            createtime:'',
+            createtime1:'',
+            plantime:'',
+            plantime1:'',
+            userID: this.userid,
+            pageNum: this.currentPage,
+            pageSize: 999,
+          },
+        })
+        .then((res) => {
+          this.tableData = res.data.list;
+          console.log(this.tableData);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
@@ -451,14 +478,6 @@ export default {
     },
     clearvalues() {
       this.formLabelAlign = ''
-      // this.formLabelAlign.issueno = "";
-      // this.formLabelAlign.issuserank = "";
-      // this.formLabelAlign.createtime = "";
-      // this.formLabelAlign.createtimeto = "";
-      // this.formLabelAlign.createtor = "";
-      // this.formLabelAlign.modifier = "";
-      // this.formLabelAlign.changetime = "";
-      // this.formLabelAlign.changetimeto = "";
     },
   },
 };

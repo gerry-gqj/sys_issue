@@ -103,7 +103,7 @@
                 placeholder="选择日期"
                 :picker-options="pickerOptions0"
                 format="yyyy 年 MM 月 dd 日"
-                value-format="yyyy-MM-dd 00:00:00">
+                value-format="yyyy-MM-dd">
             </el-date-picker>
           </p>
         </div>
@@ -132,10 +132,13 @@
       <h2>指派修改人栏</h2>
       <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
         <div class="grid-content">
-          <el-input             v-model="modifier"
-                                placeholder="内容"
-                                maxlength="30"
-                                show-word-limit></el-input>
+          <el-select v-model="modifier" filterable placeholder="请选择">
+            <el-option
+                v-for="item in modifierOptions"
+                :label="item.userID"
+                :value="item.userID">
+            </el-option>
+          </el-select>
         </div>
       </el-col>
       <br /><br />
@@ -158,6 +161,7 @@
 export default {
   data () {
     return {
+      modifierOptions:[],
       options: [
         {
           value: "最高",

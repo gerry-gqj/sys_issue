@@ -66,10 +66,10 @@
             ></el-table-column>
             <el-table-column fixed="right" label="操作" width="100">
               <template slot-scope="scope">
-                <el-button @click="cancel(scope.row)" type="text" size="small"
+                <el-button @click="cancel(scope.row)" type="text" size="small" v-if="scope.row.userstate!='注销'"
                   >注销</el-button
                 >
-                <el-button @click="manager(scope.row)" type="text" size="small"
+                <el-button @click="manager(scope.row)" type="text" size="small" v-if="scope.row.userstate!='注销'"
                   >经理</el-button
                 >
               </template>
@@ -161,7 +161,7 @@ export default {
         .get("http://120.78.176.2:8080/user/selectalluser", {
           params: {
             pageNum: this.currentPage,
-            pageSize: this.pageSize,
+            pageSize: 999,
           },
         })
         .then((res) => {

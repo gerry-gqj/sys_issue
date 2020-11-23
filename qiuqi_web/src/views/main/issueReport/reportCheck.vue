@@ -134,11 +134,30 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data.list;
-          console.log(this.tableData);
+          console.log(res.data.total);
         })
         .catch(function (error) {
           console.log(error);
         });
+    },
+    searchIssue(){
+      this.$axios
+          .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
+            params: {
+
+              userID:this.formInline.UserId,
+              name:this.formInline.UserName,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
