@@ -16,7 +16,8 @@
         <el-table-column prop="userID" label="用户 ID"> </el-table-column>
         <el-table-column prop="name" label="用户姓名"> </el-table-column>
         <el-table-column prop="creation" label="创建Issue数"> </el-table-column>
-        <el-table-column prop="recived" label="收到Issue数"> </el-table-column>
+        <el-table-column prop="recived" label="收到Issue数">
+        </el-table-column>
         <el-table-column prop="resolved" label="修改Issue数"> </el-table-column>
         <el-table-column prop="closed" label="关闭Issue数"> </el-table-column>
         <el-table-column prop="completion" label="完成率"> </el-table-column>
@@ -62,6 +63,22 @@ export default {
           changeIs: "3",
           complete: "xx",
         },
+        {
+          id: "20201117",
+          name: "xxxxxx",
+          createIs: "11",
+          receiveIs: "2",
+          changeIs: "3",
+          complete: "xx",
+        },
+        {
+          id: "20201117",
+          name: "xxxxxx",
+          createIs: "11",
+          receiveIs: "2",
+          changeIs: "3",
+          complete: "xx",
+        },
       ],
       currentPage: 1, // 当前页码
       total: 0, // 总条数
@@ -69,26 +86,45 @@ export default {
     };
   },
   mounted() {
-    this.getIssues(this);
+    this.getIssues(this)
   },
   methods: {
-    getIssues(that) {
-      this.$axios
-        .get("http://120.78.176.2:8080/issue/selectissuecount", {
-          params: {
-            pageNum: this.currentPage,
-            pageSize: this.pageSize,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-          this.total = res.data.total;
-          console.log(res.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    getIssues(that){
+      this.$axios.get('http://120.78.176.2:8080/issue/selectissuecount',
+          {
+            params:
+                {
+                  pageNum: this.currentPage,
+                  pageSize: this.pageSize
+                }
+          })
+          .then((res)=> {
+            this.tableData = res.data.list
+            this.total=res.data.total
+            console.log(res.data)
+          }).catch(function (error) {
+        console.log(error)
+      })
     },
+  selectLikeIssues(that){
+    this.$axios.get('http://120.78.176.2:8080/issue/selectissuebyidorname',
+        {
+          params:
+              {
+                userID:this.formInline.UserName,
+                pageNum: this.currentPage,
+                pageSize: this.pageSize
+              }
+        })
+        .then((res)=> {
+          this.tableData = res.data.list
+          this.total=res.data.total
+          console.log(res.data)
+        }).catch(function (error) {
+      console.log(error)
+    })
+  },
+
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;

@@ -19,20 +19,19 @@
           >
             <el-form-item label="Issue No">
               <el-input
-                v-model="formLabelAlign.issueno"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+                  v-model="formLabelAlign.issueno"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  show-word-limit            ></el-input>
             </el-form-item>
             <el-form-item label="创建人">
               <el-input
-                v-model="formLabelAlign.createtor"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
+                  v-model="formLabelAlign.createtor"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  show-word-limit
               ></el-input>
             </el-form-item>
           </el-form>
@@ -73,12 +72,12 @@
             </el-form-item>
             <el-form-item label="修改人">
               <el-input
-                v-model="formLabelAlign.modifier"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-                disabled
+                  v-model="formLabelAlign.modifier"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  show-word-limit
+                  disabled
               ></el-input>
             </el-form-item>
           </el-form>
@@ -278,7 +277,7 @@
       <el-radio :label="true">倒序</el-radio>
       <el-radio :label="false">正序</el-radio>
     </el-radio-group>
-   
+
   </div> -->
                     <el-timeline :reverse="reverse">
                       <el-timeline-item
@@ -451,14 +450,15 @@ export default {
       // window.location.href = "/main/check/list";
     },
     clearvalues() {
-      this.formLabelAlign.issueno = "";
-      this.formLabelAlign.issuserank = "";
-      this.formLabelAlign.createtime = "";
-      this.formLabelAlign.createtimeto = "";
-      this.formLabelAlign.createtor = "";
-      this.formLabelAlign.modifier = "";
-      this.formLabelAlign.changetime = "";
-      this.formLabelAlign.changetimeto = "";
+      this.formLabelAlign = ''
+      // this.formLabelAlign.issueno = "";
+      // this.formLabelAlign.issuserank = "";
+      // this.formLabelAlign.createtime = "";
+      // this.formLabelAlign.createtimeto = "";
+      // this.formLabelAlign.createtor = "";
+      // this.formLabelAlign.modifier = "";
+      // this.formLabelAlign.changetime = "";
+      // this.formLabelAlign.changetimeto = "";
     },
   },
 };

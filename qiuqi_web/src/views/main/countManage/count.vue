@@ -107,7 +107,7 @@ export default {
         .get("http://120.78.176.2:8080/user/selectalluser", {
           params: {
             pageNum: this.currentPage,
-            pageSize: this.pageSize,
+            pageSize: 999,
           },
         })
         .then((res) => {

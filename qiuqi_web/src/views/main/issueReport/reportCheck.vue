@@ -24,7 +24,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="goreport">查询</el-button>
+            <el-button type="primary" @click="searchIssue">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </el-form-item>
         </el-form>
@@ -124,18 +124,17 @@ export default {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
     },
-    getIssues(that) {
+    getIssues() {
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectissuecount", {
           params: {
             pageNum: this.currentPage,
-            pageSize: this.pageSize,
+            pageSize: 999,
           },
         })
         .then((res) => {
           this.tableData = res.data.list;
-          this.total = res.data.total;
-          console.log(res.data);
+          console.log(this.tableData);
         })
         .catch(function (error) {
           console.log(error);

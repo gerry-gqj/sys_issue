@@ -23,7 +23,7 @@
                   show-word-limit
                 ></el-input>
               </el-form-item>
-              <el-form-item label="姓名：" prop="name">
+              <el-form-item label="用户名：" prop="name">
                 <el-input
                   v-model="ruleForm.name"
                   maxlength="20"
@@ -46,7 +46,7 @@
                   show-password
                 ></el-input>
               </el-form-item>
-              <el-form-item label="确认密码" prop="checkPass">
+              <el-form-item label="确认密码：" prop="checkPass">
                 <el-input
                   type="password"
                   v-model="ruleForm.checkPass"
@@ -128,13 +128,19 @@ export default {
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          {pattern:/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,message:'邮箱格式错误'},
           {
             type: "email",
             message: "请输入正确的邮箱地址",
             trigger: ["blur", "change"],
           },
         ],
-        loginid: [{ max: 30, message: "长度在 30 个字符", trigger: "blur" }],
+        //登录ID
+        loginid: [{ max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          { required: true, message: "请输入ID", trigger: "blur" },
+          {pattern:/^[0-9]*$/,message:'ID为数字'}
+        ],
+
       },
     };
   },

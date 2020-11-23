@@ -31,7 +31,7 @@
             label-width="100px"
             class="demo-ruleForm"
           >
-            <el-form-item label="用户名：" prop="id">
+            <el-form-item label="系统ID：" prop="id">
               <el-input
                 v-model="ruleForm.id"
                 maxlength="30"
@@ -140,9 +140,10 @@ export default {
             .then((res) => {
               if (res.data.status === "登陆成功") {
                 //缓存用户名
+                localStorage.setItem('username',res.data.name)
                 this.username = localStorage.setItem(
-                  "username",
-                  this.ruleForm.id
+                    'username'
+                    ,this.ruleForm.id
                 );
                 //登录成功后路由到主页面
                 this.$message(

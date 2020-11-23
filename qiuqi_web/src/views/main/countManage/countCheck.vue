@@ -28,7 +28,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="gocount">查询</el-button>
+            <el-button type="primary" @click="searchUser">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </el-form-item>
         </el-form>
@@ -165,13 +165,31 @@ export default {
           },
         })
         .then((res) => {
-          this.total = res.data.total;
           this.tableData = res.data.list;
           // console.log(res.data)
         })
         .catch(function (error) {
           console.log(error);
         });
+    },
+    searchUser() {
+      this.$axios
+          .get("http://120.78.176.2:8080/user/selectidorname", {
+            params: {
+              name:this.formInline.UserName,
+              userID:this.formInline.UserId,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.total = res.data.total;
+            this.tableData = res.data.list;
+            // console.log(res.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     cancel(index) {
       this.$confirm("确定将" + index.name + "注销吗?", "提示", {
