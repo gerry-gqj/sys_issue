@@ -37,21 +37,21 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/main',
-    name: 'Main',
+    name: '主界面',
     component: () =>
       import("../views/main.vue"),
     children: [
       // 创建issue
       {
         path: '/main/create',
-        name: 'Create',
+        name: '创建Issue',
         component: () =>
           import("../views/main/createIssue/create.vue"),
       },
       // issue查询
       {
         path: '/main/check',
-        name: 'Check',
+        name: 'issue查询',
         component: () =>
           import("../views/main/issueCheck/check.vue"), children: [
             {
@@ -67,7 +67,7 @@ const routes: Array<RouteConfig> = [
       // 账户管理
       {
         path: '/main/countcheck',
-        name: 'Countcheck',
+        name: '账户查询',
         component: () =>
           import("../views/main/countManage/countCheck.vue"), children: [
             {
@@ -82,7 +82,7 @@ const routes: Array<RouteConfig> = [
       // issue报表
       {
         path: '/main/reportcheck',
-        name: 'Reportcheck',
+        name: 'issue报表',
         component: () =>
           import("../views/main/issueReport/reportCheck.vue"),
         children: [
