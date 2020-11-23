@@ -63,9 +63,9 @@
               >
                 <el-option
                   v-for="item in options"
-                  :key="item.value"
+                  :key="item.label"
                   :label="item.label"
-                  :value="item.value"
+                  :value="item.label"
                 >
                 </el-option>
               </el-select>
@@ -107,6 +107,8 @@
                 :picker-options="pickerOptions0(formLabelAlign.createtimeto)"
                 style="text-align: center; width: 150px"
                 clearable
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
             <el-form-item label="修改时间">
@@ -117,6 +119,8 @@
                 :picker-options="pickerOptions0(formLabelAlign.changetimeto)"
                 style="text-align: center; width: 150px"
                 clearable
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
           </el-form>
@@ -137,6 +141,8 @@
                 :picker-options="pickerOptione0(formLabelAlign.createtime)"
                 style="text-align: center; width: 150px"
                 clearable
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
             <el-form-item label="至">
@@ -148,6 +154,8 @@
                 style="text-align: center; width: 150px"
                 clearable
                 maxlength="30"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
           </el-form>
@@ -221,7 +229,7 @@
         style="text-align: center"
       >
         <div class="button">
-          <el-button type="primary" @click="golist">查询</el-button>
+          <el-button type="primary" @click="searchIssue">查询</el-button>
           <el-button @click="clearvalues">清空</el-button>
         </div>
       </el-col>
@@ -249,7 +257,7 @@
             <el-table-column prop="creater" label="创建人"> </el-table-column>
             <el-table-column prop="createtime" label="创建时间">
             </el-table-column>
-            <el-table-column prop="userID" label="修改人"> </el-table-column>
+            <el-table-column prop="name" label="修改人"> </el-table-column>
             <el-table-column prop="issuestate" label="Issue 状态">
             </el-table-column>
             <el-table-column prop="plantime" label="计划完成时间">
@@ -413,35 +421,35 @@ export default {
   mounted() {
     this.userid=localStorage.getItem('userID')
     this.username=localStorage.getItem('username')
-    this.getIssues(this);
+    this.searchIssue();
   },
   methods: {
-    getIssues(that) {
-      this.$axios
-        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
-          params: {
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then(function (res) {
-          that.tableData = res.data.list;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // getIssues(that) {
+    //   this.$axios
+    //     .get("http://120.78.176.2:8080/issue/selectIssueAll", {
+    //       params: {
+    //         pageNum: this.currentPage,
+    //         pageSize: 999,
+    //       },
+    //     })
+    //     .then(function (res) {
+    //       that.tableData = res.data.list;
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
   searchIssue() {
     this.$axios
-        .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
+        .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
           params: {
             issueID: this.formLabelAlign.issueno,
-            level:this.formLabelAlign.issuserank,
+            issuestate:this.formLabelAlign.issuserank,
             creater:this.formLabelAlign.createtor,
-            createtime:'',
-            createtime1:'',
-            plantime:'',
-            plantime1:'',
+            createtime:this.formLabelAlign.createtime,
+            createtime1:this.formLabelAlign.createtimeto,
+            plantime:this.formLabelAlign.changetime,
+            plantime1:this.formLabelAlign.changetimeto,
             userID: this.userid,
             pageNum: this.currentPage,
             pageSize: 999,
@@ -449,6 +457,7 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data.list;
+          this.formLabelAlign.modifier=this.userid
           console.log(this.tableData);
         })
         .catch(function (error) {
