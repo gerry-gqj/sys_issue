@@ -75,7 +75,7 @@ export default {
       }
     };
     return {
-      imgSrc: require("../assets/imgs/5.gif") /*用来设置背景图片 */,
+      imgSrc: require("../assets/imgs/user2.jpg") /*用来设置背景图片 */,
       activeName: "second",
       // dialogVisible2: true,
       // dialogVisible3: false,
@@ -136,7 +136,10 @@ export default {
             .then((res) => {
               if (res.data.status === "登陆成功") {
                 //缓存用户名
-                this.username = localStorage.setItem('username',this.ruleForm.id)
+                this.username = localStorage.setItem(
+                  "username",
+                  this.ruleForm.id
+                );
                 //登录成功后路由到主页面
                 this.$message(
                   {

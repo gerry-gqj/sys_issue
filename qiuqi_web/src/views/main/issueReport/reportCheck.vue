@@ -1,26 +1,26 @@
 <template>
   <div>
-    <h4 style="text-align:center;width:1200px">Issue报表查询</h4>
+    <!-- <h4 style="text-align: center; width: 1200px">Issue报表查询</h4> -->
     <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
-    <hr>
+    <hr />
     <el-container>
-      <div style="width:1200px;text-align:center">
-        <el-form :inline="true"
-                 :model="formInline"
-                 class="demo-form-inline">
+      <div style="width: 1200px; text-align: center">
+        <el-form :inline="true" :model="formInline" class="demo-form-inline">
           <el-form-item label="">
-            <el-input v-model="formInline.UserId"
-                      placeholder="请输入用户ID"></el-input>
+            <el-input
+              v-model="formInline.UserId"
+              placeholder="请输入用户ID"
+            ></el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-input v-model="
-                      formInline.UserName"
-                      placeholder="请输入用户姓名">
+            <el-input
+              v-model="formInline.UserName"
+              placeholder="请输入用户姓名"
+            >
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary"
-                       @click="goreport">查询</el-button>
+            <el-button type="primary" @click="goreport">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </el-form-item>
         </el-form>
@@ -35,23 +35,23 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       formInline: {
         UserId: "",
-        UserName: ""
-      }
+        UserName: "",
+      },
     };
   },
   methods: {
-    goreport () {
+    goreport() {
       this.$router.push("/main/reportcheck/report");
       // window.location.href = "/main/reportcheck/report";
     },
-    clearvalues () {
+    clearvalues() {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
-    }
-  }
+    },
+  },
 };
 </script>

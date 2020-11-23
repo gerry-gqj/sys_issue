@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h3 style="text-align: center">Issue 查询</h3>
-    <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
+    <!-- <h3 style="text-align: center">Issue 查询</h3>
+    <hr style="border: 1px dashed #000; height: 1px" /> -->
     <hr />
-    <el-row :gutter="1">
+    <el-row :gutter="0">
       <el-col :span="6" offset="1">
         <div class="grid-content bg-purple">
           <!-- Issue No
@@ -12,7 +12,6 @@
                     style="text-align:center; width:150px"
                     maxlength="30"
                     clearable></el-input> -->
-
           <el-form
             :label-position="labelPosition"
             label-width="80px"
@@ -209,11 +208,11 @@
     </el-row> -->
     <div>
       <el-col
-        :xs="20"
-        :sm="20"
-        :md="20"
-        :lg="20"
-        :xl="20"
+        :xs="22"
+        :sm="22"
+        :md="22"
+        :lg="22"
+        :xl="22"
         style="text-align: center"
       >
         <div class="button">
