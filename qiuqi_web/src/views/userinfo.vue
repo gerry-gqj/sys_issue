@@ -127,6 +127,7 @@ export default {
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          {pattern:/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,message:'邮箱格式错误'},
           {
             type: "email",
             message: "请输入正确的邮箱地址",
@@ -137,13 +138,17 @@ export default {
       },
     };
   },
+  mounted() {
+    this.ruleForm.loginid=localStorage.getItem('userID')
+
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
             .post(
-              "http://120.78.176.2:8080/loginregister/register",
+              "http://120.78.176.2:8080/user/updateuser",
               this.$qs.stringify({
                 email: this.ruleForm.mail,
                 name: this.ruleForm.name,
@@ -151,24 +156,36 @@ export default {
                 userID: this.ruleForm.loginid,
               })
             )
-            .then(function (res) {
-              if (res.data.status == "注册成功") {
-                alert("注册成功，现在返回登录页面");
-                window.location.href = "./";
-              } else if (res.data.status == "用户名已存在") {
-                alert("用户名已存在！请重新输入");
-                window.location.href = "./Registered";
+            .then((res)=> {
+              console.log(res.data)
+              if (res.data.status == "修改个人信息成功") {
+                this.$message(
+                    {
+                      type: 'success',
+                      message: '修改成功'
+                    }
+                );
+                setTimeout( ()=>{window.location.href = "./main"},1000)
               } else {
-                alert("输入信息有误!请重新输入");
-                window.location.href = "/Registered";
+                this.$message(
+                    {
+                      type: 'error',
+                      message: '修改失败'
+                    }
+                );
               }
             })
             .catch(function (error) {
               console.log(error);
             });
         } else {
-          alert("注册失败!");
-          return false;
+          this.$message(
+              {
+                type: 'error',
+                message: '修改失败'
+              }
+          );
+
         }
       });
     },

@@ -62,7 +62,6 @@
                              label="操作"
                              width="100">
               <template slot-scope="scope">
-<<<<<<< HEAD
                 <el-button @click="cancel(scope.row)"
                            type="text"
                            size="small"
@@ -72,14 +71,7 @@
                            type="text"
                            size="small"
                            v-if="scope.row.userstate!='注销'&&scope.row.role=='普通员工'">经理</el-button>
-=======
-                <el-button @click="cancel(scope.row)" type="text" size="small" v-if="scope.row.userstate!='注销'"
-                  >注销</el-button
-                >
-                <el-button @click="manager(scope.row)" type="text" size="small" v-if="scope.row.userstate!='注销'"
-                  >经理</el-button
-                >
->>>>>>> 4a6da952694ea67f08275f72b1160a0daaeca19e
+
               </template>
             </el-table-column>
           </el-table>

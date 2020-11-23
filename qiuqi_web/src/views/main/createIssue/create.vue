@@ -252,7 +252,7 @@ export default {
             {
               type: 'error',
               message: msg
-            },
+            }
         );
         return
       }
