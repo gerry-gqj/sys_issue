@@ -139,8 +139,11 @@ export default {
             )
             .then((res) => {
               if (res.data.status === "登陆成功") {
-                //缓存用户名
+                //缓存id、用户名、权限
+                localStorage.setItem('userID',res.data.userID)
                 localStorage.setItem('username',res.data.name)
+                localStorage.setItem('role',res.data.role)
+
                 this.username = localStorage.setItem(
                     'username'
                     ,this.ruleForm.id

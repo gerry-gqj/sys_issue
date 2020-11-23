@@ -41,6 +41,9 @@ export default {
       activeIndex: "1",
     };
   },
+  mounted() {
+    this.user=localStorage.getItem('username')
+  },
   methods: {
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
