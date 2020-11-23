@@ -22,6 +22,8 @@
                 v-model="formLabelAlign.issueno"
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
+                maxlength="30"
+                show-word-limit
               ></el-input>
             </el-form-item>
             <el-form-item label="创建人">
@@ -29,6 +31,8 @@
                 v-model="formLabelAlign.createtor"
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
+                maxlength="30"
+                show-word-limit
               ></el-input>
             </el-form-item>
           </el-form>
@@ -72,6 +76,8 @@
                 v-model="formLabelAlign.modifier"
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
+                maxlength="30"
+                show-word-limit
                 disabled
               ></el-input>
             </el-form-item>

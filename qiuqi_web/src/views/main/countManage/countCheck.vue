@@ -15,6 +15,8 @@
             <el-input
               v-model="formInline.UserId"
               placeholder="请输入用户ID"
+              maxlength="30"
+              show-word-limit
             ></el-input>
           </el-form-item>
           <el-form-item label="">
@@ -22,6 +24,7 @@
               v-model="formInline.UserName"
               placeholder="请输入用户姓名"
               maxlength="30"
+              show-word-limit
             ></el-input>
           </el-form-item>
           <el-form-item>

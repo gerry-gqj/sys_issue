@@ -17,13 +17,25 @@
               class="demo-ruleForm"
             >
               <el-form-item label="登录ID：" prop="loginid">
-                <el-input v-model="ruleForm.loginid"></el-input>
+                <el-input
+                  v-model="ruleForm.loginid"
+                  maxlength="30"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
               <el-form-item label="姓名：" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+                <el-input
+                  v-model="ruleForm.name"
+                  maxlength="20"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
               <el-form-item label="邮箱：" prop="mail">
-                <el-input v-model="ruleForm.mail"></el-input>
+                <el-input
+                  v-model="ruleForm.mail"
+                  maxlength="30"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
               <el-form-item label="输入密码：" prop="pass">
                 <el-input
