@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="background">
-      <img :src="imgSrc"
-           width="100%"
-           height="100%"
-           alt="" />
+      <img :src="imgSrc" width="100%" height="100%" alt="" />
     </div>
     <div class="front">
       <el-container>
@@ -27,26 +24,28 @@
           <h2 class="title">登录</h2>
           <!-- 登录模块 -->
           <!-- <el-tab-pane label="登录" name="second"> -->
-          <el-form :model="ruleForm"
-                   :rules="rules"
-                   ref="ruleForm"
-                   label-width="100px"
-                   class="demo-ruleForm">
-            <el-form-item label="用户名："
-                          prop="id">
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="100px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="用户名：" prop="id">
               <el-input v-model="ruleForm.id"></el-input>
             </el-form-item>
-            <el-form-item label="输入密码："
-                          prop="pass1">
-              <el-input type="password"
-                        v-model="ruleForm.pass1"
-                        autocomplete="off"
-                        maxlength="30"
-                        show-password></el-input>
+            <el-form-item label="输入密码：" prop="pass1">
+              <el-input
+                type="password"
+                v-model="ruleForm.pass1"
+                autocomplete="off"
+                maxlength="30"
+                show-password
+              ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary"
-                         @click="Login('ruleForm')">登录
+              <el-button type="primary" @click="Login('ruleForm')"
+                >登录
               </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
               <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
@@ -64,21 +63,20 @@
 
 <script>
 export default {
-  data () {
+  data() {
     const validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
+      if (value === "") {
+        callback(new Error("请输入密码"));
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass');
+        if (this.ruleForm.checkPass !== "") {
+          this.$refs.ruleForm.validateField("checkPass");
         }
         callback();
       }
     };
     return {
-
-      imgSrc: require('../assets/imgs/5.gif'),/*用来设置背景图片 */
-      activeName: 'second',
+      imgSrc: require("../assets/imgs/5.gif") /*用来设置背景图片 */,
+      activeName: "second",
       // dialogVisible2: true,
       // dialogVisible3: false,
       ruleForm: {
@@ -90,25 +88,23 @@ export default {
         type: [],
         // resource: '',
         // desc: '',
-        id: '',
-        loginid: '',
-        pass1: ''
+        id: "",
+        loginid: "",
+        pass1: "",
       },
       rules: {
         id: [
-          { required: true, message: '请输入系统ID', trigger: 'blur' },
-          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+          { required: true, message: "请输入系统ID", trigger: "blur" },
+          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
         ],
 
-        pass1: [
-          { required: true, validator: validatePass, trigger: 'blur' }],
+        pass1: [{ required: true, validator: validatePass, trigger: "blur" }],
 
         name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' },
-          { max: 30, message: '长度在 30 个字符', trigger: 'blur' }
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
         ],
-
-      }
+      },
     };
   },
   methods: {
@@ -116,7 +112,7 @@ export default {
     //   this.$router.push("main");
     //   // window.location.href = "./main";
     // },
-    FormRegistered () {
+    FormRegistered() {
       // 路由跳转到注册页面
       // this.$router.push("Registered");
       window.location.href = "/Registered";
@@ -126,32 +122,36 @@ export default {
     // },
 
     //用户登录
-    Login (formName) {
+    Login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$axios.post('http://120.78.176.2:8080/loginregister/login',
-            this.$qs.stringify({
-              name: this.ruleForm.id,
-              password: this.ruleForm.pass1
-            }))
+          this.$axios
+            .post(
+              "http://120.78.176.2:8080/loginregister/login",
+              this.$qs.stringify({
+                name: this.ruleForm.id,
+                password: this.ruleForm.pass1,
+              })
+            )
             .then((res) => {
               if (res.data.status == "登陆成功") {
                 //登录成功后路由到主页面
                 this.$message(
                   {
-                    type: 'success',
-                    message: '登录成功'
+                    type: "success",
+                    message: "登录成功",
                   },
                   // window.location.href = "/",
-                  this.$router.push("main"),
+                  (window.location.href = "/main")
+                  // this.$router.push("main"),
                 );
                 // window.location.href = "./main";
               } else {
                 this.$message(
                   {
-                    type: 'error',
-                    message: '登录失败，请检查账号密码!'
-                  },
+                    type: "error",
+                    message: "登录失败，请检查账号密码!",
+                  }
                   // window.location.href = "/",
                 );
                 // alert('输入信息有误!请重新输入');
@@ -159,7 +159,8 @@ export default {
                 // this.$router.push("/");
                 // window.location.href = "/Login";
               }
-            }).catch(function (error) {
+            })
+            .catch(function (error) {
               console.log(error);
             });
         }
