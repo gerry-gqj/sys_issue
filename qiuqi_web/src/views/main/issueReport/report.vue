@@ -19,6 +19,7 @@
         <el-table-column prop="recived" label="收到Issue数">
         </el-table-column>
         <el-table-column prop="resolved" label="修改Issue数"> </el-table-column>
+        <el-table-column prop="closed" label="关闭Issue数"> </el-table-column>
         <el-table-column prop="completion" label="完成率"> </el-table-column>
       </el-table>
     </el-container>
@@ -97,8 +98,9 @@ export default {
                   pageSize: this.pageSize
                 }
           })
-          .then(function (res) {
-            that.tableData = res.data
+          .then((res)=> {
+            this.tableData = res.data.list
+            this.total=res.data.total
             console.log(res.data)
           }).catch(function (error) {
         console.log(error)
