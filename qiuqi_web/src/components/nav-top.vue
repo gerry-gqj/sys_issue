@@ -1,42 +1,43 @@
 <template>
   <div class="main">
     <el-container>
-      <el-aside width="auto"
-                class="header-logo tap">
-        <img class="logo"
-             src="../assets/imgs/user2.jpg"
-             alt="Logo" />
+      <el-aside width="auto" class="header-logo tap">
+        <img class="logo" src="../assets/imgs/user2.jpg" alt="Logo" />
       </el-aside>
       <h1>GBA Issue管理系统</h1>
-      <el-aside width="auto"
-                class="header-logo tap">
-        <el-dropdown><span>
-            <a class="user"
-               @click="ModifyUserInformation"><span class="userimg">
-                <el-avatar icon="el-icon-user-solid"
-                           class="headerLogo"></el-avatar>
+      <el-aside width="auto" class="header-logo tap">
+        <el-dropdown
+          ><span>
+            <a class="user" @click="ModifyUserInformation"
+              ><span class="userimg">
+                <el-avatar
+                  icon="el-icon-user-solid"
+                  class="headerLogo"
+                ></el-avatar>
               </span>
-              <span class="username">{{user}}</span>
-            </a></span>
+              <span class="username">{{ user }}</span>
+            </a></span
+          >
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="userinfo">修改用户信息</el-dropdown-item>
-            <el-dropdown-item @click.native="logout"
-                              divided>退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="userinfo"
+              >修改用户信息</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="logout" divided
+              >退出登录</el-dropdown-item
+            >
           </el-dropdown-menu>
         </el-dropdown>
-
       </el-aside>
     </el-container>
   </div>
 </template>
 
 <script>
-import router from '@/router';
+import router from "@/router";
 export default {
-  data () {
-
+  data() {
     return {
-      user: 'user',
+      user: "user",
       activeIndex: "1",
     };
   },
@@ -44,28 +45,28 @@ export default {
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
     // },
-    ModifyUserInformation () {
-      this.user = 'User';
+    ModifyUserInformation() {
+      this.user = "User";
     },
-    userinfo () {
+    userinfo() {
       window.location.href = "/userinfo";
     },
-    logout () {
+    logout() {
       // this.$router.push('/');
       // 实现页面跳转和刷新页面
 
-      this.$confirm('是否注销登录?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-        center: true
+      this.$confirm("是否注销登录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        center: true,
       }).then(() => {
         this.$message(
           //   {
           //   type: 'success',
           //   message: '取消注册!'
           // },
-          window.location.href = "/",
+          (window.location.href = "/")
         );
         // }).catch(() => {
         //   this.$message({
