@@ -32,7 +32,11 @@
             class="demo-ruleForm"
           >
             <el-form-item label="用户名：" prop="id">
-              <el-input v-model="ruleForm.id"></el-input>
+              <el-input
+                v-model="ruleForm.id"
+                maxlength="30"
+                show-word-limit
+              ></el-input>
             </el-form-item>
             <el-form-item label="输入密码：" prop="pass1">
               <el-input

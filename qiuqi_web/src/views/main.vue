@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-container>
       <!-- header部分 -->
       <el-header>
@@ -30,7 +29,7 @@ export default {
     navtop,
     leftNav,
   },
-  data () {
+  data() {
     return {};
   },
   methods: {},
