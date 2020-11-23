@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="background">
-      <img :src="imgSrc" width="100%" height="100%" alt="" />
+      <img :src="imgSrc"
+           width="100%"
+           height="100%"
+           alt="" />
     </div>
     <div class="front">
       <el-container>
@@ -24,32 +27,28 @@
           <h2 class="title">登录</h2>
           <!-- 登录模块 -->
           <!-- <el-tab-pane label="登录" name="second"> -->
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="100px"
-            class="demo-ruleForm"
-          >
-            <el-form-item label="系统ID：" prop="id">
-              <el-input
-                v-model="ruleForm.id"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+          <el-form :model="ruleForm"
+                   :rules="rules"
+                   ref="ruleForm"
+                   label-width="100px"
+                   class="demo-ruleForm">
+            <el-form-item label="系统ID："
+                          prop="id">
+              <el-input v-model="ruleForm.id"
+                        maxlength="30"
+                        show-word-limit></el-input>
             </el-form-item>
-            <el-form-item label="输入密码：" prop="pass1">
-              <el-input
-                type="password"
-                v-model="ruleForm.pass1"
-                autocomplete="off"
-                maxlength="30"
-                show-password
-              ></el-input>
+            <el-form-item label="输入密码："
+                          prop="pass1">
+              <el-input type="password"
+                        v-model="ruleForm.pass1"
+                        autocomplete="off"
+                        maxlength="30"
+                        show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="Login('ruleForm')"
-                >登录
+              <el-button type="primary"
+                         @click="Login('ruleForm')">登录
               </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
               <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
@@ -67,7 +66,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -116,7 +115,7 @@ export default {
     //   this.$router.push("main");
     //   // window.location.href = "./main";
     // },
-    FormRegistered() {
+    FormRegistered () {
       // 路由跳转到注册页面
       // this.$router.push("Registered");
       window.location.href = "/Registered";
@@ -126,7 +125,7 @@ export default {
     // },
 
     //用户登录
-    Login(formName) {
+    Login (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
@@ -140,13 +139,13 @@ export default {
             .then((res) => {
               if (res.data.status === "登陆成功") {
                 //缓存id、用户名、权限
-                localStorage.setItem('userID',res.data.userID)
-                localStorage.setItem('username',res.data.name)
-                localStorage.setItem('role',res.data.role)
+                localStorage.setItem('userID', res.data.userID)
+                localStorage.setItem('username', res.data.name)
+                localStorage.setItem('role', res.data.role)
 
                 this.username = localStorage.setItem(
-                    'username'
-                    ,this.ruleForm.id
+                  'username'
+                  , this.ruleForm.id
                 );
                 //登录成功后路由到主页面
                 this.$message(
