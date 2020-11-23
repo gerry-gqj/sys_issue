@@ -135,7 +135,9 @@ export default {
               password: this.ruleForm.pass1
             }))
             .then((res) => {
-              if (res.data.status == "登陆成功") {
+              if (res.data.status === "登陆成功") {
+                //缓存用户名
+                this.username = localStorage.setItem('username',this.ruleForm.id)
                 //登录成功后路由到主页面
                 this.$message(
                   {

@@ -97,11 +97,14 @@
         <div class="grid-content">
           <p>计划修改时间</p>
           <p>
-            <el-date-picker v-model="planTime"
-                            type="date"
-                            placeholder="选择日期"
-                            :picker-options="pickerOptions0"
-                            style="width: 100%"></el-date-picker>
+            <el-date-picker
+                v-model="planTime"
+                type="date"
+                placeholder="选择日期"
+                :picker-options="pickerOptions0"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd 00:00:00">
+            </el-date-picker>
           </p>
         </div>
       </el-col>
@@ -127,11 +130,7 @@
     <!-- 指派修改人栏 -->
     <div>
       <h2>指派修改人栏</h2>
-      <el-col :xs="12"
-              :sm="6"
-              :md="6"
-              :lg="6"
-              :xl="6">
+      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
         <div class="grid-content">
           <el-input v-model="modifier"
                     placeholder="内容"></el-input>
@@ -159,22 +158,23 @@ export default {
     return {
       options: [
         {
-          value: "选项1",
+          value: "最高",
           label: "最高",
         },
         {
-          value: "选项2",
+          value: "较高",
           label: "较高",
         },
         {
-          value: "选项3",
+          value: "一般",
           label: "一般",
         },
         {
-          value: "选项4",
+          value: "低",
           label: "低",
         },
       ],
+      modifier:"",
       username:"",
       title: "",
       issueid: "",
@@ -199,20 +199,6 @@ export default {
     console.log(this.username)
   },
   methods:{
-    //获取当前时间
-    gettime(){
-      const date = new Date();
-      let month = date.getMonth() + 1;
-      let strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-        month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      return date.getFullYear() + "-" + month + "-" + strDate
-          + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    },
     //新增Issue接口--post
     createIssue(){
       //验证是否为空
@@ -238,7 +224,6 @@ export default {
         );
         return
       }
-      const time = this.gettime();
       this.$axios.post('http://120.78.176.2:8080/issue/createIssue',
           this.$qs.stringify({
             creater: this.username,
