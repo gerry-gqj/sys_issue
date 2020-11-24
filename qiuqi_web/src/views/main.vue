@@ -32,6 +32,12 @@ export default {
   data() {
     return {};
   },
+  created() {
+    let role=localStorage.getItem('role')
+    if(role==''||role==null){
+      this.$router.push('/');
+    }
+  },
 };
 </script>
 
