@@ -63,6 +63,21 @@ const routes: Array<RouteConfig> = [
         //     },
         //   ]
       },
+      {
+        path: '/main/checkmycreate',
+        name: 'issue查询',
+        component: () =>
+          import("../views/main/issueCheck/mycreate.vue"),
+        // children: [
+        //     {
+        //       path: '/main/check/list',
+        //       name: 'List',
+        //       component: () =>
+        //         import("../views/main/issueCheck/list.vue"),
+        //     },
+        //   ]
+      },
+
 
       // 账户管理
       {

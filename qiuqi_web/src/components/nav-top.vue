@@ -1,11 +1,9 @@
 <template>
   <div class="main">
     <el-container>
-      <el-aside width="auto"
-                class="header-logo tap">
-        <img class="logo"
-             src="../assets/imgs/user2.jpg"
-             alt="Logo" />      </el-aside>
+      <el-aside width="auto" class="header-logo tap">
+        <img class="logo" src="../assets/imgs/user2.jpg" alt="Logo"
+      /></el-aside>
       <h1>GBA Issue管理系统</h1>
       <el-aside width="auto" class="header-logo tap">
         <el-dropdown
@@ -18,7 +16,8 @@
                 ></el-avatar>
               </span>
               <span class="username">{{ user }}</span>
-            </a></span>
+            </a></span
+          >
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="userinfo"
               >修改用户信息</el-dropdown-item
@@ -43,14 +42,13 @@ export default {
     };
   },
   mounted() {
-    this.user=localStorage.getItem('username')
+    this.user = localStorage.getItem("username");
   },
   methods: {
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
     // },
-    ModifyUserInformation() {
-    },
+    ModifyUserInformation() {},
     userinfo() {
       window.location.href = "/userinfo";
     },
@@ -65,10 +63,10 @@ export default {
         center: true,
       }).then(() => {
         //缓存id、用户名、权限
-        localStorage.setItem('userID', '')
-        localStorage.setItem('username', '')
-        localStorage.setItem('role', '')
-        window.location.href = "/"
+        localStorage.setItem("userID", "");
+        localStorage.setItem("username", "");
+        localStorage.setItem("role", "");
+        window.location.href = "/";
       });
     },
   },

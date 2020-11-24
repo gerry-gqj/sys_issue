@@ -33,6 +33,7 @@
                 style="text-align: center; width: 200px"
                 maxlength="30"
                 show-word-limit
+                disabled
               ></el-input>
             </el-form-item>
           </el-form>
@@ -77,7 +78,6 @@
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
                 maxlength="30"
-                disabled
               ></el-input>
             </el-form-item>
             <el-form-item label="修改人" v-else>
@@ -548,7 +548,8 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data.list;
-          this.formLabelAlign.modifier = this.userid;
+          //   this.formLabelAlign.modifier = this.userid;
+          this.formLabelAlign.createtor = this.userid;
           console.log(this.tableData);
         })
         .catch(function (error) {
