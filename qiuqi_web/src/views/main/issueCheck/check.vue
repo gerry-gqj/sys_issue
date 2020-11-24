@@ -12,10 +12,12 @@
                     style="text-align:center; width:150px"
                     maxlength="30"
                     clearable></el-input> -->
-          <el-form :label-position="labelPosition"
-                   label-width="80px"
-                   :model="formLabelAlign">
-          <el-form-item label="Issue No">
+          <el-form
+            :label-position="labelPosition"
+            label-width="80px"
+            :model="formLabelAlign"
+          >
+            <el-form-item label="Issue No">
               <el-input
                 v-model="formLabelAlign.issueno"
                 placeholder="请输入"
@@ -69,18 +71,21 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人"  v-if="this.role=='普通员工'">
-              <el-input v-model="formLabelAlign.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"
-                        disabled></el-input>
+            <el-form-item label="修改人" v-if="this.role == '普通员工'">
+              <el-input
+                v-model="formLabelAlign.modifier"
+                placeholder="请输入"
+                style="text-align: center; width: 200px"
+                maxlength="30"
+                disabled
+              ></el-input>
             </el-form-item>
             <el-form-item label="修改人" v-else>
-              <el-input v-model="formLabelAlign.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"
+              <el-input
+                v-model="formLabelAlign.modifier"
+                placeholder="请输入"
+                style="text-align: center; width: 200px"
+                maxlength="30"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -238,76 +243,73 @@
       </el-col>
     </div>
     <div>
-      <el-col
-        :xs="22"
-        :sm="22"
-        :md="22"
-        :lg="22"
-        :xl="22"
-        style="text-align: center"
+      <el-row>
+        <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="3">
+          <h1>Issue 列表</h1>
+        </el-col></el-row
       >
-      </el-col>
     </div>
-
     <div>
       <!-- 路由容器 -->
       <!-- <router-view /> -->
 
       <div>
         <el-col
-            :xs="22"
-            :sm="22"
-            :md="22"
-            :lg="22"
-            :xl="22"
-            style="text-align: center"
+          :xs="24"
+          :sm="24"
+          :md="24"
+          :lg="24"
+          :xl="24"
+          style="text-align: center"
         >
-          <h1>Issue 列表</h1>
           <el-container>
-            <el-table :data="
-              tableData.slice(
-                (currentPage - 1) * pageSize,
-                currentPage * pageSize
-              )
-            "
-                      style="width: 100%"
-                      :header-cell-style="getRowClass">
+            <el-table
+              :data="
+                tableData.slice(
+                  (currentPage - 1) * pageSize,
+                  currentPage * pageSize
+                )
+              "
+              style="width: 100%"
+              :header-cell-style="getRowClass"
+            >
               <el-table-column type="selection"></el-table-column>
-              <el-table-column type="index"
-                               label="序号"></el-table-column>
-              <el-table-column prop="issueID"
-                               label="Issue ID"> </el-table-column>
-              <el-table-column prop="title"
-                               label="Issue 标题"> </el-table-column>
-              <el-table-column prop="creater"
-                               label="创建人"> </el-table-column>
-              <el-table-column prop="createtime"
-                               label="创建时间">
+              <el-table-column type="index" label="序号"></el-table-column>
+              <el-table-column prop="issueID" label="Issue ID">
               </el-table-column>
-              <el-table-column prop="name" v-if="this.role=='普通员工'"
-                               label="修改人"> </el-table-column>
-              <el-table-column prop="userID" v-else
-                               label="修改人"> </el-table-column>
-              <el-table-column prop="issuestate"
-                               label="Issue 状态">
+              <el-table-column prop="title" label="Issue 标题">
               </el-table-column>
-              <el-table-column prop="plantime"
-                               label="计划完成时间">
+              <el-table-column prop="creater" label="创建人"> </el-table-column>
+              <el-table-column prop="createtime" label="创建时间">
               </el-table-column>
-              <el-table-column prop="acttime"
-                               label="实际完成时间">
+              <el-table-column
+                prop="name"
+                v-if="this.role == '普通员工'"
+                label="修改人"
+              >
               </el-table-column>
-              <el-table-column fixed="right"
-                               label="操作"
-                               width="100">
+              <el-table-column prop="userID" v-else label="修改人">
+              </el-table-column>
+              <el-table-column prop="issuestate" label="Issue 状态">
+              </el-table-column>
+              <el-table-column prop="plantime" label="计划完成时间">
+              </el-table-column>
+              <el-table-column prop="acttime" label="实际完成时间">
+              </el-table-column>
+              <el-table-column fixed="right" label="操作" width="100">
                 <template>
-                  <el-button @click="dialogVisible = true"
-                             type="text"
-                             size="small">详情</el-button>
-                  <el-dialog title="提示"
-                             :visible.sync="dialogVisible"
-                             width="30%"
-                             :append-to-body="true">
+                  <el-button
+                    @click="dialogVisible = true"
+                    type="text"
+                    size="small"
+                    >详情</el-button
+                  >
+                  <el-dialog
+                    title="提示"
+                    :visible.sync="dialogVisible"
+                    width="30%"
+                    :append-to-body="true"
+                  >
                     <div>
                       <!-- <div class="radio">
   =======
@@ -391,11 +393,11 @@
         </el-col>
         <div class="paginationClass">
           <el-col
-            :xs="22"
-            :sm="22"
-            :md="22"
-            :lg="22"
-            :xl="22"
+            :xs="24"
+            :sm="24"
+            :md="24"
+            :lg="24"
+            :xl="24"
             style="text-align: center"
           >
             <el-pagination
@@ -486,7 +488,7 @@ export default {
           cmpttrue: "2020-11-17",
         },
       ],
-      role:'',
+      role: "",
       userid: "",
       username: "",
       currentPage: 1, // 当前页码
@@ -508,38 +510,38 @@ export default {
       },
     };
   },
-mounted () {
-  this.userid = localStorage.getItem('userID')
-  this.username = localStorage.getItem('username')
-  this.role = localStorage.getItem('role')
-  console.log( this.userid)
-  console.log(this.username)
-  console.log(this.role)
-  console.log(this.role!='普通员工')
-  if(this.role!='普通员工'){
-    this.getIssues()
-  }else{
-    this.searchIssue()
-  }
-},
-methods: {
-  getIssues() {
-    this.$axios
+  mounted() {
+    this.userid = localStorage.getItem("userID");
+    this.username = localStorage.getItem("username");
+    this.role = localStorage.getItem("role");
+    console.log(this.userid);
+    console.log(this.username);
+    console.log(this.role);
+    console.log(this.role != "普通员工");
+    if (this.role != "普通员工") {
+      this.getIssues();
+    } else {
+      this.searchIssue();
+    }
+  },
+  methods: {
+    getIssues() {
+      this.$axios
         .get("http://120.78.176.2:8080/issue/selectIssueAll", {
           params: {
             pageNum: this.currentPage,
             pageSize: 999,
           },
         })
-        .then( (res)=> {
+        .then((res) => {
           this.tableData = res.data.list;
         })
-        .catch((error)=> {
+        .catch((error) => {
           console.log(error);
         });
-  },
-  searchIssue () {
-    this.$axios
+    },
+    searchIssue() {
+      this.$axios
         .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
           params: {
             issueID: this.formLabelAlign.issueno,
@@ -556,13 +558,13 @@ methods: {
         })
         .then((res) => {
           this.tableData = res.data.list;
-          this.formLabelAlign.modifier = this.userid
+          this.formLabelAlign.modifier = this.userid;
           console.log(this.tableData);
         })
         .catch(function (error) {
           console.log(error);
         });
-  },
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;

@@ -128,7 +128,10 @@ export default {
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
-          {pattern:/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,message:'邮箱格式错误'},
+          {
+            pattern: /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,
+            message: "邮箱格式错误",
+          },
           {
             type: "email",
             message: "请输入正确的邮箱地址",
@@ -136,11 +139,11 @@ export default {
           },
         ],
         //登录ID
-        loginid: [{ max: 30, message: "长度在 30 个字符", trigger: "blur" },
+        loginid: [
+          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
           { required: true, message: "请输入ID", trigger: "blur" },
-          {pattern:/^[0-9]*$/,message:'ID为数字'}
+          { pattern: /^[0-9]*$/, message: "ID为数字" },
         ],
-
       },
     };
   },
