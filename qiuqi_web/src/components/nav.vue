@@ -10,15 +10,15 @@
               <i class="el-icon-menu"></i>
               <span slot="title">创建新 Issue</span>
             </el-menu-item>
-            <el-menu-item index="/main/reportCheck">
+            <el-menu-item index="/main/reportCheck" :disabled="this.role=='普通员工'">
               <i class="el-icon-document"></i>
               <span slot="title">Issue 报表</span>
             </el-menu-item>
-            <el-menu-item index="/main/countCheck" :disabled="this.role=='经理'">
+            <el-menu-item index="/main/countCheck" :disabled="this.role!='超级Admin'">
               <i class="el-icon-location"></i>
               <span slot="title">账户管理</span>
             </el-menu-item>
-            <el-menu-item index="/main/check"  >
+            <el-menu-item index="/main/check">
               <i class="el-icon-setting"></i>
               <span slot="title">Issue 查询</span>
             </el-menu-item>
@@ -29,21 +29,18 @@
     </el-aside>
   </div>
 </template>
-
-
 <script>
 export default {
-  data () {
+  data() {
     return {
-      role:''
+      role: ''
     };
   },
   mounted() {
-    this.role=localStorage.getItem('role')
+    this.role = localStorage.getItem('role')
     console.log(this.role)
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
@@ -56,6 +53,7 @@ export default {
 .el-menu {
   border-right: none;
 }
+
 .el-aside {
   border-right: 1px solid #f5f1f1;
 }
