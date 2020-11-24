@@ -290,7 +290,7 @@
                 label="修改人"
               >
               </el-table-column>
-              <el-table-column prop="userID" v-else label="修改人">
+              <el-table-column prop="name" v-else label="修改人">
               </el-table-column>
               <el-table-column prop="issuestate" label="Issue 状态">
               </el-table-column>
@@ -543,7 +543,7 @@ export default {
             createtime1: this.formLabelAlign.createtimeto,
             plantime: this.formLabelAlign.changetime,
             plantime1: this.formLabelAlign.changetimeto,
-            userID: this.userid,
+            userID: this.formLabelAlign.modifier,
             pageNum: this.currentPage,
             pageSize: 999,
           },
