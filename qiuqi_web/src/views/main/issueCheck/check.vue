@@ -33,6 +33,7 @@
                 style="text-align: center; width: 200px"
                 maxlength="30"
                 show-word-limit
+                disabled
               ></el-input>
             </el-form-item>
           </el-form>
@@ -77,8 +78,6 @@
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
                 maxlength="30"
-                v-if="this.role != '经理'"
-                disabled
               ></el-input>
             </el-form-item>
             <el-form-item label="修改人" v-else>
@@ -252,18 +251,17 @@
         </el-col></el-row
       >
     </div>
-
     <div>
       <!-- 路由容器 -->
       <!-- <router-view /> -->
 
       <div>
         <el-col
-          :xs="22"
-          :sm="22"
-          :md="22"
-          :lg="22"
-          :xl="22"
+          :xs="24"
+          :sm="24"
+          :md="24"
+          :lg="24"
+          :xl="24"
           style="text-align: center"
         >
           <el-container>
@@ -353,9 +351,8 @@
               </el-table-column>
               <el-table-column fixed="right"
                                label="操作"
-                               width="100" >
-                <template >
-
+                               width="100">
+                <template>
                   <el-button @click="dialogVisible = true"
                              type="text"
                              size="small">详情</el-button>
@@ -364,7 +361,7 @@
                              width="30%"
                              :append-to-body="true">
                     <div>
-                     <div class="radio">
+                      <!-- <div class="radio">
   >>>>>>> 1db679dd441edd578fcbf06b5e0d1e3d7bc7be31
       排序：
       <el-radio-group v-model="reverse">
@@ -390,7 +387,7 @@
                       >
                     </span>
                   </el-dialog>
-                  <el-button  type="text" size="small" v-if="state.issuestate!='已关闭'">修改</el-button>
+                  <el-button type="text" size="small">修改</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -553,7 +550,8 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data.list;
-          this.formLabelAlign.modifier = this.userid;
+          //   this.formLabelAlign.modifier = this.userid;
+          this.formLabelAlign.createtor = this.userid;
           console.log(this.tableData);
         })
         .catch(function (error) {
