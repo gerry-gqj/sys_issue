@@ -228,19 +228,21 @@
       </el-col>
     </el-row> -->
     <div>
-      <el-col
-        :xs="22"
-        :sm="22"
-        :md="22"
-        :lg="22"
-        :xl="22"
-        style="text-align: center"
+      <el-row>
+        <el-col
+          :xs="22"
+          :sm="22"
+          :md="22"
+          :lg="22"
+          :xl="22"
+          style="text-align: center"
+        >
+          <div class="button">
+            <el-button type="primary" @click="searchIssue">查询</el-button>
+            <el-button @click="clearvalues">清空</el-button>
+          </div>
+        </el-col></el-row
       >
-        <div class="button">
-          <el-button type="primary" @click="searchIssue">查询</el-button>
-          <el-button @click="clearvalues">清空</el-button>
-        </div>
-      </el-col>
     </div>
     <div>
       <el-row>
