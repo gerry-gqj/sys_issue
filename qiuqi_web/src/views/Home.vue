@@ -120,10 +120,6 @@ export default {
       // this.$router.push("Registered");
       window.location.href = "/Registered";
     },
-    // handleClick (tab, event) {
-    //   console.log(tab, event);
-    // },
-
     //用户登录
     Login (formName) {
       this.$refs[formName].validate((valid) => {
@@ -137,6 +133,7 @@ export default {
               })
             )
             .then((res) => {
+              console.log(res.data.status)
               if (res.data.status === "登陆成功") {
                 //缓存id、用户名、权限
                 localStorage.setItem('userID', res.data.userID)
@@ -158,18 +155,26 @@ export default {
                   // this.$router.push("main"),
                 );
                 // window.location.href = "./main";
-              } else {
+              } else if(res.data.status === "用户不存在"){
                 this.$message(
                   {
                     type: "error",
-                    message: "登录失败，请检查账号密码!",
+                    message: "用户不存在",
                   }
-                  // window.location.href = "/",
                 );
-                // alert('输入信息有误!请重新输入');
-                // 密码错误返回登录页面
-                // this.$router.push("/");
-                // window.location.href = "/Login";
+              }else if(res.data.status === "该用户已注销"){
+                this.$message(
+                    {
+                      type: "error",
+                      message: "该用户已注销",
+                    }
+                );
+              }else {
+                this.$message(
+                    {
+                      type: "error",
+                      message: "登录失败",
+                    })
               }
             })
             .catch(function (error) {

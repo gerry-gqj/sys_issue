@@ -38,8 +38,6 @@
     </el-aside>
   </div>
 </template>
-
-
 <script>
 export default {
   data() {
@@ -71,6 +69,7 @@ export default {
 .el-menu {
   border-right: none;
 }
+
 .el-aside {
   border-right: 1px solid #f5f1f1;
 }
