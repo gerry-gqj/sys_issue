@@ -64,18 +64,11 @@ export default {
         type: "warning",
         center: true,
       }).then(() => {
-        this.$message(
-          //   {
-          //   type: 'success',
-          //   message: '取消注册!'
-          // },
-          (window.location.href = "/")
-        );
-        // }).catch(() => {
-        //   this.$message({
-        //     type: 'info',
-        //     // message: '已取消删除'
-        //   });
+        //缓存id、用户名、权限
+        localStorage.setItem('userID', '')
+        localStorage.setItem('username', '')
+        localStorage.setItem('role', '')
+        window.location.href = "/"
       });
     },
   },

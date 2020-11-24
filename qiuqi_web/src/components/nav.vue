@@ -14,11 +14,11 @@
               <i class="el-icon-document"></i>
               <span slot="title">Issue 报表</span>
             </el-menu-item>
-            <el-menu-item index="/main/countCheck">
+            <el-menu-item index="/main/countCheck" :disabled="this.role=='经理'">
               <i class="el-icon-location"></i>
               <span slot="title">账户管理</span>
             </el-menu-item>
-            <el-menu-item index="/main/check">
+            <el-menu-item index="/main/check"  >
               <i class="el-icon-setting"></i>
               <span slot="title">Issue 查询</span>
             </el-menu-item>
@@ -34,7 +34,13 @@
 <script>
 export default {
   data () {
-    return {};
+    return {
+      role:''
+    };
+  },
+  mounted() {
+    this.role=localStorage.getItem('role')
+    console.log(this.role)
   },
   methods: {
   },

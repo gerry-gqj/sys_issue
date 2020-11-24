@@ -72,6 +72,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="修改人">
+<<<<<<< HEAD
               <el-input
                 v-model="formLabelAlign.modifier"
                 placeholder="请输入"
@@ -80,6 +81,20 @@
                 show-word-limit
                 disabled
               ></el-input>
+=======
+              <el-input v-model="formLabelAlign.modifier"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        v-if="this.role!='经理'"
+                        disabled></el-input>
+              <el-input v-model="formLabelAlign.modifier"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        v-else></el-input>
+>>>>>>> 1db679dd441edd578fcbf06b5e0d1e3d7bc7be31
             </el-form-item>
           </el-form>
         </div>
@@ -252,6 +267,7 @@
       <!-- <router-view /> -->
 
       <div>
+<<<<<<< HEAD
         <el-col
           :xs="22"
           :sm="22"
@@ -304,6 +320,55 @@
                   >
                     <div>
                       <!-- <div class="radio">
+=======
+        <p>Issue 列表</p>
+        <el-container>
+          <el-table :data="
+              tableData.slice(
+                (currentPage - 1) * pageSize,
+                currentPage * pageSize
+              )
+            "
+                    style="width: 100%"
+                    :header-cell-style="getRowClass">
+            <el-table-column type="selection"></el-table-column>
+            <el-table-column type="index"
+                             label="序号"></el-table-column>
+            <el-table-column prop="issueID"
+                             label="Issue ID"> </el-table-column>
+            <el-table-column prop="title"
+                             label="Issue 标题"> </el-table-column>
+            <el-table-column prop="creater"
+                             label="创建人"> </el-table-column>
+            <el-table-column prop="createtime"
+                             label="创建时间">
+            </el-table-column>
+            <el-table-column prop="name"
+                             label="修改人"> </el-table-column>
+
+            <el-table-column prop="issuestate"
+                             label="Issue 状态">
+            </el-table-column>
+            <el-table-column prop="plantime"
+                             label="计划完成时间">
+            </el-table-column>
+            <el-table-column prop="acttime"
+                             label="实际完成时间">
+            </el-table-column>
+            <el-table-column fixed="right"
+                             label="操作"
+                             width="100">
+              <template>
+                <el-button @click="dialogVisible = true"
+                           type="text"
+                           size="small">详情</el-button>
+                <el-dialog title="提示"
+                           :visible.sync="dialogVisible"
+                           width="30%"
+                           :append-to-body="true">
+                  <div>
+                    <!-- <div class="radio">
+>>>>>>> 1db679dd441edd578fcbf06b5e0d1e3d7bc7be31
     排序：
     <el-radio-group v-model="reverse">
       <el-radio :label="true">倒序</el-radio>
@@ -431,8 +496,14 @@ export default {
           cmpttrue: "2020-11-17",
         },
       ],
+<<<<<<< HEAD
       userid: "",
       username: "",
+=======
+      role:'',
+      userid: '',
+      username: '',
+>>>>>>> 1db679dd441edd578fcbf06b5e0d1e3d7bc7be31
       currentPage: 1, // 当前页码
       total: 0, // 总条数
       pageSize: 20, // 每页的数据条数
@@ -452,6 +523,7 @@ export default {
       },
     };
   },
+<<<<<<< HEAD
   mounted() {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
@@ -474,6 +546,35 @@ export default {
     //     });
     // },
     searchIssue() {
+=======
+  mounted () {
+    this.userid = localStorage.getItem('userID')
+    this.username = localStorage.getItem('username')
+    this.role = localStorage.getItem('role')
+    if(this.role!='普通员工'){
+      this.searchIssue()
+    }else{
+      this.getIssues()
+    }
+  },
+  methods: {
+    getIssues() {
+      this.$axios
+        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
+          params: {
+            pageNum: this.currentPage,
+            pageSize: 999,
+          },
+        })
+        .then(function (res) {
+          this.tableData = res.data.list;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    searchIssue () {
+>>>>>>> 1db679dd441edd578fcbf06b5e0d1e3d7bc7be31
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
           params: {
