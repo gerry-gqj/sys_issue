@@ -8,7 +8,7 @@
         @close="handleClose"
         router
       >
-        <el-menu-item index="/main/create">
+        <el-menu-item index="/main/create" :disabled="this.role == '经理'">
           <i class="el-icon-menu"></i>
           <span slot="title">创建新 Issue</span>
         </el-menu-item>
@@ -16,7 +16,7 @@
           <i class="el-icon-document"></i>
           <span slot="title">Issue 报表</span>
         </el-menu-item>
-        <el-menu-item index="/main/countCheck" :disabled="this.role == '经理'">
+        <el-menu-item index="/main/countCheck" :disabled="this.role != '超级Admin'">
           <i class="el-icon-location"></i>
           <span slot="title">账户管理</span>
         </el-menu-item>

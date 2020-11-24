@@ -115,7 +115,7 @@ export default {
         ],
         pass: [
           { required: true, validator: validatePass, trigger: "blur" },
-          // { pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/, message: '密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位' }
+          { pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/, message: '密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位' }
         ],
         pass1: [{ required: true, validator: validatePass, trigger: "blur" }],
         checkPass: [

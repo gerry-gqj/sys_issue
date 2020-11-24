@@ -32,7 +32,7 @@ export default {
   data() {
     return {};
   },
-  created() {
+  beforeCreate() {
     let role=localStorage.getItem('role')
     if(role==''||role==null){
       this.$router.push('/');

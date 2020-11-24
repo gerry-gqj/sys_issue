@@ -125,61 +125,61 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-            .post(
-              "http://120.78.176.2:8080/loginregister/login",
-              this.$qs.stringify({
-                name: this.ruleForm.id,
-                password: this.ruleForm.pass1,
-              })
-            )
-            .then((res) => {
-              console.log(res.data.status)
-              if (res.data.status === "登陆成功") {
-                //缓存id、用户名、权限
-                localStorage.setItem('userID', res.data.userID)
-                localStorage.setItem('username', res.data.name)
-                localStorage.setItem('role', res.data.role)
+              .post(
+                  "http://120.78.176.2:8080/loginregister/login",
+                  this.$qs.stringify({
+                    name: this.ruleForm.id,
+                    password: this.ruleForm.pass1,
+                  })
+              )
+              .then((res) => {
+                console.log(res.data.status)
+                if (res.data.status == "登陆成功") {
+                  //缓存id、用户名、权限
+                  localStorage.setItem('userID', res.data.userID)
+                  localStorage.setItem('username', res.data.name)
+                  localStorage.setItem('role', res.data.role)
 
-                this.username = localStorage.setItem(
-                  'username'
-                  , this.ruleForm.id
-                );
-                //登录成功后路由到主页面
-                this.$message(
-                  {
-                    type: "success",
-                    message: "登录成功",
-                  },
-                  // window.location.href = "/",
-                  (window.location.href = "/main")
-                  // this.$router.push("main"),
-                );
-                // window.location.href = "./main";
-              } else if(res.data.status === "用户不存在"){
-                this.$message(
-                  {
-                    type: "error",
-                    message: "用户不存在",
-                  }
-                );
-              }else if(res.data.status === "该用户已注销"){
-                this.$message(
-                    {
-                      type: "error",
-                      message: "该用户已注销",
-                    }
-                );
-              }else {
-                this.$message(
-                    {
-                      type: "error",
-                      message: "登录失败",
-                    })
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
+                  this.username = localStorage.setItem(
+                      'username'
+                      , this.ruleForm.id
+                  );
+                  //登录成功后路由到主页面
+                  this.$message(
+                      {
+                        type: "success",
+                        message: "登录成功",
+                      },
+                      // window.location.href = "/",
+                      (window.location.href = "/main")
+                      // this.$router.push("main"),
+                  );
+                  // window.location.href = "./main";
+                } else if(res.data.status == "用户名不存在"){
+                  this.$message(
+                      {
+                        type: "error",
+                        message: "用户不存在",
+                      }
+                  );
+                }else if(res.data.status == "该用户已注销"){
+                  this.$message(
+                      {
+                        type: "error",
+                        message: "该用户已注销",
+                      }
+                  );
+                }else {
+                  this.$message(
+                      {
+                        type: "error",
+                        message: "登录失败",
+                      })
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
       });
     },

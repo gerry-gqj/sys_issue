@@ -353,8 +353,9 @@
               </el-table-column>
               <el-table-column fixed="right"
                                label="操作"
-                               width="100">
-                <template>
+                               width="100" >
+                <template >
+
                   <el-button @click="dialogVisible = true"
                              type="text"
                              size="small">详情</el-button>
@@ -389,7 +390,7 @@
                       >
                     </span>
                   </el-dialog>
-                  <el-button type="text" size="small">修改</el-button>
+                  <el-button  type="text" size="small" v-if="state.issuestate!='已关闭'">修改</el-button>
                 </template>
               </el-table-column>
             </el-table>
