@@ -87,7 +87,7 @@ section {
   padding: 0px 20px;
 }
 .logo {
-  width: 200px;
+  width: 50px;
   height: 50px;
 }
 .headerLogo,
