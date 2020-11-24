@@ -127,7 +127,10 @@ export default {
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
-          {pattern:/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,message:'邮箱格式错误'},
+          {
+            pattern: /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,
+            message: "邮箱格式错误",
+          },
           {
             type: "email",
             message: "请输入正确的邮箱地址",
@@ -139,8 +142,7 @@ export default {
     };
   },
   mounted() {
-    this.ruleForm.loginid=localStorage.getItem('userID')
-
+    this.ruleForm.loginid = localStorage.getItem("userID");
   },
   methods: {
     submitForm(formName) {
@@ -156,36 +158,31 @@ export default {
                 userID: this.ruleForm.loginid,
               })
             )
-            .then((res)=> {
-              console.log(res.data)
+            .then((res) => {
+              console.log(res.data);
               if (res.data.status == "修改个人信息成功") {
-                this.$message(
-                    {
-                      type: 'success',
-                      message: '修改成功'
-                    }
-                );
-                setTimeout( ()=>{window.location.href = "./main"},1000)
+                this.$message({
+                  type: "success",
+                  message: "修改成功",
+                });
+                setTimeout(() => {
+                  window.location.href = "./main";
+                }, 1000);
               } else {
-                this.$message(
-                    {
-                      type: 'error',
-                      message: '修改失败'
-                    }
-                );
+                this.$message({
+                  type: "error",
+                  message: "修改失败",
+                });
               }
             })
             .catch(function (error) {
               console.log(error);
             });
         } else {
-          this.$message(
-              {
-                type: 'error',
-                message: '修改失败'
-              }
-          );
-
+          this.$message({
+            type: "error",
+            message: "修改失败",
+          });
         }
       });
     },
