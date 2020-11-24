@@ -35,7 +35,8 @@
       <div>
         <h1>账户管理</h1>
         <el-container>
-          <el-table :data="
+          <el-table border
+                    :data="
               tableData.slice(
                 (currentPage - 1) * pageSize,
                 currentPage * pageSize
@@ -60,16 +61,16 @@
                              label="账户状态"></el-table-column>
             <el-table-column fixed="right"
                              label="操作"
-                             width="100">
+                             width="150">
               <template slot-scope="scope">
                 <el-button @click="cancel(scope.row)"
-                           type="text"
-                           size="small"
+                           type="danger"
+                           size="mini"
                            v-if="scope.row.userstate!='注销'">注销</el-button>
                 <el-button @click="
                            manager(scope.row)"
-                           type="text"
-                           size="small"
+                           type="primary"
+                           size="mini"
                            v-if="scope.row.userstate!='注销'&&scope.row.role=='普通员工'">经理</el-button>
 
               </template>

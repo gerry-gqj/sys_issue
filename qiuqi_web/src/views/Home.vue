@@ -9,24 +9,9 @@
     <div class="front">
       <el-container>
         <el-header>GBA Issue管理系统</el-header>
-        <!-- <el-main>
-        <el-row>
-          <el-button @click="FormRegistered()"
-                     round>注册</el-button>
-          <el-button round
-                     @click="FormLogin()">登陆</el-button>
-        </el-row>
-      </el-main> -->
+        <!-- 登录模块 -->
         <el-card class="box-card">
-          <!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
-
-          <!-- <el-tab-pane label="注册" name="first">
-       <el-button @click="FormRegistered()"
-                   round>注册</el-button>
-    </el-tab-pane> -->
           <h2 class="title">登录</h2>
-          <!-- 登录模块 -->
-          <!-- <el-tab-pane label="登录" name="second"> -->
           <el-form :model="ruleForm"
                    :rules="rules"
                    ref="ruleForm"
@@ -47,17 +32,13 @@
                         show-password></el-input>
             </el-form-item>
             <el-form-item>
+              <!-- 按钮组 -->
               <el-button type="primary"
                          @click="Login('ruleForm')">登录
               </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
-              <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
             </el-form-item>
           </el-form>
-          <!-- <el-button round
-                   @click="FormLogin()">登陆</el-button> -->
-          <!-- </el-tab-pane> -->
-          <!-- </el-tabs> -->
         </el-card>
       </el-container>
     </div>
@@ -78,19 +59,12 @@ export default {
       }
     };
     return {
-      imgSrc: require("../assets/imgs/user2.jpg") /*用来设置背景图片 */,
+      /*用来设置背景图片 */
+      imgSrc: require("../assets/imgs/user2.jpg"),
       activeName: "second",
-      // dialogVisible2: true,
-      // dialogVisible3: false,
       ruleForm: {
-        // name: '',
-        // pass: '',
-        // checkPass: '',
-        // mail: '',
         delivery: false,
         type: [],
-        // resource: '',
-        // desc: '',
         id: "",
         loginid: "",
         pass1: "",
@@ -100,9 +74,7 @@ export default {
           { required: true, message: "请输入系统ID", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
         ],
-
         pass1: [{ required: true, validator: validatePass, trigger: "blur" }],
-
         name: [
           { required: true, message: "请输入姓名", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
@@ -111,13 +83,7 @@ export default {
     };
   },
   methods: {
-    // FormLogin () {
-    //   this.$router.push("main");
-    //   // window.location.href = "./main";
-    // },
     FormRegistered () {
-      // 路由跳转到注册页面
-      // this.$router.push("Registered");
       window.location.href = "/Registered";
     },
     //用户登录
@@ -125,67 +91,61 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-              .post(
-                  "http://120.78.176.2:8080/loginregister/login",
-                  this.$qs.stringify({
-                    name: this.ruleForm.id,
-                    password: this.ruleForm.pass1,
-                  })
-              )
-              .then((res) => {
-                console.log(res.data.status)
-                if (res.data.status == "登陆成功") {
-                  //缓存id、用户名、权限
-                  localStorage.setItem('userID', res.data.userID)
-                  localStorage.setItem('username', res.data.name)
-                  localStorage.setItem('role', res.data.role)
-
-                  this.username = localStorage.setItem(
-                      'username'
-                      , this.ruleForm.id
-                  );
-                  //登录成功后路由到主页面
-                  this.$message(
-                      {
-                        type: "success",
-                        message: "登录成功",
-                      },
-                      // window.location.href = "/",
-                      (window.location.href = "/main")
-                      // this.$router.push("main"),
-                  );
-                  // window.location.href = "./main";
-                } else if(res.data.status == "用户名不存在"){
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "用户不存在",
-                      }
-                  );
-                }else if(res.data.status == "该用户已注销"){
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "该用户已注销",
-                      }
-                  );
-                }else {
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "登录失败",
-                      })
-                }
+            .post(
+              "http://120.78.176.2:8080/loginregister/login",
+              this.$qs.stringify({
+                name: this.ruleForm.id,
+                password: this.ruleForm.pass1,
               })
-              .catch(function (error) {
-                console.log(error);
-              });
+            )
+            .then((res) => {
+              console.log(res.data.status)
+              if (res.data.status == "登陆成功") {
+                //缓存id、用户名、权限
+                localStorage.setItem('userID', res.data.userID)
+                localStorage.setItem('username', res.data.name)
+                localStorage.setItem('role', res.data.role)
+
+                this.username = localStorage.setItem(
+                  'username'
+                  , this.ruleForm.id
+                );
+                //登录成功后路由到主页面
+                this.$message(
+                  {
+                    type: "success",
+                    message: "登录成功",
+                  },
+                  (window.location.href = "/main")
+                );
+              } else if (res.data.status == "用户名不存在") {
+                this.$message(
+                  {
+                    type: "error",
+                    message: "用户不存在",
+                  }
+                );
+              } else if (res.data.status == "该用户已注销") {
+                this.$message(
+                  {
+                    type: "error",
+                    message: "该用户已注销",
+                  }
+                );
+              } else {
+                this.$message(
+                  {
+                    type: "error",
+                    message: "登录失败",
+                  })
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
       });
     },
-    // resetForm (formName) {
-    //   this.$refs[formName].resetFields();
-    // }
   },
 };
 </script>
@@ -228,22 +188,20 @@ body > .el-container {
 }
 
 .box-card {
-  width: 480px;
+  width: 420px;
   height: 300px;
   margin: 100px;
   align-self: center;
-  /* position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
 }
-
 .title {
   text-align: center;
 }
-
 /* 图片背景样式 */
 .background {
   width: 100%;

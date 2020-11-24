@@ -1,68 +1,56 @@
 <template>
   <div>
-    <!-- <el-dialog title=""
-               :visible.sync="dialogVisible1"
-               width="30%"
-               :before-close="handleClose"> -->
     <div class="main">
       <el-row>
-        <el-col :span="12" :offset="12">
+        <el-col :span="12"
+                :offset="12">
           <el-card class="box-card">
             <h2 class="title">新用户注册</h2>
-            <el-form
-              :model="ruleForm"
-              :rules="rules"
-              ref="ruleForm"
-              label-width="100px"
-              class="demo-ruleForm"
-            >
-              <el-form-item label="登录ID：" prop="loginid">
-                <el-input
-                  v-model="ruleForm.loginid"
-                  maxlength="30"
-                  show-word-limit
-                ></el-input>
+            <el-form :model="ruleForm"
+                     :rules="rules"
+                     ref="ruleForm"
+                     label-width="100px"
+                     class="demo-ruleForm">
+              <el-form-item label="登录ID："
+                            prop="loginid">
+                <el-input v-model="ruleForm.loginid"
+                          maxlength="30"
+                          show-word-limit></el-input>
               </el-form-item>
-              <el-form-item label="用户名：" prop="name">
-                <el-input
-                  v-model="ruleForm.name"
-                  maxlength="20"
-                  show-word-limit
-                ></el-input>
+              <el-form-item label="用户名："
+                            prop="name">
+                <el-input v-model="ruleForm.name"
+                          maxlength="20"
+                          show-word-limit></el-input>
               </el-form-item>
-              <el-form-item label="邮箱：" prop="mail">
-                <el-input
-                  v-model="ruleForm.mail"
-                  maxlength="30"
-                  show-word-limit
-                ></el-input>
+              <el-form-item label="邮箱："
+                            prop="mail">
+                <el-input v-model="ruleForm.mail"
+                          maxlength="30"
+                          show-word-limit></el-input>
               </el-form-item>
-              <el-form-item label="输入密码：" prop="pass">
-                <el-input
-                  type="password"
-                  v-model="ruleForm.pass"
-                  autocomplete="off"
-                  maxlength="30"
-                  show-password
-                ></el-input>
+              <el-form-item label="输入密码："
+                            prop="pass">
+                <el-input type="password"
+                          v-model="ruleForm.pass"
+                          autocomplete="off"
+                          maxlength="30"
+                          show-password></el-input>
               </el-form-item>
-              <el-form-item label="确认密码：" prop="checkPass">
-                <el-input
-                  type="password"
-                  v-model="ruleForm.checkPass"
-                  autocomplete="off"
-                  maxlength="30"
-                  show-password
-                ></el-input>
+              <el-form-item label="确认密码："
+                            prop="checkPass">
+                <el-input type="password"
+                          v-model="ruleForm.checkPass"
+                          autocomplete="off"
+                          maxlength="30"
+                          show-password></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')"
-                  >注册</el-button
-                >
+                <el-button type="primary"
+                           @click="submitForm('ruleForm')">注册</el-button>
                 <el-button @click="goback">返回</el-button>
               </el-form-item>
             </el-form>
-            <!-- </el-dialog> -->
           </el-card>
         </el-col>
       </el-row>
@@ -72,7 +60,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -129,7 +117,7 @@ export default {
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
           {
-            pattern: /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,
+            pattern: /^([a-zA-Z0-9]+[-_.]?)+@[a-zA-Z0-9]+.(com|cn)+$/,
             message: "邮箱格式错误",
           },
           {
@@ -148,7 +136,7 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
+    submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
@@ -183,10 +171,7 @@ export default {
         }
       });
     },
-    // resetForm (formName) {
-    //   this.$refs[formName].resetFields();
-    // },
-    goback() {
+    goback () {
       // this.$router.go(-1);
       this.$confirm("是否取消注册?", "提示", {
         confirmButtonText: "确定",

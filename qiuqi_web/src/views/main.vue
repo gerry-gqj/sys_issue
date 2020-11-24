@@ -1,23 +1,32 @@
 <template>
   <div>
-    <el-container>
-      <!-- header部分 -->
-      <el-header>
-        <navtop></navtop>
-      </el-header>
+    <el-row>
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24"
+              style="text-align: center">
+        <el-container>
+          <!-- header部分 -->
+          <el-header>
+            <navtop></navtop>
+          </el-header>
 
-      <el-container>
-        <!-- aside部分 -->
-        <leftNav></leftNav>
-        <el-card class="box-card">
-          <el-main>
-            <!-- main部分 -->
-            <router-view />
-            <!-- 路由容器 -->
-          </el-main>
-        </el-card>
-      </el-container>
-    </el-container>
+          <el-container>
+            <!-- aside部分 -->
+            <leftNav></leftNav>
+            <el-card class="box-card">
+              <el-main>
+                <!-- main部分 -->
+                <router-view />
+                <!-- 路由容器 -->
+              </el-main>
+            </el-card>
+          </el-container>
+        </el-container>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -29,12 +38,12 @@ export default {
     navtop,
     leftNav,
   },
-  data() {
+  data () {
     return {};
   },
-  beforeCreate() {
-    let role=localStorage.getItem('role')
-    if(role==''||role==null){
+  beforeCreate () {
+    const role = localStorage.getItem('role')
+    if (role == '' || role == null) {
       this.$router.push('/');
     }
   },
