@@ -65,8 +65,14 @@
                         placeholder="请输入"
                         style="text-align: center; width: 200px"
                         maxlength="30"
-                        show-word-limit
+                        v-if="this.role!='经理'"
                         disabled></el-input>
+              <el-input v-model="formLabelAlign.modifier"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        v-else></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -237,6 +243,7 @@
             </el-table-column>
             <el-table-column prop="name"
                              label="修改人"> </el-table-column>
+
             <el-table-column prop="issuestate"
                              label="Issue 状态">
             </el-table-column>
@@ -373,6 +380,7 @@ export default {
           cmpttrue: "2020-11-17",
         },
       ],
+      role:'',
       userid: '',
       username: '',
       currentPage: 1, // 当前页码
@@ -397,24 +405,29 @@ export default {
   mounted () {
     this.userid = localStorage.getItem('userID')
     this.username = localStorage.getItem('username')
-    this.searchIssue();
+    this.role = localStorage.getItem('role')
+    if(this.role!='普通员工'){
+      this.searchIssue()
+    }else{
+      this.getIssues()
+    }
   },
   methods: {
-    // getIssues(that) {
-    //   this.$axios
-    //     .get("http://120.78.176.2:8080/issue/selectIssueAll", {
-    //       params: {
-    //         pageNum: this.currentPage,
-    //         pageSize: 999,
-    //       },
-    //     })
-    //     .then(function (res) {
-    //       that.tableData = res.data.list;
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
+    getIssues() {
+      this.$axios
+        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
+          params: {
+            pageNum: this.currentPage,
+            pageSize: 999,
+          },
+        })
+        .then(function (res) {
+          this.tableData = res.data.list;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     searchIssue () {
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
