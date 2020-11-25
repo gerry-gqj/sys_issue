@@ -163,9 +163,7 @@
           style="text-align: center"
         >
           <div class="button">
-            <el-button type="primary" @click="searchIssueByLike"
-              >查询</el-button
-            >
+            <el-button type="primary" @click="searchClick">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </div>
         </el-col>
@@ -191,12 +189,7 @@
           <el-container>
             <el-table
               border
-              :data="
-                tableData.slice(
-                  (currentPage - 1) * pageSize,
-                  currentPage * pageSize
-                )
-              "
+              :data="tableData"
               style="width: 100%"
               :header-cell-style="getRowClass"
             >
@@ -299,7 +292,7 @@
               :page-sizes="[1, 5, 10, 20]"
               :page-size="pageSize"
               layout="total, sizes, prev, pager, next, jumper"
-              :total="tableData.length"
+              :total="total"
             >
             </el-pagination>
           </el-col>
@@ -404,19 +397,22 @@ export default {
     this.role = localStorage.getItem("role");
     this.formLabelAlign1.createtor = this.username;
 
-    this.searchIssue();
+    this.searchIssueByLike();
   },
   methods: {
     getIssues() {
       this.$axios
         .get("http://120.78.176.2:8080/issue/findCreateIssue", {
           params: {
-            creater: this.formLabelAlign.createtor,
+            creater: this.formLabelAlign1.createtor,
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize: this.pageSize,
           },
         })
         .then((res) => {
+          this.total = res.data.total;
+          console.log("res.data");
+          console.log(res.data);
           this.tableData = res.data.list;
 
           let arr = [];
@@ -431,8 +427,11 @@ export default {
           console.log(error);
         });
     },
-    searchIssueByLike() {
+    searchClick() {
       this.currentPage = 1;
+      this.searchIssueByLike();
+    },
+    searchIssueByLike() {
       console.log(this.formLabelAlign2.modifier);
       this.$axios
         .get("http://120.78.176.2:8080/issue/findLikeNewIssue", {
@@ -446,10 +445,11 @@ export default {
             createtime1: this.formLabelAlign4.createtimeto,
             plantime1: this.formLabelAlign4.changetimeto,
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize: this.pageSize,
           },
         })
         .then((res) => {
+          this.total = res.data.total;
           this.tableData = res.data.list;
           console.log(this.tableData);
         })
@@ -466,6 +466,7 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
+      this.searchIssueByLike();
     },
     getRowClass({ rowIndex }) {
       if (rowIndex == 0) {

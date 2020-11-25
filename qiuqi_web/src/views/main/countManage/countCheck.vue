@@ -23,7 +23,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary"
-                       @click="searchUser">查询</el-button>
+                       @click="searchClick">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </el-form-item>
         </el-form>
@@ -37,10 +37,7 @@
         <el-container>
           <el-table border
                     :data="
-              tableData.slice(
-                (currentPage - 1) * pageSize,
-                currentPage * pageSize
-              )
+              tableData
             "
                     style="width: 100%"
                     :header-cell-style="getRowClass">
@@ -92,7 +89,7 @@
                          :page-sizes="[1, 5, 10, 20]"
                          :page-size="pageSize"
                          layout="total, sizes, prev, pager, next, jumper"
-                         :total="tableData.length">
+                         :total="total">
           </el-pagination>
         </div>
       </div>
@@ -140,11 +137,6 @@ export default {
     this.getUserInfo();
   },
   methods: {
-    // 模糊查询
-    gocount () {
-      // this.$router.push("/main/countcheck/count");
-      // window.location.href = "/main/countcheck/count";
-    },
     // 清楚输入值
     clearvalues () {
       this.formInline.UserId = "";
@@ -155,10 +147,20 @@ export default {
       this.currentPage = 1;
       this.pageSize = val;
     },
+    //验证是否输入信息
+    validate(){
+      if((this.formInline.UserId==''||this.formInline.UserId==null)&&
+          (this.formInline.UserName==''||this.formInline.UserName==null)){
+        this.getUserInfo()
+      }else{
+        this.searchUser()
+      }
+    },
     //当前页改变时触发 跳转其他页
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
+      this.validate()
     },
     getRowClass ({ rowIndex }) {
       if (rowIndex === 0) {
@@ -172,26 +174,30 @@ export default {
         .get("http://120.78.176.2:8080/user/selectalluser", {
           params: {
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize: this.pageSize,
           },
         })
         .then((res) => {
+          this.total=res.data.total
           this.tableData = res.data.list;
           // console.log(res.data)
         })
-        .catch(function (error) {
+        .catch( (error)=> {
           console.log(error);
         });
     },
-    searchUser () {
+    searchClick(){
       this.currentPage=1
+      this.validate()
+    },
+    searchUser () {
       this.$axios
         .get("http://120.78.176.2:8080/user/selectidorname", {
           params: {
             name: this.formInline.UserName,
             userID: this.formInline.UserId,
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize: this.pageSize,
           },
         })
         .then((res) => {
@@ -229,7 +235,7 @@ export default {
                 message: "注销失败!",
               });
             });
-          this.getUserInfo(this);
+          this.getUserInfo();
         })
         .catch(() => {
           this.$message({
@@ -272,7 +278,7 @@ export default {
                 message: "注销失败!",
               });
             });
-          this.getUserInfo(this);
+          this.getUserInfo();
         })
         .catch(() => {
           this.$message({
