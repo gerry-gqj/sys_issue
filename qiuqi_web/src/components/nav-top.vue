@@ -1,62 +1,63 @@
 <template>
-  <div class="main">
-    <el-container>
-      <el-aside width="auto" class="header-logo tap"
-        ><a @click="gowelcome">
-          <img class="logo" src="../assets/imgs/logo.png" alt="Logo" /></a
-      ></el-aside>
-      <h1>GBA Issue管理系统</h1>
-      <el-aside width="auto" class="header-logo tap">
-        <el-dropdown
-          ><span>
-            <a class="user" @click="ModifyUserInformation"
-              ><span class="userimg">
-                <el-avatar
-                  icon="el-icon-user-solid"
-                  class="headerLogo"
-                ></el-avatar>
+  <div class="top">
+    <el-row>
+      <el-col :span="3">
+        <a @click="gowelcome">
+          <img class="logo"
+               src="../assets/imgs/logo.png"
+               alt="Logo" />
+        </a>
+      </el-col>
+      <el-col :span="10"
+              :offset="5">
+        <h1 style="color:#00008B">GBA Issue管理系统</h1>
+      </el-col>
+      <el-col :span="3"
+              :offset="3">
+        <el-dropdown><span>
+            <a class="user"
+               @click="ModifyUserInformation"><span class="userimg">
+                <el-avatar icon="el-icon-user-solid"
+                           class="headerLogo"></el-avatar>
               </span>
-              <span class="username">{{ user }}</span>
-            </a></span
-          >
+              <span class="username"
+                    style="color:#1E90FF;font-size:20px">{{ user }}</span>
+            </a></span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="userinfo"
-              >修改用户信息</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="logout" divided
-              >退出登录</el-dropdown-item
-            >
+            <el-dropdown-item @click.native="userinfo">修改用户信息</el-dropdown-item>
+            <el-dropdown-item @click.native="logout"
+                              divided>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      </el-aside>
-    </el-container>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import router from "@/router";
 export default {
-  data() {
+  data () {
     return {
       user: "user",
       activeIndex: "1",
     };
   },
-  mounted() {
+  mounted () {
     this.user = localStorage.getItem("username");
   },
   methods: {
-    gowelcome() {
+    gowelcome () {
       this.$router.push("/main/welcome");
     },
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
     // },
-    ModifyUserInformation() {},
-    userinfo() {
+    ModifyUserInformation () { },
+    userinfo () {
       window.location.href = "/userinfo";
     },
-    logout() {
+    logout () {
       // this.$router.push('/');
       // 实现页面跳转和刷新页面
 
@@ -126,7 +127,4 @@ section {
 .el-icon-arrow-down {
   font-size: 12px;
 }
-/* .main {
-  height: 1000px;
-} */
 </style>

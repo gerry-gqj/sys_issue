@@ -1,68 +1,76 @@
 <template>
   <div id="create">
     <div>
-      <h2>Issue题目</h2>
-
-      <el-input
-        type="text"
-        placeholder="内容"
-        v-model="title"
-        maxlength="80"
-        show-word-limit
-      ></el-input>
+      <h2 style="color:#8A2BE2">Issue 题目</h2>
+      <el-input type="text"
+                placeholder="内容"
+                v-model="title"
+                maxlength="80"
+                show-word-limit></el-input>
     </div>
     <!-- 基本信息栏 -->
-    <h2>基本信息</h2>
+    <h3>基本信息</h3>
     <hr style="border: 1px dashed #000; height: 1px" />
+
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue No.</p>
           <p>
-            <el-input
-              v-model="issueid"
-              placeholder="系统自动生成"
-              :disabled="true"
-            ></el-input>
+            <el-input v-model="issueid"
+                      placeholder="系统自动生成"
+                      :disabled="true"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>创建时间</p>
           <p>
-            <el-input
-              v-model="createtime"
-              placeholder="系统自动生成"
-              :disabled="true"
-            ></el-input>
+            <el-input v-model="createtime"
+                      placeholder="系统自动生成"
+                      :disabled="true"></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue类型</p>
           <p>
-            <el-input
-              v-model="issusetype"
-              placeholder="内容"
-              maxlength="30"
-              show-word-limit
-            ></el-input>
+            <el-input v-model="issusetype"
+                      placeholder="内容"
+                      maxlength="30"
+                      show-word-limit></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>Issue等级</p>
           <p>
-            <el-select v-model="issuserank" filterable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+            <el-select v-model="issuserank"
+                       filterable
+                       placeholder="请选择">
+              <el-option v-for="item in options"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value">
               </el-option>
             </el-select>
           </p>
@@ -70,30 +78,34 @@
       </el-col>
     </el-row>
     <el-row :gutter="50">
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>影响版本</p>
           <p>
-            <el-input
-              v-model="version"
-              maxlength="30"
-              show-word-limit
-            ></el-input>
+            <el-input v-model="version"
+                      maxlength="30"
+                      show-word-limit></el-input>
           </p>
         </div>
       </el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
           <p>计划修改时间</p>
           <p>
-            <el-date-picker
-              v-model="planTime"
-              type="date"
-              placeholder="选择日期"
-              :picker-options="pickerOptions0"
-              format="yyyy 年 MM 月 dd 日"
-              value-format="yyyy-MM-dd"
-            >
+            <el-date-picker v-model="planTime"
+                            type="date"
+                            placeholder="选择日期"
+                            :picker-options="pickerOptions0"
+                            format="yyyy 年 MM 月 dd 日"
+                            value-format="yyyy-MM-dd">
             </el-date-picker>
           </p>
         </div>
@@ -101,31 +113,38 @@
     </el-row>
     <!-- 重现步骤栏 -->
     <div style="margin-bottom: 100px">
-      <h2>重现步骤</h2>
-      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+      <h4>重现步骤</h4>
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24">
         <div class="grid-content">
-          <el-input
-            type="textarea"
-            placeholder="请输入内容"
-            rows="5"
-            v-model="step"
-            maxlength="2000"
-            show-word-limit
-          ></el-input>
+          <el-input type="textarea"
+                    placeholder="请输入内容"
+                    rows="5"
+                    v-model="step"
+                    maxlength="2000"
+                    show-word-limit></el-input>
         </div>
       </el-col>
     </div>
     <!-- 指派修改人栏 -->
     <div>
-      <h2>指派修改人栏</h2>
-      <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="12"
+              :sm="6"
+              :md="6"
+              :lg="6"
+              :xl="6">
         <div class="grid-content">
-          <el-select v-model="modifier" filterable placeholder="请选择">
-            <el-option
-              v-for="item in modifierOptions"
-              :label="item.userID"
-              :value="item.userID"
-            >
+          <h4>指派修改人栏</h4>
+          <el-select v-model="modifier"
+                     style="text-align:center"
+                     filterable
+                     placeholder="请选择">
+            <el-option v-for="item in modifierOptions"
+                       :label="item.userID"
+                       :value="item.userID">
             </el-option>
           </el-select>
         </div>
@@ -134,15 +153,15 @@
     </div>
     <!-- 提交按钮 -->
     <div>
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="24"
-        :xl="24"
-        style="text-align: center"
-      >
-        <el-button round @click="createIssue()">提交</el-button>
+      <el-col :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24"
+              style="text-align: center">
+        <el-button type="primary"
+                   round
+                   @click="createIssue()">提交</el-button>
       </el-col>
     </div>
   </div>
@@ -150,7 +169,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       modifierOptions: [],
       options: [
@@ -185,18 +204,18 @@ export default {
       userid: "",
       value: "",
       pickerOptions0: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() < Date.now() - 8.64e7;
         },
       },
     };
   },
-  beforeCreate() {
+  beforeCreate () {
     if (localStorage.getItem("role") == "经理") {
       this.$router.push("/");
     }
   },
-  mounted() {
+  mounted () {
     //获取用户名
     this.username = localStorage.getItem("username");
     //获取当前时间
@@ -218,7 +237,7 @@ export default {
   },
   methods: {
     //显示用户id
-    searchByUserID() {
+    searchByUserID () {
       this.$axios
         .get("http://120.78.176.2:8080/user/selectuserID")
         .then((res) => {
@@ -229,7 +248,7 @@ export default {
         });
     },
     //新增Issue接口--post
-    createIssue() {
+    createIssue () {
       //验证是否为空
       let msg = " ";
       if (this.username == "") {
@@ -296,14 +315,22 @@ export default {
 .el-col {
   border-radius: 4px;
 }
-
 #create {
   width: 1000px;
-  margin: 50px 150px;
+  margin: 0px 60px;
 }
-
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
+}
+.item .el-form-item__label {
+  color: wheat;
+  font-size: 20px;
+}
+h3 {
+  color: rgb(202, 101, 211);
+}
+h4 {
+  color: rgb(201, 101, 221);
 }
 </style>

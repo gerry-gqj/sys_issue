@@ -61,7 +61,7 @@ export default {
 }
 .el-header,
 .el-footer {
-  background-color: white;
+  background-color: #eaf1f7;
   box-sizing: border-box;
   border-bottom: 1px solid #f5f1f1;
 }

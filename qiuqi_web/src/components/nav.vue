@@ -84,4 +84,3 @@ export default {
   border-right: 1px solid #f5f1f1;
 }
 </style>
-
