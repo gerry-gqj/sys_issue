@@ -250,64 +250,57 @@ export default {
     //新增Issue接口--post
     createIssue () {
       //验证是否为空
-      let msg = " ";
-      if (this.username == "") {
-        msg = "账号过期，请重新登录";
-        this.$message({
-          type: "error",
-          message: msg,
-        });
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1000);
-      } else if (
-        this.issuserank == "" ||
-        this.planTime == "" ||
-        this.step == "" ||
-        this.title == "" ||
-        this.modifier == "" ||
-        this.version == ""
-      ) {
-        msg = "请填写完整信息";
-        this.$message({
-          type: "error",
-          message: msg,
-        });
-        return;
+      let msg=' ';
+      if(this.username==''){
+        msg='账号过期，请重新登录'
+        this.$message(
+            {
+              type: 'error',
+              message: msg
+            },
+        );
+        setTimeout(()=>{
+          window.location.href = "/"
+        },1000)
+      } else if(this.issuserank == '' || this.planTime == '' || this.step == '' || this.title == '' || this.modifier == ''||this.version==''){
+        msg='请填写完整信息'
+        this.$message(
+            {
+              type: 'error',
+              message: msg
+            }
+        );
+        return
       }
-      this.$axios
-        .post(
-          "http://120.78.176.2:8080/issue/createIssue",
+      this.$axios.post('http://120.78.176.2:8080/issue/createIssue',
           this.$qs.stringify({
             creater: this.username,
             level: this.issuserank,
-            plantime: this.planTime,
-            step: this.step,
-            title: this.title,
-            type: this.issuserank,
-            userID: this.modifier,
-            version: this.version,
-          })
-        )
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.status === "创建成功") {
-            this.$message({
-              type: "success",
-              message: "创建成功",
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: "创建失败",
-            });
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-  },
+            plantime:this.planTime,
+            step:this.step,
+            title:this.title,
+            type:this.issuserank,
+            userID:this.modifier,
+            version:this.version
+          }))
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.status === "创建成功") {
+              this.$message({
+                type: 'success',
+                message: '创建成功'
+              });
+            }else {
+              this.$message({
+                type: 'error',
+                message: '创建失败'
+              });
+            }
+          }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
 };
 </script>
 

@@ -58,11 +58,7 @@
             </el-table-column>
             <el-table-column prop="recived" label="收到Issue数">
               <template scope="scope">
-                <a
-                  :href="'check?id=' + scope.row.userID"
-                  style="text-decoration: none; color: dodgerblue"
-                  >{{ scope.row.creation }}</a
-                >
+                <a :href="'check?id='+scope.row.userID" style="text-decoration:none;color: dodgerblue">{{scope.row.recived}}</a>
               </template>
             </el-table-column>
             <el-table-column prop="resolved" label="修改Issue数">
@@ -130,19 +126,19 @@ export default {
       pageSize: 5, // 每页的数据条数
     };
   },
-  mounted() {
+  mounted () {
     this.getIssues();
   },
   methods: {
-    goreport() {
+    goreport () {
       // this.$router.push("/main/reportcheck/report");
       // window.location.href = "/main/reportcheck/report";
     },
-    clearvalues() {
+    clearvalues () {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
     },
-    getIssues() {
+    getIssues () {
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectissuecount", {
           params: {
@@ -151,11 +147,11 @@ export default {
           },
         })
         .then((res) => {
-          this.total = res.data.total;
+          this.total=res.data.total
           this.tableData = res.data.list;
           console.log(this.tableData);
         })
-        .catch((error) => {
+        .catch( (error)=> {
           console.log(error);
         });
     },
@@ -182,30 +178,28 @@ export default {
           console.log(error);
         });
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
-      this.searchIssue();
+      this.searchIssue()
     },
     //验证是否输入信息
-    validate() {
-      if (
-        (this.formInline.UserId == "" || this.formInline.UserId == null) &&
-        (this.formInline.UserName == "" || this.formInline.UserName == null)
-      ) {
-        this.getIssues();
-      } else {
-        this.searchIssue();
+    validate(){
+      if((this.formInline.UserId==''||this.formInline.UserId==null)&&
+          (this.formInline.UserName==''||this.formInline.UserName==null)){
+        this.getIssues()
+      }else{
+        this.searchIssue()
       }
     },
     //当前页改变时触发 跳转其他页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
-      this.validate();
+      this.validate()
     },
-    getRowClass({ rowIndex }) {
+    getRowClass ({ rowIndex }) {
       if (rowIndex == 0) {
         return "background:#81BEF7";
       } else {

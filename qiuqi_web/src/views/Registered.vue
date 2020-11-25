@@ -18,7 +18,7 @@
               <el-form-item label="登录ID：" prop="loginid">
                 <el-input
                   v-model="ruleForm.loginid"
-                  maxlength="30"
+                  maxlength="10"
                   show-word-limit
                 ></el-input>
               </el-form-item>
@@ -109,7 +109,7 @@ export default {
       rules: {
         id: [
           { required: true, message: "请输入系统ID", trigger: "blur" },
-          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          { max: 10, message: "长度在 10 个字符以内", trigger: "blur" },
         ],
         pass: [
           { required: true, validator: validatePass, trigger: "blur" },
@@ -124,7 +124,7 @@ export default {
         ],
         name: [
           { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          { max: 30, message: "长度在 30 个字符以内", trigger: "blur" },
         ],
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },

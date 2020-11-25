@@ -12,8 +12,7 @@
     </div>
     <div class="front">
       <el-row>
-        <el-col :span="12"
-                :offset="12">
+        <el-col :span="12" :offset="12">
           <div class="grid-content"></div>
 
           <el-card class="box-card">
@@ -28,37 +27,42 @@
                 <el-input v-model="ruleForm.loginid"
                           disabled></el-input>
               </el-form-item>
-              <el-form-item label="姓名："
-                            prop="name">
-                <el-input v-model="ruleForm.name"
-                          maxlength="30"
-                          show-word-limit></el-input>
+              <el-form-item label="姓名：" prop="name">
+                <el-input
+                  v-model="ruleForm.name"
+                  maxlength="20"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
-              <el-form-item label="邮箱："
-                            prop="mail">
-                <el-input v-model="ruleForm.mail"
-                          maxlength="30"
-                          show-word-limit></el-input>
+              <el-form-item label="邮箱：" prop="mail">
+                <el-input
+                  v-model="ruleForm.mail"
+                  maxlength="30"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
-              <el-form-item label="输入密码："
-                            prop="pass">
-                <el-input type="password"
-                          v-model="ruleForm.pass"
-                          autocomplete="off"
-                          maxlength="30"
-                          show-password></el-input>
+              <el-form-item label="输入密码：" prop="pass">
+                <el-input
+                  type="password"
+                  v-model="ruleForm.pass"
+                  autocomplete="off"
+                  maxlength="30"
+                  show-password
+                ></el-input>
               </el-form-item>
-              <el-form-item label="确认密码"
-                            prop="checkPass">
-                <el-input type="password"
-                          v-model="ruleForm.checkPass"
-                          autocomplete="off"
-                          maxlength="30"
-                          show-password></el-input>
+              <el-form-item label="确认密码" prop="checkPass">
+                <el-input
+                  type="password"
+                  v-model="ruleForm.checkPass"
+                  autocomplete="off"
+                  maxlength="30"
+                  show-password
+                ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary"
-                           @click="submitForm('ruleForm')">提交</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')"
+                  >提交</el-button
+                >
                 <el-button @click="goback">取消</el-button>
               </el-form-item>
             </el-form>
@@ -72,7 +76,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -126,7 +130,7 @@ export default {
         ],
         name: [
           { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 30, message: "长度在 30 个字符", trigger: "blur" },
+          { max: 20, message: "长度在 20 个字符", trigger: "blur" },
         ],
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },

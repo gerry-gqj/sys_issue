@@ -119,8 +119,7 @@
             :label-position="labelPosition"
             label-width="80px"
             :model="formLabelAlign4"
-            ref="formLabelAlignref4"
-          >
+            ref="formLabelAlignref4">
             <el-form-item label="至" prop="createtimeto">
               <el-date-picker
                 v-model="formLabelAlign4.createtimeto"
@@ -180,15 +179,13 @@
           :md="24"
           :lg="24"
           :xl="24"
-          style="text-align: center"
-        >
+          style="text-align: center">
           <el-container>
             <el-table
               border
               :data="tableData"
               style="width: 100%"
-              :header-cell-style="getRowClass"
-            >
+              :header-cell-style="getRowClass">
               <el-table-column type="selection"></el-table-column>
               <el-table-column type="index" label="序号"></el-table-column>
               <el-table-column prop="issueID" label="Issue ID">
@@ -201,8 +198,7 @@
               <el-table-column
                 prop="name"
                 v-if="this.role == '普通员工'"
-                label="修改人"
-              >
+                label="修改人">
               </el-table-column>
               <el-table-column prop="name" v-else label="修改人">
               </el-table-column>
@@ -212,15 +208,18 @@
               </el-table-column>
               <el-table-column prop="acttime" label="实际完成时间">
               </el-table-column>
+<!--              <el-table-column prop="solution" label="解决方案" >-->
+<!--              </el-table-column>-->
               <el-table-column fixed="right" label="操作" width="150">
-                <template>
+                <template scope="scope">
                   <el-button
-                    @click="dialogVisible = true"
+                    @click="detailClick(scope.row.title,scope.$index)"
                     type="info"
                     size="mini"
                     >详情</el-button
                   >
-                  <el-button type="primary" size="mini" @click="operate = true"
+                  <el-button type="primary" size="mini" @click="checkClick(scope.row.issueID)"
+                             :disabled="scope.row.issuestate!='待验证'"
                     >验证</el-button
                   >
                   <el-dialog
@@ -230,8 +229,8 @@
                     :append-to-body="true"
                   >
                     <div>
-                      <p>Issue名称：{{ test }}</p>
-                      <p>解决方案：{{ solutePlan }}</p>
+                      <p>Issue名称：{{ issueName }}</p>
+                      <p>解决方案：{{ solutionPlan }}</p>
                     </div>
                     <!-- <el-timeline :reverse="reverse">
                       <el-timeline-item
@@ -257,8 +256,8 @@
                     :append-to-body="true"
                   >
                     <div style="text-align: center">
-                      <el-button type="primary" round>退回修改</el-button>
-                      <el-button type="primary" round>关闭issue</el-button>
+                      <el-button type="primary" round @click="changeIssueState(1)">退回修改</el-button>
+                      <el-button type="primary" round @click="changeIssueState(0)">关闭issue</el-button>
                     </div>
 
                     <span slot="footer" class="dialog-footer">
@@ -340,6 +339,7 @@ export default {
       dialogVisible: false,
       operate: false,
       reverse: true,
+      currentIssueId:0,
       activities: [
         {
           content: "已关闭",
@@ -366,6 +366,8 @@ export default {
           cmpttrue: "",
         },
       ],
+      solutionPlan:'',
+      issueName:'',
       role: "",
       userid: "",
       username: "",
@@ -397,41 +399,40 @@ export default {
     this.searchIssueByLike();
   },
   methods: {
-    getIssues() {
-      this.$axios
-        .get("http://120.78.176.2:8080/issue/findCreateIssue", {
-          params: {
-            creater: this.formLabelAlign1.createtor,
-            pageNum: this.currentPage,
-            pageSize: this.pageSize,
-          },
-        })
-        .then((res) => {
-          this.total = res.data.total;
-          console.log("res.data");
-          console.log(res.data);
-          this.tableData = res.data.list;
-
-          let arr = [];
-          for (let i in res.data.list) {
-            arr.push(res.data.list[i].name);
-          }
-          console.log(new Set(arr));
-          this.modifierOptions = new Set(arr);
-          console.log(this.tableData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // getIssues() {
+    //   this.$axios
+    //     .get("http://120.78.176.2:8080/issue/findCreateIssue", {
+    //       params: {
+    //         creater: this.formLabelAlign1.createtor,
+    //         pageNum: this.currentPage,
+    //         pageSize: this.pageSize,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       this.total = res.data.total;
+    //       console.log("res.data");
+    //       console.log(res.data);
+    //       this.tableData = res.data.list;
+    //
+    //       let arr = [];
+    //       for (let i in res.data.list) {
+    //         arr.push(res.data.list[i].name);
+    //       }
+    //       console.log(new Set(arr));
+    //       this.modifierOptions = new Set(arr);
+    //       console.log(this.tableData);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
     searchClick() {
       this.currentPage = 1;
       this.searchIssueByLike();
     },
     searchIssueByLike() {
-      console.log(this.formLabelAlign2.modifier);
       this.$axios
-        .get("http://120.78.176.2:8080/issue/findLikeNewIssue", {
+        .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
           params: {
             issueID: this.formLabelAlign1.issueno,
             creater: this.formLabelAlign1.createtor,
@@ -473,8 +474,6 @@ export default {
       }
     },
     golist() {
-      // this.$router.push("/main/check/list");
-      // window.location.href = "/main/check/list";
     },
     clearvalues() {
       this.$refs.formLabelAlignref1.resetFields();
@@ -482,6 +481,52 @@ export default {
       this.$refs.formLabelAlignref3.resetFields();
       this.$refs.formLabelAlignref4.resetFields();
     },
+    //点击验证
+    checkClick(issueID){
+      this.operate = true
+      this.currentIssueId=issueID
+    },
+    //更改issue状态 0：关闭 1：退回修改
+    changeIssueState(option){
+      let state=''
+      console.log('id:'+this.currentIssueId)
+      console.log('op:'+option)
+      if(option==0){
+        state='已关闭'
+      }else if(option==1){
+        state='待修改'
+      }
+      this.$axios.post('http://120.78.176.2:8080/issue/updateIssueState',
+          this.$qs.stringify({
+            issueID: this.currentIssueId,
+            issuestate:state
+          }))
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.status === "修改成功") {
+              this.$message({
+                type: 'success',
+                message: '修改成功'
+              });
+              this.operate=false
+              this.searchIssueByLike();
+            }else {
+              this.$message({
+                type: 'error',
+                message: '修改失败'
+              });
+            }
+          }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    //详情点击
+    detailClick(title,inx){
+      let index=this.pageSize*(this.currentPage-1)+inx
+      this.solutionPlan=this.tableData[index].solution
+      this.issueName=title
+      this.dialogVisible = true
+    }
   },
 };
 </script>
