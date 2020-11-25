@@ -20,6 +20,7 @@
                 style="text-align: center; width: 200px"
                 maxlength="30"
                 show-word-limit
+                clearable="true"
               ></el-input>
             </el-form-item>
             <el-form-item label="创建人" prop="createtor">

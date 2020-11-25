@@ -3,7 +3,7 @@
     <el-container>
       <el-aside width="auto" class="header-logo tap"
         ><a @click="gowelcome">
-          <img class="logo" src="../assets/imgs/user2.jpg" alt="Logo" /></a
+          <img class="logo" src="../assets/imgs/logo.png" alt="Logo" /></a
       ></el-aside>
       <h1>GBA Issue管理系统</h1>
       <el-aside width="auto" class="header-logo tap">

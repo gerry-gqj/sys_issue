@@ -149,11 +149,11 @@ export default {
 
 <style>
 .el-header {
-  color: #333;
+  color: gold;
   text-align: center;
   line-height: 150px;
   font-style: inherit;
-  font-size: 35px;
+  font-size: 50px;
 }
 
 .el-footer {
