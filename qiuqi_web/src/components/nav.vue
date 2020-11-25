@@ -12,7 +12,7 @@
           <i class="el-icon-menu"></i>
           <span slot="title">创建 Issue</span>
         </el-menu-item>
-        <el-menu-item index="/main/reportCheck" v-if="this.role != '普通员工'">
+        <el-menu-item index="/main/reportCheck" v-if="this.role == '超级Admin'||this.role == '经理'">
           <i class="el-icon-document"></i>
           <span slot="title">Issue 报表</span>
         </el-menu-item>
@@ -27,7 +27,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/main/check">修改人</el-menu-item>
-            <el-menu-item index="/main/checkmycreate">创建人</el-menu-item>
+            <el-menu-item index="/main/checkmycreate" v-if="role=='普通员工'">创建人</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

@@ -2,7 +2,6 @@
   <div>
     <!-- <h4 style="text-align: center; width: 1200px">Issue报表查询</h4> -->
     <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
-    <hr />
     <el-container>
       <div style="width: 1200px; text-align: center">
         <el-form :inline="true"
@@ -45,26 +44,27 @@
                     style="width: 100%"
                     :header-cell-style="getRowClass">
             <el-table-column type="selection"></el-table-column>
-            <el-table-column type="index"
-                             label="序号"></el-table-column>
-            <el-table-column prop="userID"
-                             label="用户 ID"> </el-table-column>
-            <el-table-column prop="name"
-                             label="用户姓名"> </el-table-column>
-            <el-table-column prop="creation"
-                             label="创建Issue数">
+            <el-table-column type="index" label="序号"></el-table-column>
+            <el-table-column prop="userID" label="用户 ID"> </el-table-column>
+            <el-table-column prop="name" label="用户姓名"> </el-table-column>
+            <el-table-column prop="creation" label="创建Issue数">
+              <template scope="scope">
+                <a :href="'check?username='+scope.row.name" style="text-decoration:none;color: dodgerblue">{{scope.row.creation}}</a>
+              </template>
             </el-table-column>
-            <el-table-column prop="recived"
-                             label="收到Issue数">
+            <el-table-column prop="recived" label="收到Issue数">
+              <template scope="scope">
+                <a :href="'check?id='+scope.row.userID" style="text-decoration:none;color: dodgerblue">{{scope.row.creation}}</a>
+              </template>
             </el-table-column>
-            <el-table-column prop="resolved"
-                             label="修改Issue数">
+            <el-table-column prop="resolved" label="修改Issue数">
+              <template scope="scope">
+                <a :href="'check?id='+scope.row.userID+'&state=closed'" style="text-decoration:none;color: dodgerblue">{{scope.row.resolved}}</a>
+              </template>
             </el-table-column>
-            <el-table-column prop="closed"
-                             label="关闭Issue数">
-            </el-table-column>
-            <el-table-column prop="completion"
-                             label="完成率">
+<!--            <el-table-column prop="closed" label="关闭Issue数">-->
+<!--            </el-table-column>-->
+            <el-table-column prop="completion" label="完成率">
             </el-table-column>
           </el-table>
         </el-container>
@@ -144,24 +144,25 @@ export default {
           console.log(error);
         });
     },
-    searchIssue () {
+    searchIssue(){
+      this.currentPage=1
       this.$axios
-        .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
-          params: {
+          .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
+            params: {
 
-            userID: this.formInline.UserId,
-            name: this.formInline.UserName,
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-          console.log(this.tableData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+              userID:this.formInline.UserId,
+              name:this.formInline.UserName,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);

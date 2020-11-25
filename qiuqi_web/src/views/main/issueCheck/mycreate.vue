@@ -4,7 +4,6 @@
 // Admin--可以查看所有的用户的issue信息，并且可以修改
 <template>
   <div>
-    <hr />
     <el-row :gutter="0">
       <el-col :span="6"
               :offset="1">
@@ -62,19 +61,14 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <!-- <el-form-item label="修改人"
-                          v-if="this.role == '普通员工'">
-              <el-input v-model="formLabelAlign.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"></el-input>
-            </el-form-item> -->
-            <el-form-item label="修改人"
-                          prop="modifier">
-              <el-input v-model="formLabelAlign2.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"></el-input>
+            <el-form-item label="修改人">
+              <el-input
+                  v-model="formLabelAlign.modifier"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  show-word-limit
+              ></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -152,8 +146,7 @@
                 :xl="22"
                 style="text-align: center">
           <div class="button">
-            <el-button type="primary"
-                       @click="searchIssue">查询</el-button>
+            <el-button type="primary" @click="searchIssueByLike">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </div>
         </el-col>
@@ -171,6 +164,7 @@
       </el-row>
     </div>
     <div>
+
       <div>
         <el-col :xs="24"
                 :sm="24"
@@ -186,70 +180,94 @@
                   currentPage * pageSize
                 )
               "
-                      style="width: 100%"
-                      :header-cell-style="getRowClass">
+                style="width: 100%"
+                :header-cell-style="getRowClass"
+            >
               <el-table-column type="selection"></el-table-column>
-              <el-table-column type="index"
-                               label="序号"></el-table-column>
-              <el-table-column prop="issueID"
-                               label="Issue ID">
+              <el-table-column type="index" label="序号"></el-table-column>
+              <el-table-column prop="issueID" label="Issue ID">
               </el-table-column>
-              <el-table-column prop="title"
-                               label="Issue 标题">
+              <el-table-column prop="title" label="Issue 标题">
               </el-table-column>
-              <el-table-column prop="creater"
-                               label="创建人"> </el-table-column>
-              <el-table-column prop="createtime"
-                               label="创建时间">
+              <el-table-column prop="creater" label="创建人"> </el-table-column>
+              <el-table-column prop="createtime" label="创建时间">
               </el-table-column>
-              <el-table-column prop="name"
-                               v-if="this.role == '普通员工'"
-                               label="修改人">
+              <el-table-column
+                  prop="name"
+                  v-if="this.role == '普通员工'"
+                  label="修改人">
               </el-table-column>
-              <el-table-column prop="name"
-                               v-else
-                               label="修改人">
+              <el-table-column prop="name" v-else label="修改人">
               </el-table-column>
-              <el-table-column prop="issuestate"
-                               label="Issue 状态">
+              <el-table-column prop="issuestate" label="Issue 状态">
               </el-table-column>
-              <el-table-column prop="plantime"
-                               label="计划完成时间">
+              <el-table-column prop="plantime" label="计划完成时间">
               </el-table-column>
-              <el-table-column prop="acttime"
-                               label="实际完成时间">
+              <el-table-column prop="acttime" label="实际完成时间">
               </el-table-column>
-              <el-table-column fixed="right"
-                               label="操作"
-                               width="150">
+              <el-table-column fixed="right" label="操作" width="100">
                 <template>
-                  <el-button @click="dialogVisible = true"
-                             type="info"
-                             size="mini">详情</el-button>
-                  <!-- <el-dialog title="提示"
-                             :visible.sync="dialogVisible"
-                             width="30%"
-                             :append-to-body="true">
+                  <el-button
+                      @click="dialogVisible = true"
+                      type="text"
+                      size="small"
+
+                  >详情</el-button
+                  >
+                  <el-dialog
+                      title="Issue详情"
+                      :visible.sync="dialogVisible"
+                      width="50%"
+                      :append-to-body="true"
+                  >
                     <div>
-                      <el-timeline :reverse="reverse">
-                        <el-timeline-item v-for="(activity, index) in activities"
-                                          :key="index"
-                                          :timestamp="activity.timestamp">
-                          {{ activity.content }}
-                        </el-timeline-item>
-                      </el-timeline>
+                      <p>Issue名称：{{test}}</p>
+                      <p>解决方案：{{solutePlan}}</p>
+                    </div>
+                    <!-- <el-timeline :reverse="reverse">
+                      <el-timeline-item
+                        v-for="(activity, index) in activities"
+                        :key="index"
+                        :timestamp="activity.timestamp"
+                      >
+                        {{ activity.content }}
+                      </el-timeline-item>
+                    </el-timeline> -->
+
+
+                    <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="dialogVisible = false"
+                      >关 闭</el-button
+                      >
+                    </span>
+                  </el-dialog>
+                  <el-button type="text" size="small" @click="operate = true">操作</el-button>
+
+                  <!-- 操作          ------------->
+
+
+                  <el-dialog
+                      title="操作"
+                      :visible.sync="operate"
+                      width="20%"
+                      :append-to-body="true"
+                  >
+                    <div style="text-align:center">
+
+                      <el-button type="primary" round>退回修改</el-button>
+                      <el-button type="primary" round>关闭issue</el-button>
                     </div>
 
-                    <span slot="footer"
-                          class="dialog-footer">
-                      <el-button type="primary"
-                                 @click="dialogVisible = false">关 闭</el-button>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="operate = false"
+                      >关 闭</el-button
+                      >
                     </span>
-                  </el-dialog> -->
-                  <el-button type="warning"
-                             size="mini">修改</el-button>
-                </template>
-              </el-table-column>
+                  </el-dialog>
+
+
+
+                </template>              </el-table-column>
             </el-table>
           </el-container>
         </el-col>
@@ -368,57 +386,66 @@ export default {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
-    console.log(this.userid);
-    console.log(this.username);
-    console.log(this.role);
-    console.log(this.role != "普通员工");
-    if (this.role != "普通员工") {
-      this.getIssues();
-    } else {
-      this.searchIssue();
-    }
+    this.formLabelAlign.createtor = this.username;
+
+    this.searchIssue();
+
+
+
+
+
+
   },
   methods: {
     getIssues () {
       this.$axios
-        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
-          params: {
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .get("http://120.78.176.2:8080/issue/findCreateIssue", {
+            params: {
+              creater:this.formLabelAlign.createtor,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+
+            let arr=[]
+            for(let i in res.data.list){
+              arr.push(res.data.list[i].name)
+            }
+            console.log(new Set(arr))
+            this.modifierOptions=new Set(arr)
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
-    searchIssue () {
+    searchIssueByLike() {
+      this.currentPage=1
+      console.log(this.formLabelAlign.modifier)
       this.$axios
-        .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
-          params: {
-            issueID: this.formLabelAlign1.issueno,
-            creater: this.formLabelAlign1.createtor,
-            issuestate: this.formLabelAlign2.issuserank,
-            userID: this.formLabelAlign2.modifier,
-            plantime: this.formLabelAlign3.changetime,
-            createtime: this.formLabelAlign3.createtime,
-            createtime1: this.formLabelAlign4.createtimeto,
-            plantime1: this.formLabelAlign4.changetimeto,
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-          //   this.formLabelAlign.modifier = this.userid;
-          this.formLabelAlign1.createtor = this.userid;
-          console.log(this.tableData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .get("http://120.78.176.2:8080/issue/findLikeNewIssue", {
+            params: {
+              issueID: this.formLabelAlign1.issueno,
+              creater: this.formLabelAlign1.createtor,
+              issuestate: this.formLabelAlign2.issuserank,
+              userID: this.formLabelAlign2.modifier,
+              plantime: this.formLabelAlign3.changetime,
+              createtime: this.formLabelAlign3.createtime,
+              createtime1: this.formLabelAlign4.createtimeto,
+              plantime1: this.formLabelAlign4.changetimeto,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);

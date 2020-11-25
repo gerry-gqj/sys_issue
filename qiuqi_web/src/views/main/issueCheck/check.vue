@@ -4,7 +4,6 @@
 // Admin--可以查看所有的用户的issue信息，并且可以修改
 <template>
   <div>
-    <hr />
     <el-row :gutter="0">
       <el-col :span="6"
               :offset="1">
@@ -21,13 +20,14 @@
                         maxlength="30"
                         show-word-limit></el-input>
             </el-form-item>
-            <el-form-item label="创建人"
-                          prop="createtor">
-              <el-input v-model="formLabelAlign1.createtor"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"
-                        show-word-limit></el-input>
+            <el-form-item label="创建人">
+              <el-input
+                  v-model="formLabelAlign1.createtor"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  show-word-limit
+              ></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -51,14 +51,14 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人"
-                          v-if="this.role == '普通员工'"
-                          prop>
-              <el-input v-model="formLabelAlign2.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"
-                        disabled></el-input>
+            <el-form-item label="修改人" v-if="this.role == '普通员工'">
+              <el-input
+                  v-model="formLabelAlign.modifier"
+                  placeholder="请输入"
+                  style="text-align: center; width: 200px"
+                  maxlength="30"
+                  disabled
+              ></el-input>
             </el-form-item>
             <el-form-item label="修改人"
                           prop="modifier"
@@ -194,13 +194,7 @@
               <el-table-column prop="createtime"
                                label="创建时间">
               </el-table-column>
-              <el-table-column prop="name"
-                               v-if="this.role == '普通员工'"
-                               label="修改人">
-              </el-table-column>
-              <el-table-column prop="name"
-                               v-else
-                               label="修改人">
+              <el-table-column prop="name" label="修改人">
               </el-table-column>
               <el-table-column prop="issuestate"
                                label="Issue 状态">
@@ -218,27 +212,37 @@
                   <el-button @click="dialogVisible = true"
                              type="info"
                              size="mini">详情</el-button>
-                  <!-- <el-dialog title="提示"
-                             :visible.sync="dialogVisible"
-                             width="30%"
-                             :append-to-body="true">
+                  <!--issue详情对话框-->
+                  <el-dialog
+                      title="Issue详情"
+                      :visible.sync="dialogVisible"
+                      width="50%"
+                      :append-to-body="true"
+                  >
                     <div>
-                      <el-timeline :reverse="reverse">
-                        <el-timeline-item v-for="(activity, index) in activities"
-                                          :key="index"
-                                          :timestamp="activity.timestamp">
-                          {{ activity.content }}
-                        </el-timeline-item>
-                      </el-timeline>
+                      <p>Issue名称：{{test}}</p>
+                      <p>解决方案：{{solutePlan}}</p>
                     </div>
-                    <span slot="footer"
-                          class="dialog-footer">
+                    <div>
+                      <el-input
+                          type="textarea"
+                          :autosize="{ minRows: 4, maxRows: 6}"
+                          placeholder="请输入内容"
+                          v-model="solute">
+                      </el-input>
+                    </div>
+                    <div style="text-align:center">
+                      <el-button round>提交方案</el-button>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
                       <el-button type="info"
                                  size="small"
                                  round
-                                 @click="dialogVisible = false">关 闭</el-button>
+                                 @click="change = false"
+                      >关 闭</el-button
+                      >
                     </span>
-                  </el-dialog> -->
+                  </el-dialog>
                   <el-button type="warning"
                              size="mini">修改</el-button>
                 </template>
@@ -247,22 +251,26 @@
           </el-container>
         </el-col>
         <div class="paginationClass">
-          <el-col :xs="24"
-                  :sm="24"
-                  :md="24"
-                  :lg="24"
-                  :xl="24"
-                  style="text-align: center">
-            <el-pagination align="center"
-                           @size-change="handleSizeChange"
-                           @current-change="handleCurrentChange"
-                           :current-page="currentPage"
-                           :page-sizes="[1, 5, 10, 20]"
-                           :page-size="pageSize"
-                           layout="total, sizes, prev, pager, next, jumper"
-                           :total="tableData.length">
-            </el-pagination>
-          </el-col>
+          <el-col
+              :xs="24"
+              :sm="24"
+              :md="24"
+              :lg="24"
+              :xl="24"
+              style="text-align: center"
+          >
+            <el-pagination
+                align="center"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[1, 5, 10, 20]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="tableData.length"
+            >
+            </el-pagination
+            ></el-col>
         </div>
       </div>
     </div>
@@ -308,7 +316,12 @@ export default {
       value: "",
       labelPosition: "left",
       dialogVisible: false,
+      dialogFormVisible:false,
+      change:false,
+      solute:'',
       reverse: true,
+      test:'testIssssssue',
+      solutePlan:'solutePlan',
       activities: [
         {
           content: "已关闭",
@@ -361,57 +374,76 @@ export default {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
-    console.log(this.userid);
-    console.log(this.username);
-    console.log(this.role);
-    console.log(this.role != "普通员工");
-    if (this.role != "普通员工") {
-      this.getIssues();
-    } else {
+    let queryParam=this.$route.query;
+    if(Object.keys(queryParam).length==0){
+      if (this.role != "普通员工") {
+        this.getIssues();
+      } else {
+        this.formLabelAlign2.modifier = this.userid
+        this.searchIssue();
+      }
+    }else {
+      this.formLabelAlign2.modifier = queryParam.id;
+      this.formLabelAlign1.createtor=queryParam.username
+      console.log(queryParam.id)
+      if(queryParam.state=='closed'){
+
+        this.formLabelAlign2.issuserank='已关闭'
+      }
       this.searchIssue();
     }
   },
   methods: {
     getIssues () {
       this.$axios
-        .get("http://120.78.176.2:8080/issue/selectIssueAll", {
-          params: {
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .get("http://120.78.176.2:8080/issue/selectIssueAll", {
+            params: {
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     },
-    searchIssue () {
+    searchIssue() {
+      this.currentPage=1
+      let url=''
+      if(this.formLabelAlign1.createtor!==''&&this.formLabelAlign1.createtor!=null){
+        url='http://120.78.176.2:8080/issue/findCreateIssue'
+        console.log(1)
+      }else if(this.formLabelAlign2.modifier!==''&&this.formLabelAlign2.modifier!=null){
+        url='http://120.78.176.2:8080/issue/selectLikeIssue'
+        console.log(2)
+      }else {
+        url='http://120.78.176.2:8080/issue/selectIssueAll'
+        console.log(3)
+      }
       this.$axios
-        .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
-          params: {
-            issueID: this.formLabelAlign1.issueno,
-            creater: this.formLabelAlign1.createtor,
-            issuestate: this.formLabelAlign2.issuserank,
-            userID: this.formLabelAlign2.modifier,
-            plantime: this.formLabelAlign3.changetime,
-            createtime: this.formLabelAlign3.createtime,
-            createtime1: this.formLabelAlign4.createtimeto,
-            plantime1: this.formLabelAlign4.changetimeto,
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
-          this.formLabelAlign2.modifier = this.userid;
-          // this.formLabelAlign.createtor = this.userid;
-          console.log(this.tableData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .get(url, {
+            params: {
+              issueID: this.formLabelAlign1.issueno,
+              issuestate: this.formLabelAlign2.issuserank,
+              creater: this.formLabelAlign1.createtor,
+              createtime: this.formLabelAlign3.createtime,
+              createtime1: this.formLabelAlign4.createtimeto,
+              plantime: this.formLabelAlign3.changetime,
+              plantime1: this.formLabelAlign4.changetimeto,
+              userID: this.formLabelAlign2.modifier,
+              pageNum: this.currentPage,
+              pageSize: 999,
+            },
+          })
+          .then((res) => {
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);

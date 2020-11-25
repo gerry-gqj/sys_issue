@@ -2,7 +2,7 @@
   <div>
     <!-- <h4 style="text-align:center;width:1200px;">账户管理</h4>
     <hr style="border: 1px dashed #000; height: 1px" /> -->
-    <hr />
+
     <el-container>
       <div style="text-align: center; width: 1200px">
         <el-form ref="form"
@@ -58,7 +58,13 @@
             <el-table-column prop="role"
                              label="用户身份"></el-table-column>
             <el-table-column prop="userstate"
-                             label="账户状态"></el-table-column>
+                             label="账户状态">
+              <template scope="scope">
+              <el-tag color="white"
+                  :type="scope.row.userstate==='注销'?'danger':(scope.row.userstate==='激活'?'success':'')"
+              >{{scope.row.userstate}}</el-tag>
+            </template>
+            </el-table-column>
             <el-table-column fixed="right"
                              label="操作"
                              width="150">
@@ -125,6 +131,11 @@ export default {
       pageSize: 20, // 每页的数据条数
     };
   },
+  beforeCreate() {
+    if(localStorage.getItem('role')!='超级Admin'){
+      this.$router.push('/');
+    }
+  },
   mounted () {
     this.getUserInfo();
   },
@@ -173,6 +184,7 @@ export default {
         });
     },
     searchUser () {
+      this.currentPage=1
       this.$axios
         .get("http://120.78.176.2:8080/user/selectidorname", {
           params: {

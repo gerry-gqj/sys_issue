@@ -200,6 +200,11 @@ export default {
       },
     };
   },
+  beforeCreate() {
+    if(localStorage.getItem('role')=='经理'){
+      this.$router.push('/');
+    }
+  },
   mounted() {
     //获取用户名
     this.username = localStorage.getItem('username')
