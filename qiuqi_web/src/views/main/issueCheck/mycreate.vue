@@ -96,7 +96,6 @@
                 :picker-options="pickerOptions0(formLabelAlign4.createtimeto)"
                 style="text-align: center; width: 150px"
                 clearable
-                format="yyyy 年 MM 月 dd 日"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -108,7 +107,6 @@
                 :picker-options="pickerOptions0(formLabelAlign4.changetimeto)"
                 style="text-align: center; width: 150px"
                 clearable
-                format="yyyy 年 MM 月 dd 日"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -131,7 +129,6 @@
                 :picker-options="pickerOptione0(formLabelAlign3.createtime)"
                 style="text-align: center; width: 150px"
                 clearable
-                format="yyyy 年 MM 月 dd 日"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -144,7 +141,6 @@
                 style="text-align: center; width: 150px"
                 clearable
                 maxlength="30"
-                format="yyyy 年 MM 月 dd 日"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>

@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="background">
-      <img :src="imgSrc"
-           width="100%"
-           height="100%"
-           alt="" />
+      <img :src="imgSrc" width="100%" height="100%" alt="" />
     </div>
     <div class="front">
       <el-container>
@@ -12,30 +9,34 @@
         <!-- 登录模块 -->
         <el-card class="box-card">
           <h2 class="title">登录</h2>
-          <el-form :model="ruleForm"
-                   :rules="rules"
-                   ref="ruleForm"
-                   label-width="100px"
-                   class="demo-ruleForm">
-            <el-form-item label="系统ID："
-                          prop="id">
-              <el-input v-model="ruleForm.id"
-                        maxlength="30"
-                        show-word-limit></el-input>
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="100px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="系统ID：" prop="id">
+              <el-input
+                v-model="ruleForm.id"
+                maxlength="30"
+                show-word-limit
+              ></el-input>
             </el-form-item>
-            <el-form-item label="输入密码："
-                          prop="pass1">
-              <el-input type="password"
-                        v-model="ruleForm.pass1"
-                        autocomplete="off"
-                        maxlength="30"
-                        show-password></el-input>
+            <el-form-item label="输入密码：" prop="pass1">
+              <el-input
+                type="password"
+                v-model="ruleForm.pass1"
+                autocomplete="off"
+                maxlength="30"
+                show-password
+              ></el-input>
             </el-form-item>
             <el-form-item>
               <!-- 按钮组 -->
               <!-- 按钮组 -->
-              <el-button type="primary"
-                         @click="Login('ruleForm')">登录
+              <el-button type="primary" @click="Login('ruleForm')"
+                >登录
               </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
             </el-form-item>
@@ -48,7 +49,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -61,7 +62,7 @@ export default {
     };
     return {
       /*用来设置背景图片 */
-      imgSrc: require("../assets/imgs/user2.jpg"),
+      imgSrc: require("../assets/imgs/1.jpg"),
       activeName: "second",
       ruleForm: {
         delivery: false,
@@ -84,67 +85,61 @@ export default {
     };
   },
   methods: {
-    FormRegistered () {
+    FormRegistered() {
       window.location.href = "/Registered";
     },
     //用户登录
-    Login (formName) {
+    Login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-              .post(
-                  "http://120.78.176.2:8080/loginregister/login",
-                  this.$qs.stringify({
-                    name: this.ruleForm.id,
-                    password: this.ruleForm.pass1,
-                  })
-              )
-              .then((res) => {
-                console.log(res.data.status)
-                if (res.data.status == "登陆成功") {
-                  //缓存id、用户名、权限
-                  localStorage.setItem('userID', res.data.userID)
-                  localStorage.setItem('username', res.data.name)
-                  localStorage.setItem('role', res.data.role)
-
-                  this.username = localStorage.setItem(
-                      'username'
-                      , this.ruleForm.id
-                  );
-                  //登录成功后路由到主页面
-                  this.$message(
-                      {
-                        type: "success",
-                        message: "登录成功",
-                      },
-                      (window.location.href = "/main")
-                  );
-                } else if (res.data.status == "用户名不存在") {
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "用户不存在",
-                      }
-                  );
-                } else if (res.data.status == "该用户已注销") {
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "该用户已注销",
-                      }
-                  );
-                } else {
-                  this.$message(
-                      {
-                        type: "error",
-                        message: "登录失败",
-                      })
-                }
+            .post(
+              "http://120.78.176.2:8080/loginregister/login",
+              this.$qs.stringify({
+                name: this.ruleForm.id,
+                password: this.ruleForm.pass1,
               })
-              .catch(function (error) {
-                console.log(error);
-              });
+            )
+            .then((res) => {
+              console.log(res.data.status);
+              if (res.data.status == "登陆成功") {
+                //缓存id、用户名、权限
+                localStorage.setItem("userID", res.data.userID);
+                localStorage.setItem("username", res.data.name);
+                localStorage.setItem("role", res.data.role);
 
+                this.username = localStorage.setItem(
+                  "username",
+                  this.ruleForm.id
+                );
+                //登录成功后路由到主页面
+                this.$message(
+                  {
+                    type: "success",
+                    message: "登录成功",
+                  },
+                  (window.location.href = "/main")
+                );
+              } else if (res.data.status == "用户名不存在") {
+                this.$message({
+                  type: "error",
+                  message: "用户不存在",
+                });
+              } else if (res.data.status == "该用户已注销") {
+                this.$message({
+                  type: "error",
+                  message: "该用户已注销",
+                });
+              } else {
+                this.$message({
+                  type: "error",
+                  message: "登录失败",
+                });
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
       });
     },

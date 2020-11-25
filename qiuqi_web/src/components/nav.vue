@@ -9,7 +9,7 @@
         router
       >
         <el-menu-item index="/main/create" v-if="this.role != '经理'">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-circle-plus-outline"></i>
           <span slot="title">创建 Issue</span>
         </el-menu-item>
         <el-menu-item
@@ -20,7 +20,7 @@
           <span slot="title">Issue 报表</span>
         </el-menu-item>
         <el-menu-item index="/main/countCheck" v-if="this.role == '超级Admin'">
-          <i class="el-icon-location"></i>
+          <i class="el-icon-user"></i>
           <span slot="title">账户管理</span>
         </el-menu-item>
         <el-menu-item index="/main/check" v-if="this.role != '普通员工'">
@@ -29,12 +29,16 @@
         </el-menu-item>
         <el-submenu index="1" v-if="this.role == '普通员工'">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-arrow-down"></i>
             <span>Issue 查询</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/main/check">修改人</el-menu-item>
-            <el-menu-item index="/main/checkmycreate">创建人</el-menu-item>
+            <el-menu-item index="/main/check">
+              <i class="el-icon-bell"></i>我的修改</el-menu-item
+            >
+            <el-menu-item index="/main/checkmycreate"
+              ><i class="el-icon-info"></i>我的创建</el-menu-item
+            >
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

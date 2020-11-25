@@ -94,7 +94,7 @@ export default {
       }
     };
     return {
-      imgSrc: require("../assets/imgs/user2.jpg"),
+      imgSrc: require("../assets/imgs/2.jpg"),
       dialogVisible1: true,
       ruleForm: {
         name: "",
