@@ -208,7 +208,7 @@
                                label="操作"
                                width="150"
                                v-if="this.role == '普通员工'">
-                <template>
+                <template scope="scope">
                   <el-button @click="dialogVisible = true"
                              type="info"
                              size="mini">详情
