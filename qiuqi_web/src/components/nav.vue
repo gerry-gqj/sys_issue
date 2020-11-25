@@ -12,7 +12,10 @@
           <i class="el-icon-menu"></i>
           <span slot="title">创建 Issue</span>
         </el-menu-item>
-        <el-menu-item index="/main/reportCheck" v-if="this.role == '超级Admin'||this.role == '经理'">
+        <el-menu-item
+          index="/main/reportCheck"
+          v-if="this.role == '超级Admin' || this.role == '经理'"
+        >
           <i class="el-icon-document"></i>
           <span slot="title">Issue 报表</span>
         </el-menu-item>
@@ -20,14 +23,18 @@
           <i class="el-icon-location"></i>
           <span slot="title">账户管理</span>
         </el-menu-item>
-        <el-submenu index="1">
+        <el-menu-item index="/main/check" v-if="this.role != '普通员工'">
+          <i class="el-icon-search"></i>
+          <span slot="title">Issue 查询</span>
+        </el-menu-item>
+        <el-submenu index="1" v-if="this.role == '普通员工'">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>Issue 查询</span>
           </template>
           <el-menu-item-group>
             <el-menu-item index="/main/check">修改人</el-menu-item>
-            <el-menu-item index="/main/checkmycreate" v-if="role=='普通员工'">创建人</el-menu-item>
+            <el-menu-item index="/main/checkmycreate">创建人</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
