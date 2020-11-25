@@ -1,23 +1,22 @@
 <template>
   <div class="menu">
     <el-aside width="210px">
-      <el-menu default-active="this.$route.path"
-               class="el-menu-vertical-demo"
-               @open="handleOpen"
-               @close="handleClose"
-               router>
-        <el-menu-item index="/main/create"
-                      v-if="this.role != '经理'">
+      <el-menu
+        default-active="this.$route.path"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        router
+      >
+        <el-menu-item index="/main/create" v-if="this.role != '经理'">
           <i class="el-icon-menu"></i>
           <span slot="title">创建 Issue</span>
         </el-menu-item>
-        <el-menu-item index="/main/reportCheck"
-                      v-if="this.role =='超级Admin'||'经理'">
+        <el-menu-item index="/main/reportCheck" v-if="this.role != '普通员工'">
           <i class="el-icon-document"></i>
           <span slot="title">Issue 报表</span>
         </el-menu-item>
-        <el-menu-item index="/main/countCheck"
-                      v-if="this.role == '超级Admin'">
+        <el-menu-item index="/main/countCheck" v-if="this.role == '超级Admin'">
           <i class="el-icon-location"></i>
           <span slot="title">账户管理</span>
         </el-menu-item>
@@ -37,20 +36,20 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       role: "",
     };
   },
-  mounted () {
+  mounted() {
     this.role = localStorage.getItem("role");
     console.log(this.role);
   },
   methods: {
-    handleOpen (key, keyPath) {
+    handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
-    handleClose (key, keyPath) {
+    handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
   },

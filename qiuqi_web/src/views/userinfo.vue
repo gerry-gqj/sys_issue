@@ -4,8 +4,10 @@
                  :visible.sync="dialogVisible1"
                  width="30%"
                  :before-close="handleClose"> -->
-
-    <div class="main">
+    <div class="background">
+      <img :src="imgSrc" width="100%" height="100%" alt="" />
+    </div>
+    <div class="front">
       <el-row>
         <el-col :span="12" :offset="12">
           <div class="grid-content"></div>
@@ -92,8 +94,8 @@ export default {
       }
     };
     return {
+      imgSrc: require("../assets/imgs/user2.jpg"),
       dialogVisible1: true,
-
       ruleForm: {
         name: "",
         pass: "",
@@ -130,7 +132,10 @@ export default {
         mail: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { max: 30, message: "长度在 30 个字符", trigger: "blur" },
-          {pattern:/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,message:'邮箱格式错误'},
+          {
+            pattern: /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.(com|cn)+$/,
+            message: "邮箱格式错误",
+          },
           {
             type: "email",
             message: "请输入正确的邮箱地址",
@@ -142,8 +147,7 @@ export default {
     };
   },
   mounted() {
-    this.ruleForm.loginid=localStorage.getItem('userID')
-
+    this.ruleForm.loginid = localStorage.getItem("userID");
   },
   methods: {
     submitForm(formName) {
@@ -159,36 +163,31 @@ export default {
                 userID: this.ruleForm.loginid,
               })
             )
-            .then((res)=> {
-              console.log(res.data)
+            .then((res) => {
+              console.log(res.data);
               if (res.data.status == "修改个人信息成功") {
-                this.$message(
-                    {
-                      type: 'success',
-                      message: '修改成功'
-                    }
-                );
-                setTimeout( ()=>{window.location.href = "./main"},1000)
+                this.$message({
+                  type: "success",
+                  message: "修改成功",
+                });
+                setTimeout(() => {
+                  window.location.href = "./main";
+                }, 1000);
               } else {
-                this.$message(
-                    {
-                      type: 'error',
-                      message: '修改失败'
-                    }
-                );
+                this.$message({
+                  type: "error",
+                  message: "修改失败",
+                });
               }
             })
             .catch(function (error) {
               console.log(error);
             });
         } else {
-          this.$message(
-              {
-                type: 'error',
-                message: '修改失败'
-              }
-          );
-
+          this.$message({
+            type: "error",
+            message: "修改失败",
+          });
         }
       });
     },
@@ -282,7 +281,24 @@ body > .el-container {
   text-align: center;
 }
 
-.main {
-  background-color: #4654cccc;
+/* 图片背景样式 */
+.background {
+  width: 100%;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
+  /* filter: alpha(Opacity=85);
+  -moz-opacity: 0.85;
+  opacity: 0.85; */
+}
+
+/* 图片和内容的层叠显示 */
+.front {
+  z-index: 1;
+  /* position: absolute; */
+  /* 设置透明度 */
+  filter: alpha(Opacity=85); /*兼容ie*/
+  -moz-opacity: 0.85;
+  opacity: 0.9;
 }
 </style>

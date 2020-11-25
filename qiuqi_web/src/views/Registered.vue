@@ -1,53 +1,63 @@
 <template>
   <div>
-    <div class="main">
+    <div class="background">
+      <img :src="imgSrc" width="100%" height="100%" alt="" />
+    </div>
+    <div class="front">
       <el-row>
-        <el-col :span="12"
-                :offset="12">
+        <el-col :span="12" :offset="12">
           <el-card class="box-card">
             <h2 class="title">新用户注册</h2>
-            <el-form :model="ruleForm"
-                     :rules="rules"
-                     ref="ruleForm"
-                     label-width="100px"
-                     class="demo-ruleForm">
-              <el-form-item label="登录ID："
-                            prop="loginid">
-                <el-input v-model="ruleForm.loginid"
-                          maxlength="30"
-                          show-word-limit></el-input>
+            <el-form
+              :model="ruleForm"
+              :rules="rules"
+              ref="ruleForm"
+              label-width="100px"
+              class="demo-ruleForm"
+            >
+              <el-form-item label="登录ID：" prop="loginid">
+                <el-input
+                  v-model="ruleForm.loginid"
+                  maxlength="30"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
-              <el-form-item label="用户名："
-                            prop="name">
-                <el-input v-model="ruleForm.name"
-                          maxlength="20"
-                          show-word-limit></el-input>
+              <el-form-item label="用户名：" prop="name">
+                <el-input
+                  v-model="ruleForm.name"
+                  maxlength="20"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
-              <el-form-item label="邮箱："
-                            prop="mail">
-                <el-input v-model="ruleForm.mail"
-                          maxlength="30"
-                          show-word-limit></el-input>
+              <el-form-item label="邮箱：" prop="mail">
+                <el-input
+                  v-model="ruleForm.mail"
+                  maxlength="30"
+                  show-word-limit
+                ></el-input>
               </el-form-item>
-              <el-form-item label="输入密码："
-                            prop="pass">
-                <el-input type="password"
-                          v-model="ruleForm.pass"
-                          autocomplete="off"
-                          maxlength="30"
-                          show-password></el-input>
+              <el-form-item label="输入密码：" prop="pass">
+                <el-input
+                  type="password"
+                  v-model="ruleForm.pass"
+                  autocomplete="off"
+                  maxlength="30"
+                  show-password
+                ></el-input>
               </el-form-item>
-              <el-form-item label="确认密码："
-                            prop="checkPass">
-                <el-input type="password"
-                          v-model="ruleForm.checkPass"
-                          autocomplete="off"
-                          maxlength="30"
-                          show-password></el-input>
+              <el-form-item label="确认密码：" prop="checkPass">
+                <el-input
+                  type="password"
+                  v-model="ruleForm.checkPass"
+                  autocomplete="off"
+                  maxlength="30"
+                  show-password
+                ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary"
-                           @click="submitForm('ruleForm')">注册</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')"
+                  >注册</el-button
+                >
                 <el-button @click="goback">返回</el-button>
               </el-form-item>
             </el-form>
@@ -60,7 +70,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -81,8 +91,8 @@ export default {
       }
     };
     return {
+      imgSrc: require("../assets/imgs/user2.jpg"),
       dialogVisible1: true,
-
       ruleForm: {
         name: "",
         pass: "",
@@ -103,7 +113,10 @@ export default {
         ],
         pass: [
           { required: true, validator: validatePass, trigger: "blur" },
-          { pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/, message: '密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位' }
+          {
+            pattern: /^(?![a-zA-Z]+$)(?![A-Z\W_]+$)(?![a-z\W_]+$)[a-zA-Z\W_]{8,30}$/,
+            message: "密码为大小写字母，特殊符号必须包含三种，长度为 8 - 30位",
+          },
         ],
         pass1: [{ required: true, validator: validatePass, trigger: "blur" }],
         checkPass: [
@@ -136,7 +149,7 @@ export default {
     };
   },
   methods: {
-    submitForm (formName) {
+    submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
@@ -171,7 +184,7 @@ export default {
         }
       });
     },
-    goback () {
+    goback() {
       // this.$router.go(-1);
       this.$confirm("是否取消注册?", "提示", {
         confirmButtonText: "确定",
@@ -222,7 +235,24 @@ export default {
 .title {
   text-align: center;
 }
-.main {
-  background-color: #4654cccc;
+/* 图片背景样式 */
+.background {
+  width: 100%;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
+  /* filter: alpha(Opacity=85);
+  -moz-opacity: 0.85;
+  opacity: 0.85; */
+}
+
+/* 图片和内容的层叠显示 */
+.front {
+  z-index: 1;
+  /* position: absolute; */
+  /* 设置透明度 */
+  filter: alpha(Opacity=85); /*兼容ie*/
+  -moz-opacity: 0.85;
+  opacity: 0.9;
 }
 </style>
