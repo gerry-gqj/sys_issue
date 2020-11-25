@@ -118,7 +118,7 @@ export default {
                     type: "success",
                     message: "登录成功",
                   },
-                  (window.location.href = "/main")
+                  (window.location.href = "/main/welcome")
                 );
               } else if (res.data.status == "用户名不存在") {
                 this.$message({

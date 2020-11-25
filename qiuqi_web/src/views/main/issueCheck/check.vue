@@ -58,7 +58,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人" v-if="this.role == '普通员工'">
+            <el-form-item label="修改人" prop v-if="this.role == '普通员工'">
               <el-input
                 v-model="formLabelAlign2.modifier"
                 placeholder="请输入"
@@ -78,13 +78,79 @@
           </el-form>
         </div>
       </el-col>
+      <!-- <el-col :span="3">
+        <div class="grid-content bg-purple">
+          <el-form
+            :label-position="labelPosition"
+            label-width="80px"
+            :ref="formLabelAlignref3"
+            :model="formLabelAlign3"
+          >
+            <el-form-item label="创建时间" prop="createtime">
+              <el-date-picker
+                v-model="formLabelAlign3.createtime"
+                type="date"
+                placeholder="选择日期"
+                :picker-options="pickerOptions0(formLabelAlign4.createtimeto)"
+                style="text-align: center; width: 150px"
+                clearable
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="修改时间" prop="changetime">
+              <el-date-picker
+                v-model="formLabelAlign3.changetime"
+                type="date"
+                placeholder="选择日期"
+                :picker-options="pickerOptions0(formLabelAlign4.changetimeto)"
+                style="text-align: center; width: 150px"
+                clearable
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-col>
       <el-col :span="3">
         <div class="grid-content bg-purple">
           <el-form
             :label-position="labelPosition"
             label-width="80px"
-            ref="formLabelAlignref3"
+            :model="formLabelAlign4"
+            ref="formLabelAlignref4"
+          >
+            <el-form-item label="至" prop="createtimeto">
+              <el-date-picker
+                v-model="formLabelAlign4.createtimeto"
+                type="date"
+                placeholder="至"
+                :picker-options="pickerOptione0(formLabelAlign3.createtime)"
+                style="text-align: center; width: 150px"
+                clearable
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="至" prop="changetimeto">
+              <el-date-picker
+                v-model="formLabelAlign4.changetimeto"
+                type="date"
+                placeholder="至"
+                :picker-options="pickerOptione0(formLabelAlign3.changetime)"
+                style="text-align: center; width: 150px"
+                clearable
+                maxlength="30"
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-col> --><el-col :span="3">
+        <div class="grid-content bg-purple">
+          <el-form
+            :label-position="labelPosition"
+            label-width="80px"
             :model="formLabelAlign3"
+            ref="formLabelAlignref3"
           >
             <el-form-item label="创建时间" prop="createtime">
               <el-date-picker
@@ -469,13 +535,13 @@ export default {
         .get(url, {
           params: {
             issueID: this.formLabelAlign1.issueno,
-            issuestate: this.formLabelAlign2.issuserank,
             creater: this.formLabelAlign1.createtor,
-            createtime: this.formLabelAlign3.createtime,
-            createtime1: this.formLabelAlign4.createtimeto,
-            plantime: this.formLabelAlign3.changetime,
-            plantime1: this.formLabelAlign4.changetimeto,
+            issuestate: this.formLabelAlign2.issuserank,
             userID: this.formLabelAlign2.modifier,
+            createtime: this.formLabelAlign3.createtime,
+            plantime: this.formLabelAlign3.changetime,
+            createtime1: this.formLabelAlign4.createtimeto,
+            plantime1: this.formLabelAlign4.changetimeto,
             pageNum: this.currentPage,
             pageSize: this.pageSize,
           },
@@ -507,10 +573,7 @@ export default {
         return "";
       }
     },
-    golist() {},
     clearvalues() {
-      // this.formLabelAlign = "";
-      // this.$refs["check"].resetFields()
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
       this.$refs.formLabelAlignref3.resetFields();

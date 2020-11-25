@@ -1,9 +1,10 @@
 <template>
   <div class="main">
     <el-container>
-      <el-aside width="auto" class="header-logo tap">
-        <img class="logo" src="../assets/imgs/user2.jpg" alt="Logo"
-      /></el-aside>
+      <el-aside width="auto" class="header-logo tap"
+        ><a @click="gowelcome">
+          <img class="logo" src="../assets/imgs/user2.jpg" alt="Logo" /></a
+      ></el-aside>
       <h1>GBA Issue管理系统</h1>
       <el-aside width="auto" class="header-logo tap">
         <el-dropdown
@@ -45,6 +46,9 @@ export default {
     this.user = localStorage.getItem("username");
   },
   methods: {
+    gowelcome() {
+      this.$router.push("/main/welcome");
+    },
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
     // },

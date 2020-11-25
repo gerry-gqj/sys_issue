@@ -41,6 +41,11 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import("../views/main.vue"),
     children: [
+      {
+        path: '/main/welcome',
+        component: () =>
+          import("../views/main/welcome.vue"),
+      },
       // 创建issue
       {
         path: '/main/create',
