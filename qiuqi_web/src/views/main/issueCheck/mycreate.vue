@@ -216,13 +216,16 @@
               </el-table-column>
               <el-table-column prop="acttime" label="实际完成时间">
               </el-table-column>
-              <el-table-column fixed="right" label="操作" width="100">
+              <el-table-column fixed="right" label="操作" width="150">
                 <template>
                   <el-button
                     @click="dialogVisible = true"
-                    type="text"
-                    size="small"
+                    type="info"
+                    size="mini"
                     >详情</el-button
+                  >
+                  <el-button type="primary" size="mini" @click="operate = true"
+                    >验证</el-button
                   >
                   <el-dialog
                     title="Issue详情"
@@ -250,9 +253,7 @@
                       >
                     </span>
                   </el-dialog>
-                  <el-button type="text" size="small" @click="operate = true"
-                    >验证</el-button
-                  >
+
                   <el-dialog
                     title="操作"
                     :visible.sync="operate"
@@ -341,7 +342,7 @@ export default {
       value: "",
       labelPosition: "left",
       dialogVisible: false,
-
+      operate: false,
       reverse: true,
       activities: [
         {
