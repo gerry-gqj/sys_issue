@@ -5,56 +5,48 @@
 <template>
   <div>
     <el-row :gutter="0">
-      <el-col :span="6" :offset="1">
+      <el-col :span="6"
+              :offset="1">
         <div class="grid-content bg-purple">
-          <el-form
-              :label-position="labelPosition"
-              label-width="80px"
-              :model="formLabelAlign1"
-              ref="formLabelAlignref1"
-          >
-            <el-form-item label="Issue No" prop="issueno">
-              <el-input
-                  v-model="formLabelAlign1.issueno"
-                  placeholder="请输入"
-                  style="text-align: center; width: 200px"
-                  maxlength="30"
-                  show-word-limit
-              ></el-input>
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign1"
+                   ref="formLabelAlignref1">
+            <el-form-item label="Issue No"
+                          prop="issueno">
+              <el-input v-model="formLabelAlign1.issueno"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit></el-input>
             </el-form-item>
-            <el-form-item label="创建人" prop="createtor">
-              <el-input
-                  v-model="formLabelAlign1.createtor"
-                  placeholder="请输入"
-                  style="text-align: center; width: 200px"
-                  maxlength="30"
-                  show-word-limit
-              ></el-input>
+            <el-form-item label="创建人"
+                          prop="createtor">
+              <el-input v-model="formLabelAlign1.createtor"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit></el-input>
             </el-form-item>
           </el-form>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple">
-          <el-form
-              :label-position="labelPosition"
-              label-width="80px"
-              :model="formLabelAlign2"
-              ref="formLabelAlignref2"
-          >
-            <el-form-item label="Issue状态" prop="issuserank">
-              <el-select
-                  v-model="formLabelAlign2.issuserank"
-                  placeholder="请选择"
-                  style="text-align: center; width: 200px"
-                  clearable
-              >
-                <el-option
-                    v-for="item in options"
-                    :key="item.label"
-                    :label="item.label"
-                    :value="item.label"
-                >
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign2"
+                   ref="formLabelAlignref2">
+            <el-form-item label="Issue状态"
+                          prop="issuserank">
+              <el-select v-model="formLabelAlign2.issuserank"
+                         placeholder="请选择"
+                         style="text-align: center; width: 200px"
+                         clearable>
+                <el-option v-for="item in options"
+                           :key="item.label"
+                           :label="item.label"
+                           :value="item.label">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -174,11 +166,10 @@
                 :xl="24"
                 style="text-align: center">
           <el-container>
-            <el-table
-                border
-                :data="tableData"
-                style="width: 100%"
-                :header-cell-style="getRowClass">
+            <el-table border
+                      :data="tableData"
+                      style="width: 100%"
+                      :header-cell-style="getRowClass">
               <el-table-column type="selection"></el-table-column>
               <el-table-column type="index"
                                label="序号"></el-table-column>
@@ -215,7 +206,8 @@
                   </el-button>
                   <el-button type="warning"
                              size="mini"
-                             @click="changeClick(scope.row.issueID)" v-if="role=='普通员工'"
+                             @click="changeClick(scope.row.issueID)"
+                             v-if="role=='普通员工'"
                              :disabled="scope.row.issuestate!='待修改'">修改
                   </el-button>
                   <el-dialog title="提示"
@@ -237,14 +229,14 @@
                       <p>Issue名称：{{ issueName }}</p>
                       <p>解决方案：{{ solutionPlan }}</p>
                     </div>
-<!--                    <span slot="footer" class="dialog-footer">-->
-<!--                      <el-button-->
-<!--                          type="info"-->
-<!--                          size="small"-->
-<!--                          round-->
-<!--                          @click="dialogVisible = false"-->
-<!--                      >关 闭</el-button>-->
-<!--                    </span>-->
+                    <!--                    <span slot="footer" class="dialog-footer">-->
+                    <!--                      <el-button-->
+                    <!--                          type="info"-->
+                    <!--                          size="small"-->
+                    <!--                          round-->
+                    <!--                          @click="dialogVisible = false"-->
+                    <!--                      >关 闭</el-button>-->
+                    <!--                    </span>-->
                   </el-dialog>
 
                   <el-dialog title="修改"
@@ -262,11 +254,12 @@
                       </el-input>
                     </div>
                     <div style="text-align: center">
-                      <el-button round @click="submit">提交方案</el-button>
+                      <el-button round
+                                 @click="submit">提交方案</el-button>
                     </div>
-<!--                    <span slot="footer" class="dialog-footer">-->
-<!--                      <el-button type="primary" @click="changeClick">关 闭</el-button>-->
-<!--                    </span>-->
+                    <!--                    <span slot="footer" class="dialog-footer">-->
+                    <!--                      <el-button type="primary" @click="changeClick">关 闭</el-button>-->
+                    <!--                    </span>-->
                   </el-dialog>
                 </template>
               </el-table-column>
@@ -274,22 +267,20 @@
           </el-container>
         </el-col>
         <div class="paginationClass">
-          <el-col
-              :xs="24"
-              :sm="24"
-              :md="24"
-              :lg="24"
-              :xl="24"
-              style="text-align: center">
-            <el-pagination
-                align="center"
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[1, 5, 10, 20]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
+          <el-col :xs="24"
+                  :sm="24"
+                  :md="24"
+                  :lg="24"
+                  :xl="24"
+                  style="text-align: center">
+            <el-pagination align="center"
+                           @size-change="handleSizeChange"
+                           @current-change="handleCurrentChange"
+                           :current-page="currentPage"
+                           :page-sizes="[1, 5, 10, 20]"
+                           :page-size="pageSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="total">
             </el-pagination>
           </el-col>
         </div>
@@ -340,10 +331,10 @@ export default {
       dialogVisible: false,
       dialogFormVisible: false,
       change: false,
-      solute:'',
-      issueName:'',
+      solute: '',
+      issueName: '',
       solutionPlan: "",
-      currentIssueId:0,
+      currentIssueId: 0,
       reverse: true,
       test: "testIssssssue",
       solutePlan: "solutePlan",
@@ -395,16 +386,19 @@ export default {
       },
     };
   },
-  created() {
+  created () {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
   },
-  mounted() {
+  mounted () {
 
     let queryParam = this.$route.query;
     if (Object.keys(queryParam).length == 0) {
+      if (this.role == "普通员工") {
         this.formLabelAlign2.modifier = this.userid;
+      }
+
     } else {
       this.formLabelAlign2.modifier = queryParam.id;
       this.formLabelAlign1.createtor = queryParam.username;
@@ -431,11 +425,11 @@ export default {
     //         console.log(error);
     //       });
     // },
-    searchClick(){
+    searchClick () {
       this.currentPage = 1;
       this.searchIssue();
     },
-    searchIssue() {
+    searchIssue () {
       // let url = "";
       // if (
       //     this.formLabelAlign2.modifier !== "" &&
@@ -453,33 +447,34 @@ export default {
       //   console.log(3);
       // }
       this.$axios
-          .get('http://120.78.176.2:8080/issue/selectLikeIssue', {
-            params: {
-              issueID: this.formLabelAlign1.issueno,
-              issuestate: this.formLabelAlign2.issuserank,
-              creater: this.formLabelAlign1.createtor,
-              createtime: this.formLabelAlign3.createtime,
-              createtime1: this.formLabelAlign4.createtimeto,
-              plantime: this.formLabelAlign3.changetime,
-              plantime1: this.formLabelAlign4.changetimeto,
-              userID: this.formLabelAlign2.modifier,
-              pageNum: this.currentPage,
-              pageSize: this.pageSize,
-            },
-          })
-          .then((res) => {
-            this.total=res.data.total
-            this.tableData = res.data.list;
-            console.log(this.tableData);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        .get('http://120.78.176.2:8080/issue/selectLikeIssue', {
+          params: {
+            issueID: this.formLabelAlign1.issueno,
+            issuestate: this.formLabelAlign2.issuserank,
+            creater: this.formLabelAlign1.createtor,
+            createtime: this.formLabelAlign3.createtime,
+            createtime1: this.formLabelAlign4.createtimeto,
+            plantime: this.formLabelAlign3.changetime,
+            plantime1: this.formLabelAlign4.changetimeto,
+            userID: this.formLabelAlign2.modifier,
+            pageNum: this.currentPage,
+            pageSize: this.pageSize,
+          },
+        })
+        .then((res) => {
+          this.total = res.data.total
+          this.tableData = res.data.list;
+          console.log(this.tableData);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
+      this.searchIssue()
     },
     //当前页改变时触发 跳转其他页
     handleCurrentChange (val) {
@@ -494,52 +489,52 @@ export default {
         return "";
       }
     },
-    golist() {
+    golist () {
     },
-    clearvalues() {
+    clearvalues () {
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
       this.$refs.formLabelAlignref3.resetFields();
       this.$refs.formLabelAlignref4.resetFields();
     },
     //详情点击
-    detailClick(title,inx){
-      let index=this.pageSize*(this.currentPage-1)+inx
-      this.solutionPlan=this.tableData[index].solution
-      this.issueName=title
+    detailClick (title, inx) {
+      let index = this.pageSize * (this.currentPage - 1) + inx
+      this.solutionPlan = this.tableData[index].solution
+      this.issueName = title
       this.dialogVisible = true
     },
     //点击修改
-    changeClick(id){
+    changeClick (id) {
       this.change = true
-      this.currentIssueId=id
+      this.currentIssueId = id
     },
     //提交解决方案
-    submit(){
+    submit () {
       this.$axios.post('http://120.78.176.2:8080/issue/updateUserSolution',
-          this.$qs.stringify({
-            issueID: this.currentIssueId,
-            solution :this.solute,
-            userID:this.userid
-          }))
-          .then((res) => {
-            console.log(res.data)
-            if (res.data.status === "修改成功") {
-              this.$message({
-                type: 'success',
-                message: '修改成功'
-              });
-              this.change=false
-              this.searchIssueByLike();
-            }else {
-              this.$message({
-                type: 'error',
-                message: '修改成功'
-              });
-            }
-          }).catch(function (error) {
-        console.log(error);
-      });
+        this.$qs.stringify({
+          issueID: this.currentIssueId,
+          solution: this.solute,
+          userID: this.userid
+        }))
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.status === "修改成功") {
+            this.$message({
+              type: 'success',
+              message: '修改成功'
+            });
+            this.change = false
+            this.searchIssueByLike();
+          } else {
+            this.$message({
+              type: 'error',
+              message: '修改成功'
+            });
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
     }
   },
 };
