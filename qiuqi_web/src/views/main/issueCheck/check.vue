@@ -22,7 +22,7 @@
                 show-word-limit
               ></el-input>
             </el-form-item>
-            <el-form-item label="创建人">
+            <el-form-item label="创建人" prop="createtor">
               <el-input
                 v-model="formLabelAlign1.createtor"
                 placeholder="请输入"

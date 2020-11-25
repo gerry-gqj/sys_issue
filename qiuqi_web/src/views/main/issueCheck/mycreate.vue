@@ -68,7 +68,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人">
+            <el-form-item label="修改人" prop="modifier">
               <el-input
                 v-model="formLabelAlign2.modifier"
                 placeholder="请输入"
@@ -258,11 +258,8 @@
                     </span>
                   </el-dialog>
                   <el-button type="text" size="small" @click="operate = true"
-                    >操作</el-button
+                    >验证</el-button
                   >
-
-                  <!-- 操作          ------------->
-
                   <el-dialog
                     title="操作"
                     :visible.sync="operate"
@@ -351,6 +348,7 @@ export default {
       value: "",
       labelPosition: "left",
       dialogVisible: false,
+
       reverse: true,
       activities: [
         {
@@ -404,7 +402,7 @@ export default {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
-    this.formLabelAlign.createtor = this.username;
+    this.formLabelAlign1.createtor = this.username;
 
     this.searchIssue();
   },
@@ -435,7 +433,7 @@ export default {
     },
     searchIssueByLike() {
       this.currentPage = 1;
-      console.log(this.formLabelAlign.modifier);
+      console.log(this.formLabelAlign2.modifier);
       this.$axios
         .get("http://120.78.176.2:8080/issue/findLikeNewIssue", {
           params: {
