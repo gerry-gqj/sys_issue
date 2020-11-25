@@ -58,9 +58,9 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人" v-if="this.role == '普通员工'">
+            <el-form-item label="修改人" v-if="this.role == '普通员工'" prop="">
               <el-input
-                v-model="formLabelAlign.modifier"
+                v-model="formLabelAlign2.modifier"
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
                 maxlength="30"
