@@ -59,45 +59,25 @@ const routes: Array<RouteConfig> = [
         name: 'issue查询',
         component: () =>
           import("../views/main/issueCheck/check.vue"),
-        // children: [
-        //     {
-        //       path: '/main/check/list',
-        //       name: 'List',
-        //       component: () =>
-        //         import("../views/main/issueCheck/list.vue"),
-        //     },
-        //   ]
       },
       {
         path: '/main/checkmycreate',
         name: 'issue查询',
         component: () =>
           import("../views/main/issueCheck/mycreate.vue"),
-        // children: [
-        //     {
-        //       path: '/main/check/list',
-        //       name: 'List',
-        //       component: () =>
-        //         import("../views/main/issueCheck/list.vue"),
-        //     },
-        //   ]
       },
-
-
+      {
+        path: '/main/supercheck',
+        name: 'issue查询',
+        component: () =>
+          import("../views/main/issueCheck/supercheck.vue"),
+      },
       // 账户管理
       {
         path: '/main/countcheck',
         name: '账户查询',
         component: () =>
           import("../views/main/countManage/countCheck.vue"),
-        // children: [
-        //     {
-        //       path: '/main/countcheck/count',
-        //       name: 'Count',
-        //       component: () =>
-        //         import("../views/main/countManage/count.vue"),
-        //     },
-        //   ]
       },
 
       // issue报表
@@ -106,14 +86,6 @@ const routes: Array<RouteConfig> = [
         name: 'issue报表',
         component: () =>
           import("../views/main/issueReport/reportCheck.vue"),
-        // children: [
-        //   {
-        //     path: '/main/reportcheck/report',
-        //     name: 'Report',
-        //     component: () =>
-        //       import("../views/main/issueReport/report.vue"),
-        //   },
-        // ]
       },
     ]
   },
