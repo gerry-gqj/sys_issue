@@ -51,17 +51,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="修改人"
-                          prop
-                          v-if="this.role == '普通员工'">
-              <el-input v-model="formLabelAlign2.modifier"
-                        placeholder="请输入"
-                        style="text-align: center; width: 200px"
-                        maxlength="30"
-                        disabled></el-input>
-            </el-form-item>
-            <el-form-item label="修改人"
-                          prop="modifier"
-                          v-else>
+                          prop="modifier">
               <el-input v-model="formLabelAlign2.modifier"
                         placeholder="请输入"
                         style="text-align: center; width: 200px"
@@ -195,72 +185,6 @@
               <el-table-column prop="acttime"
                                label="实际完成时间">
               </el-table-column>
-              <el-table-column fixed="right"
-                               label="操作"
-                               width="150"
-                               v-if="this.role == '普通员工'">
-                <template>
-                  <el-button @click="dialogVisible = true"
-                             type="info"
-                             size="mini">详情
-                  </el-button>
-                  <el-button type="warning"
-                             size="mini"
-                             @click="change = true">修改
-                  </el-button>
-                  <el-dialog title="提示"
-                             :visible.sync="dialogVisible"
-                             width="30%"
-                             :append-to-body="true">
-                    <!-- <div>
-                      <el-timeline :reverse="reverse">
-                        <el-timeline-item
-                          v-for="(activity, index) in activities"
-                          :key="index"
-                          :timestamp="activity.timestamp"
-                        >
-                          {{ activity.content }}
-                        </el-timeline-item>
-                      </el-timeline>
-                    </div> -->
-                    <div>
-                      <p>issue:{{ test }}</p>
-                      <p>解决方案:{{ solute }}</p>
-                    </div>
-                    <span slot="footer"
-                          class="dialog-footer">
-                      <el-button type="info"
-                                 size="small"
-                                 round
-                                 @click="dialogVisible = false">关 闭</el-button>
-                    </span>
-                  </el-dialog>
-
-                  <el-dialog title="修改"
-                             :visible.sync="change"
-                             width="50%"
-                             :append-to-body="true">
-                    <div>
-                      <h3>解决方案：</h3>
-                    </div>
-                    <div>
-                      <el-input type="textarea"
-                                :autosize="{ minRows: 4, maxRows: 6 }"
-                                placeholder="请输入内容"
-                                v-model="solute">
-                      </el-input>
-                    </div>
-                    <div style="text-align: center">
-                      <el-button round>提交方案</el-button>
-                    </div>
-                    <span slot="footer"
-                          class="dialog-footer">
-                      <el-button type="primary"
-                                 @click="change = false">关 闭</el-button>
-                    </span>
-                  </el-dialog>
-                </template>
-              </el-table-column>
             </el-table>
           </el-container>
         </el-col>
@@ -387,12 +311,13 @@ export default {
     this.role = localStorage.getItem("role");
     let queryParam = this.$route.query;
     if (Object.keys(queryParam).length == 0) {
-      if (this.role != "普通员工") {
-        this.getIssues();
-      } else {
-        this.formLabelAlign2.modifier = this.userid;
-        this.searchIssue();
-      }
+      this.getIssues();
+      // if (this.role != "普通员工") {
+      //   this.getIssues();
+      // } else {
+      //   this.formLabelAlign2.modifier = this.userid;
+      //   this.searchIssue();
+      // }
     } else {
       this.formLabelAlign2.modifier = queryParam.id;
       this.formLabelAlign1.createtor = queryParam.username;
