@@ -22,7 +22,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary"
-                       @click="searchIssue">查询</el-button>
+                       @click="searchClick">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </el-form-item>
         </el-form>
@@ -36,10 +36,7 @@
         <el-container>
           <el-table border
                     :data="
-              tableData.slice(
-                (currentPage - 1) * pageSize,
-                currentPage * pageSize
-              )
+              tableData
             "
                     style="width: 100%"
                     :header-cell-style="getRowClass">
@@ -76,7 +73,7 @@
                          :page-sizes="[1, 5, 10, 20]"
                          :page-size="pageSize"
                          layout="total, sizes, prev, pager, next, jumper"
-                         :total="tableData.length">
+                         :total="total">
           </el-pagination>
         </div>
       </div>
@@ -117,7 +114,7 @@ export default {
     };
   },
   mounted () {
-    this.getIssues(this);
+    this.getIssues();
   },
   methods: {
     goreport () {
@@ -133,19 +130,23 @@ export default {
         .get("http://120.78.176.2:8080/issue/selectissuecount", {
           params: {
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize: this.pageSize,
           },
         })
         .then((res) => {
+          this.total=res.data.total
           this.tableData = res.data.list;
-          console.log(res.data.total);
+          console.log(this.tableData);
         })
-        .catch(function (error) {
+        .catch( (error)=> {
           console.log(error);
         });
     },
-    searchIssue(){
+    searchClick(){
       this.currentPage=1
+      this.validate()
+    },
+    searchIssue(){
       this.$axios
           .get("http://120.78.176.2:8080/issue/selectissuebyidorname", {
             params: {
@@ -153,10 +154,11 @@ export default {
               userID:this.formInline.UserId,
               name:this.formInline.UserName,
               pageNum: this.currentPage,
-              pageSize: 999,
+              pageSize: this.pageSize,
             },
           })
           .then((res) => {
+            this.total=res.data.total
             this.tableData = res.data.list;
             console.log(this.tableData);
           })
@@ -168,11 +170,22 @@ export default {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
+      this.searchIssue()
+    },
+    //验证是否输入信息
+    validate(){
+      if((this.formInline.UserId==''||this.formInline.UserId==null)&&
+          (this.formInline.UserName==''||this.formInline.UserName==null)){
+        this.getIssues()
+      }else{
+        this.searchIssue()
+      }
     },
     //当前页改变时触发 跳转其他页
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
+      this.validate()
     },
     getRowClass ({ rowIndex }) {
       if (rowIndex == 0) {
@@ -181,59 +194,6 @@ export default {
         return "";
       }
     },
-
-    //   querySearch1(queryString, cb) {
-    //     const IDs = this.IDs;
-    //     const results = queryString
-    //       ? IDs.filter(this.createFilter(queryString))
-    //       : IDs;
-    //     // 调用 callback 返回建议列表的数据
-    //     cb(results);
-    //   },
-    //   querySearch2(queryString, cb) {
-    //     const names = this.names;
-    //     const results = queryString
-    //       ? names.filter(this.createFilter(queryString))
-    //       : names;
-    //     // 调用 callback 返回建议列表的数据
-    //     cb(results);
-    //   },
-    //   createFilter(queryString) {
-    //     return (ID) => {
-    //       return ID.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
-    //     };
-    //   },
-    //   loadAll1() {
-    //     return [
-    //       { value: "1" },
-    //       { value: "2" },
-    //       { value: "3" },
-    //       { value: "11" },
-    //       { value: "111" },
-    //       { value: "6" },
-    //       { value: "77" },
-    //     ];
-    //   },
-    //   loadAll2() {
-    //     return [
-    //       { value: "Tony" },
-    //       { value: "LaoWang" },
-    //       { value: "Pm" },
-    //       { value: "BA" },
-    //       { value: "Java" },
-    //       { value: "C" },
-    //       { value: "Tom" },
-    //     ];
-    //   },
-    //   handleSelect(item) {
-    //     console.log(item);
-    //   },
-    // },
-    // resetForm() {
-    //     this.resetFields();
-    //    },
-
-    //
   },
 };
 </script>

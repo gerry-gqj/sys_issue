@@ -163,7 +163,7 @@
           style="text-align: center"
         >
           <div class="button">
-            <el-button type="primary" @click="searchIssueByLike"
+            <el-button type="primary" @click="searchClick"
               >查询</el-button
             >
             <el-button @click="clearvalues">清空</el-button>
@@ -192,10 +192,7 @@
             <el-table
               border
               :data="
-                tableData.slice(
-                  (currentPage - 1) * pageSize,
-                  currentPage * pageSize
-                )
+                tableData
               "
               style="width: 100%"
               :header-cell-style="getRowClass"
@@ -302,7 +299,7 @@
               :page-sizes="[1, 5, 10, 20]"
               :page-size="pageSize"
               layout="total, sizes, prev, pager, next, jumper"
-              :total="tableData.length"
+              :total="total"
             >
             </el-pagination>
           </el-col>
@@ -384,42 +381,45 @@ export default {
       currentPage: 1, // 当前页码
       total: 0, // 总条数
       pageSize: 20, // 每页的数据条数
-      pickerOptions0(val) {
+      pickerOptions0 (val) {
         return {
-          disabledDate(time) {
+          disabledDate (time) {
             return time.getTime() > new Date(val).getTime();
           },
         };
       },
-      pickerOptione0(val) {
+      pickerOptione0 (val) {
         return {
-          disabledDate(time) {
+          disabledDate (time) {
             return time.getTime() < new Date(val).getTime();
           },
         };
       },
     };
   },
-  mounted() {
+  mounted () {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
-    this.formLabelAlign.createtor = this.username;
+    this.formLabelAlign1.createtor = this.username;
 
-    this.searchIssue();
+    this.searchIssueByLike();
   },
   methods: {
-    getIssues() {
+    getIssues () {
       this.$axios
-        .get("http://120.78.176.2:8080/issue/findCreateIssue", {
-          params: {
-            creater: this.formLabelAlign.createtor,
-            pageNum: this.currentPage,
-            pageSize: 999,
-          },
-        })
-        .then((res) => {
-          this.tableData = res.data.list;
+          .get("http://120.78.176.2:8080/issue/findCreateIssue", {
+            params: {
+              creater:this.formLabelAlign1.createtor,
+              pageNum: this.currentPage,
+              pageSize: this.pageSize,
+            },
+          })
+          .then((res) => {
+            this.total=res.data.total
+            console.log('res.data')
+            console.log(res.data)
+            this.tableData = res.data.list;
 
           let arr = [];
           for (let i in res.data.list) {
@@ -433,9 +433,12 @@ export default {
           console.log(error);
         });
     },
+    searchClick(){
+      this.currentPage=1
+      this.searchIssueByLike()
+    },
     searchIssueByLike() {
-      this.currentPage = 1;
-      console.log(this.formLabelAlign.modifier);
+      console.log(this.formLabelAlign2.modifier)
       this.$axios
         .get("http://120.78.176.2:8080/issue/findLikeNewIssue", {
           params: {
@@ -448,10 +451,11 @@ export default {
             createtime1: this.formLabelAlign4.createtimeto,
             plantime1: this.formLabelAlign4.changetimeto,
             pageNum: this.currentPage,
-            pageSize: 999,
+            pageSize:  this.pageSize,
           },
         })
         .then((res) => {
+          this.total=res.data.total
           this.tableData = res.data.list;
           console.log(this.tableData);
         })
@@ -459,28 +463,29 @@ export default {
           console.log(error);
         });
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
     },
     //当前页改变时触发 跳转其他页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
+      this.searchIssueByLike()
     },
-    getRowClass({ rowIndex }) {
+    getRowClass ({ rowIndex }) {
       if (rowIndex == 0) {
         return "background:#81BEF7";
       } else {
         return "";
       }
     },
-    golist() {
+    golist () {
       // this.$router.push("/main/check/list");
       // window.location.href = "/main/check/list";
     },
-    clearvalues() {
+    clearvalues () {
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
       this.$refs.formLabelAlignref3.resetFields();
