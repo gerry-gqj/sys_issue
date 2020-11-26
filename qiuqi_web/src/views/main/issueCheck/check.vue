@@ -419,7 +419,7 @@ export default {
     let queryParam = this.$route.query;
     if (Object.keys(queryParam).length == 0) {
       if (this.role == "普通员工") {
-        this.formLabelAlign2.modifier = this.userid;
+        this.formLabelAlign2.modifier = this.username;
       }
     } else {
       this.formLabelAlign2.modifier = queryParam.id;
@@ -478,7 +478,7 @@ export default {
             createtime1: this.formLabelAlign4.createtimeto,
             plantime: this.formLabelAlign3.changetime,
             plantime1: this.formLabelAlign4.changetimeto,
-            userID: this.formLabelAlign2.modifier,
+            username: this.formLabelAlign2.modifier,
             pageNum: this.currentPage,
             pageSize: this.pageSize,
           },

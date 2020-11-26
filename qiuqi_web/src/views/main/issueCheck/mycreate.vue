@@ -454,7 +454,7 @@ export default {
             issueID: this.formLabelAlign1.issueno,
             creater: this.formLabelAlign1.createtor,
             issuestate: this.formLabelAlign2.issuserank,
-            userID: this.formLabelAlign2.modifier,
+            name: this.formLabelAlign2.modifier,//userid
             plantime: this.formLabelAlign3.changetime,
             createtime: this.formLabelAlign3.createtime,
             createtime1: this.formLabelAlign4.createtimeto,
