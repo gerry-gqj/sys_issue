@@ -9,19 +9,16 @@
         <!-- 登录模块 -->
         <el-card class="box-card">
           <h2 class="title">登录</h2>
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="100px"
-            class="demo-ruleForm"
-          >
-            <el-form-item label="用户名" prop="id">
-              <el-input
-                v-model="ruleForm.id"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+          <el-form :model="ruleForm"
+                   :rules="rules"
+                   ref="ruleForm"
+                   label-width="100px"
+                   class="demo-ruleForm">
+            <el-form-item label="姓名："
+                          prop="id">
+              <el-input v-model="ruleForm.id"
+                        maxlength="30"
+                        show-word-limit></el-input>
             </el-form-item>
             <el-form-item label="密码：" prop="pass1">
               <el-input
