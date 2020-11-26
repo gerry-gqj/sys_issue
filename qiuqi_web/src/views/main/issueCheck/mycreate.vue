@@ -427,7 +427,7 @@ export default {
             issueID: this.formLabelAlign1.issueno,
             creater: this.formLabelAlign1.createtor,
             issuestate: this.formLabelAlign2.issuserank,
-            name: this.formLabelAlign2.modifier,//userid
+            name: this.formLabelAlign2.modifier, //userid
             plantime: this.formLabelAlign3.changetime,
             createtime: this.formLabelAlign3.createtime,
             createtime1: this.formLabelAlign4.createtimeto,
@@ -464,7 +464,6 @@ export default {
         return "";
       }
     },
-    golist() {},
     clearvalues() {
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
@@ -517,11 +516,11 @@ export default {
     //详情点击
     detailClick(title, inx) {
       let index = this.pageSize * (this.currentPage - 1) + inx;
-      let sl=this.tableData[index].solution
-      if(sl==''|sl==null){
-        this.solutionPlan = '(暂无)'
-      }else{
-        this.solutionPlan = sl
+      let sl = this.tableData[index].solution;
+      if ((sl == "") | (sl == null)) {
+        this.solutionPlan = "(暂无)";
+      } else {
+        this.solutionPlan = sl;
       }
       this.issueName = title;
       this.dialogVisible = true;
