@@ -484,12 +484,19 @@ export default {
     //详情点击
     detailClick(title, inx) {
       let index = this.pageSize * (this.currentPage - 1) + inx;
-      this.solutionPlan = this.tableData[index].solution;
+      let sl = this.tableData[index].solution;
+      if ((sl == "") | (sl == null)) {
+        this.solutionPlan = "(暂无)";
+      } else {
+        this.solutionPlan = sl;
+      }
+
       this.issueName = title;
       this.dialogVisible = true;
     },
     //点击修改
     changeClick(id) {
+      this.solute = "";
       this.change = true;
       this.currentIssueId = id;
     },

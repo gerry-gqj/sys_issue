@@ -416,33 +416,6 @@ export default {
     this.searchIssueByLike();
   },
   methods: {
-    // getIssues() {
-    //   this.$axios
-    //     .get("http://120.78.176.2:8080/issue/findCreateIssue", {
-    //       params: {
-    //         creater: this.formLabelAlign1.createtor,
-    //         pageNum: this.currentPage,
-    //         pageSize: this.pageSize,
-    //       },
-    //     })
-    //     .then((res) => {
-    //       this.total = res.data.total;
-    //       console.log("res.data");
-    //       console.log(res.data);
-    //       this.tableData = res.data.list;
-    //
-    //       let arr = [];
-    //       for (let i in res.data.list) {
-    //         arr.push(res.data.list[i].name);
-    //       }
-    //       console.log(new Set(arr));
-    //       this.modifierOptions = new Set(arr);
-    //       console.log(this.tableData);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
     searchClick() {
       this.currentPage = 1;
       this.searchIssueByLike();
@@ -544,7 +517,12 @@ export default {
     //详情点击
     detailClick(title, inx) {
       let index = this.pageSize * (this.currentPage - 1) + inx;
-      this.solutionPlan = this.tableData[index].solution;
+      let sl=this.tableData[index].solution
+      if(sl==''|sl==null){
+        this.solutionPlan = '(暂无)'
+      }else{
+        this.solutionPlan = sl
+      }
       this.issueName = title;
       this.dialogVisible = true;
     },
