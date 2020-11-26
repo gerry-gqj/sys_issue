@@ -243,7 +243,7 @@ export default {
         .then((res) => {
           let op=[]
           for (let i in res.data.list) {
-            if(res.data.list[i].userstate=='激活'){
+            if(res.data.list[i].userstate=='激活' && res.data.list[i].name!=this.username){
               op.push(res.data.list[i])
             }
             console.log(op)

@@ -207,7 +207,7 @@
                 fixed="right"
                 label="操作"
                 width="150"
-                v-if="this.role == '普通员工'"
+
               >
                 <template scope="scope">
                   <el-button @click="detailClick(scope.row.title,scope.$index)"
@@ -487,7 +487,13 @@ export default {
     //详情点击
     detailClick (title, inx) {
       let index = this.pageSize * (this.currentPage - 1) + inx
-      this.solutionPlan = this.tableData[index].solution
+      let sl=this.tableData[index].solution
+      if(sl==''|sl==null){
+        this.solutionPlan = '(暂无)'
+      }else{
+        this.solutionPlan = sl
+      }
+
       this.issueName = title
       this.dialogVisible = true
     },
