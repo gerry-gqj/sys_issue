@@ -81,6 +81,12 @@ const routes: Array<RouteConfig> = [
         component: () =>
           import("../views/main/issueReport/reportCheck.vue"),
       },
+      {
+        path: '/main/graph',
+        name: '图表',
+        component: () =>
+          import("../views/main/graph/graph.vue"),
+      },
     ]
   },
   {

@@ -27,16 +27,17 @@
             <i class="el-icon-user"></i>
             <span slot="title">账户管理</span>
           </el-menu-item>
-          <!-- Admin和经理登录后显示的导航栏选项 -->
-          <!-- <el-menu-item index="/main/supercheck"
-                      v-if="this.role != '普通员工'">
-          <i class="el-icon-search"></i>
-          <span slot="title">Issue 查询</span>
-        </el-menu-item> -->
           <el-menu-item index="/main/check"
                         v-if="this.role != '普通员工'">
             <i class="el-icon-search"></i>
             <span slot="title">Issue 查询</span>
+          </el-menu-item>
+
+          <!-- Admin和经理登录后显示的导航栏选项 -->
+          <el-menu-item index="/main/graph"
+                        v-if="this.role != '普通员工'">
+            <i class="el-icon-pie-chart"></i>
+            <span slot="title">Issue 统计</span>
           </el-menu-item>
           <!-- 普通员工登录显示出的导航栏选项 -->
           <el-submenu index="1"
