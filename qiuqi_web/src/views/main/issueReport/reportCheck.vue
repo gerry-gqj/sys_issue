@@ -104,20 +104,12 @@ export default {
       },
       tableData: [
         {
-          id: "20201117",
-          name: "xxxxxx",
-          createIs: "11",
-          receiveIs: "2",
-          changeIs: "3",
-          complete: "xx",
-        },
-        {
-          id: "20201117",
-          name: "xxxxxx",
-          createIs: "11",
-          receiveIs: "2",
-          changeIs: "3",
-          complete: "xx",
+          id: "",
+          name: "",
+          createIs: "",
+          receiveIs: "",
+          changeIs: "",
+          complete: "",
         },
       ],
       currentPage: 1, // 当前页码
@@ -129,10 +121,6 @@ export default {
     this.getIssues();
   },
   methods: {
-    goreport () {
-      // this.$router.push("/main/reportcheck/report");
-      // window.location.href = "/main/reportcheck/report";
-    },
     clearvalues () {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
