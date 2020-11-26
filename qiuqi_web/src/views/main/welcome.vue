@@ -5,7 +5,7 @@
       <p>{{ currentTime }}</p>
     </div> -->
     <el-row :gutter="0" v-if="this.role == '普通员工'">
-      <el-col :span="8" :offset="2"
+      <el-col :span="18" :offset="2"
         ><div class="grid-content bg-purple-light">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -20,21 +20,18 @@
           </el-card>
         </div></el-col
       >
-      <el-col :span="8" :offset="2"
+      <!-- <el-col :span="8" :offset="2"
         ><div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>我收到的 Issue</span>
-              <!-- <el-button style="float: right; padding: 3px 0" type="text"
-                >操作按钮</el-button
-              > -->
             </div>
             <div v-for="o in 4" :key="o" class="text item">
               {{ "列表内容 " + o }}
             </div>
           </el-card>
         </div></el-col
-      >
+      > -->
     </el-row>
   </div>
 </template>

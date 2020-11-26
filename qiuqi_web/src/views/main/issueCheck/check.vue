@@ -119,7 +119,7 @@
             :model="formLabelAlign4"
             ref="formLabelAlignref4"
           >
-            <el-form-item label="至" prop="createtimeto">
+            <el-form-item label="" prop="createtimeto">
               <el-date-picker
                 v-model="formLabelAlign4.createtimeto"
                 type="date"
@@ -130,7 +130,7 @@
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
-            <el-form-item label="至" prop="changetimeto">
+            <el-form-item label="" prop="changetimeto">
               <el-date-picker
                 v-model="formLabelAlign4.changetimeto"
                 type="date"
