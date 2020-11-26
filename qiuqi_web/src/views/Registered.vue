@@ -198,7 +198,7 @@ export default {
               type: "success",
               message: "取消注册!",
             },
-            this.$router.go(-1)
+            this.$router.push("/")
           );
         })
         .catch(() => {

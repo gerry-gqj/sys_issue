@@ -203,16 +203,13 @@
               </el-table-column>
               <el-table-column prop="acttime" label="实际完成时间">
               </el-table-column>
-              <el-table-column
-                fixed="right"
-                label="操作"
-                width="150"
-                v-if="this.role == '普通员工'"
-              >
+              <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
-                  <el-button @click="detailClick(scope.row.title,scope.$index)"
-                             type="info"
-                             size="mini">详情
+                  <el-button
+                    @click="detailClick(scope.row.title, scope.$index)"
+                    type="info"
+                    size="mini"
+                    >详情
                   </el-button>
                   <el-button
                     type="warning"
@@ -429,34 +426,34 @@ export default {
     this.searchIssue();
   },
   methods: {
-    searchClick () {
+    searchClick() {
       this.currentPage = 1;
       this.searchIssue();
     },
-    searchIssue () {
+    searchIssue() {
       this.$axios
-          .get('http://120.78.176.2:8080/issue/selectLikeIssue', {
-            params: {
-              issueID: this.formLabelAlign1.issueno,
-              issuestate: this.formLabelAlign2.issuserank,
-              creater: this.formLabelAlign1.createtor,
-              createtime: this.formLabelAlign3.createtime,
-              createtime1: this.formLabelAlign4.createtimeto,
-              plantime: this.formLabelAlign3.changetime,
-              plantime1: this.formLabelAlign4.changetimeto,
-              name: this.formLabelAlign2.modifier,//userid
-              pageNum: this.currentPage,
-              pageSize: this.pageSize,
-            },
-          })
-          .then((res) => {
-            this.total=res.data.total
-            this.tableData = res.data.list;
-            console.log(this.tableData);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
+          params: {
+            issueID: this.formLabelAlign1.issueno,
+            issuestate: this.formLabelAlign2.issuserank,
+            creater: this.formLabelAlign1.createtor,
+            createtime: this.formLabelAlign3.createtime,
+            createtime1: this.formLabelAlign4.createtimeto,
+            plantime: this.formLabelAlign3.changetime,
+            plantime1: this.formLabelAlign4.changetimeto,
+            name: this.formLabelAlign2.modifier, //userid
+            pageNum: this.currentPage,
+            pageSize: this.pageSize,
+          },
+        })
+        .then((res) => {
+          this.total = res.data.total;
+          this.tableData = res.data.list;
+          console.log(this.tableData);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -485,11 +482,11 @@ export default {
       this.$refs.formLabelAlignref4.resetFields();
     },
     //详情点击
-    detailClick (title, inx) {
-      let index = this.pageSize * (this.currentPage - 1) + inx
-      this.solutionPlan = this.tableData[index].solution
-      this.issueName = title
-      this.dialogVisible = true
+    detailClick(title, inx) {
+      let index = this.pageSize * (this.currentPage - 1) + inx;
+      this.solutionPlan = this.tableData[index].solution;
+      this.issueName = title;
+      this.dialogVisible = true;
     },
     //点击修改
     changeClick(id) {
@@ -514,7 +511,7 @@ export default {
               type: "success",
               message: "修改成功",
             });
-            this.change = false
+            this.change = false;
             this.searchIssue();
           } else {
             this.$message({

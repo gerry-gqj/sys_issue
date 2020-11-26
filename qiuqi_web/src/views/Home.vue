@@ -9,16 +9,19 @@
         <!-- 登录模块 -->
         <el-card class="box-card">
           <h2 class="title">登录</h2>
-          <el-form :model="ruleForm"
-                   :rules="rules"
-                   ref="ruleForm"
-                   label-width="100px"
-                   class="demo-ruleForm">
-            <el-form-item label="姓名："
-                          prop="id">
-              <el-input v-model="ruleForm.id"
-                        maxlength="30"
-                        show-word-limit></el-input>
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="100px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="姓名：" prop="id">
+              <el-input
+                v-model="ruleForm.id"
+                maxlength="30"
+                show-word-limit
+              ></el-input>
             </el-form-item>
             <el-form-item label="密码：" prop="pass1">
               <el-input
@@ -84,6 +87,7 @@ export default {
   methods: {
     FormRegistered() {
       window.location.href = "/Registered";
+      // this.$router.push("/Registered");
     },
     //用户登录
     Login(formName) {
@@ -182,9 +186,10 @@ body > .el-container {
 }
 
 .box-card {
-  width: 420px;
+  width: 450px;
   height: 300px;
   margin: 100px;
+  line-height: 50px;
   align-self: center;
   position: absolute;
   left: 0;

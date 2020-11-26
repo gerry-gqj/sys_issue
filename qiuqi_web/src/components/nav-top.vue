@@ -7,7 +7,7 @@
         </a>
       </el-col>
       <el-col :span="10" :offset="5">
-        <h1 style="color: #00008b">GBA Issue管理系统</h1>
+        <h1>GBA Issue管理系统</h1>
       </el-col>
       <el-col :span="3" :offset="3">
         <el-dropdown
@@ -19,7 +19,7 @@
                   class="headerLogo"
                 ></el-avatar>
               </span>
-              <span class="username" style="color: #1e90ff; font-size: 20px">{{
+              <span class="username" style="color: #1e90ff; font-size: 15px">{{
                 user
               }}</span>
             </a></span
@@ -64,16 +64,8 @@ export default {
     ModifyUserInformation() {},
     userinfo() {
       window.location.href = "/userinfo";
-      // if (this.role == "超级Admin") {
-      //   alert("禁止修改管理员账号");
-      // } else {
-      //   window.location.href = "/userinfo";
-      // }
     },
     logout() {
-      // this.$router.push('/');
-      // 实现页面跳转和刷新页面
-
       this.$confirm("是否注销登录?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -139,5 +131,8 @@ section {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+h1 {
+  color: #01010e;
 }
 </style>

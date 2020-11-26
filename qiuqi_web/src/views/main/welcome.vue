@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1>欢迎回来，{{ user }}<br />您的身份是：{{ role }}</h1>
-    <p>{{ currentTime }}</p>
+    <div class="front">
+      <h1>欢迎回来，{{ user }}<br />您的身份是：{{ role }}</h1>
+      <p>{{ currentTime }}</p>
+    </div>
   </div>
 </template>
 

@@ -66,12 +66,6 @@ const routes: Array<RouteConfig> = [
         component: () =>
           import("../views/main/issueCheck/mycreate.vue"),
       },
-      {
-        path: '/main/supercheck',
-        name: 'issue查询',
-        component: () =>
-          import("../views/main/issueCheck/supercheck.vue"),
-      },
       // 账户管理
       {
         path: '/main/countcheck',
@@ -89,7 +83,10 @@ const routes: Array<RouteConfig> = [
       },
     ]
   },
-
+  {
+    path: '*', component: () =>
+      import("../views/404.vue"),
+  },
 ];
 
 const router = new VueRouter({
