@@ -12,7 +12,8 @@
     </div>
     <div class="front">
       <el-row>
-        <el-col :span="12" :offset="12">
+        <el-col :span="12"
+                :offset="12">
           <div class="grid-content"></div>
 
           <el-card class="box-card">
@@ -25,47 +26,57 @@
               <el-form-item label="登录ID："
                             prop="loginid">
                 <el-input v-model="ruleForm.loginid"
-                          disabled></el-input>
+                          disabled
+                          style="width:330px"></el-input>
               </el-form-item>
-              <el-form-item label="姓名：" prop="name">
-                <el-input
-                  v-model="ruleForm.name"
-                  maxlength="20"
-                  show-word-limit
-                ></el-input>
+              <el-form-item label="姓名："
+                            prop="name">
+                <el-input v-model="ruleForm.name"
+                          maxlength="20"
+                          show-word-limit
+                          style="width:330px"
+                          :clearable="true"></el-input>
               </el-form-item>
-              <el-form-item label="邮箱：" prop="mail">
-                <el-input
-                  v-model="ruleForm.mail"
-                  maxlength="30"
-                  show-word-limit
-                ></el-input>
+              <el-form-item label="邮箱："
+                            prop="mail">
+                <el-input v-model="ruleForm.mail"
+                          maxlength="30"
+                          show-word-limit
+                          style="width:330px"
+                          :clearable="true"></el-input>
               </el-form-item>
-              <el-form-item label="输入密码：" prop="pass">
-                <el-input
-                  type="password"
-                  v-model="ruleForm.pass"
-                  autocomplete="off"
-                  maxlength="30"
-                  show-password
-                ></el-input>
+              <el-form-item label="输入密码："
+                            prop="pass">
+                <el-input type="password"
+                          v-model="ruleForm.pass"
+                          autocomplete="off"
+                          maxlength="30"
+                          show-password
+                          style="width:330px"
+                          :clearable="true"></el-input>
               </el-form-item>
-              <el-form-item label="确认密码" prop="checkPass">
-                <el-input
-                  type="password"
-                  v-model="ruleForm.checkPass"
-                  autocomplete="off"
-                  maxlength="30"
-                  show-password
-                ></el-input>
+              <el-form-item label="确认密码"
+                            prop="checkPass">
+                <el-input type="password"
+                          v-model="ruleForm.checkPass"
+                          autocomplete="off"
+                          maxlength="30"
+                          show-password
+                          style="width:330px"
+                          :clearable="true"></el-input>
               </el-form-item>
-              <el-form-item>
+              <!-- <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')"
                   >提交</el-button
                 >
                 <el-button @click="goback">取消</el-button>
-              </el-form-item>
+              </el-form-item> -->
             </el-form>
+            <div style="text-align:center">
+              <el-button type="primary"
+                         @click="submitForm('ruleForm')">提交</el-button>
+              <el-button @click="goback">取消</el-button>
+            </div>
           </el-card>
           <!-- </el-dialog> -->
         </el-col>
@@ -76,7 +87,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -269,9 +280,12 @@ body > .el-container {
 
 .box-card {
   width: 480px;
-  height: 100%;
-  margin: 100px;
+  height: 550px;
+  margin: 50px;
   align-self: center;
+  line-height: 80px;
+  border-radius: 30px 30px 30px 30px;
+  position: absolute;
   /* position: absolute;
     left: 0;
     right: 0;
@@ -289,7 +303,7 @@ body > .el-container {
   width: 100%;
   height: 100%; /**宽高100%是为了图片铺满屏幕 */
   z-index: -1;
-  position: absolute;
+  position: fixed;
   /* filter: alpha(Opacity=85);
   -moz-opacity: 0.85;
   opacity: 0.85; */

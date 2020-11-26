@@ -5,144 +5,131 @@
 <template>
   <div>
     <el-row :gutter="0">
-      <el-col :span="6" :offset="1">
+      <el-col :span="6"
+              :offset="1">
         <div class="grid-content bg-purple">
-          <el-form
-            :label-position="labelPosition"
-            label-width="80px"
-            :model="formLabelAlign1"
-            ref="formLabelAlignref1"
-          >
-            <el-form-item label="Issue No" prop="issueno">
-              <el-input
-                v-model="formLabelAlign1.issueno"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign1"
+                   ref="formLabelAlignref1">
+            <el-form-item label="Issue No"
+                          prop="issueno">
+              <el-input v-model="formLabelAlign1.issueno"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        :clearable="true"></el-input>
             </el-form-item>
-            <el-form-item label="创建人" v-if="this.role == '普通员工'" prop>
-              <el-input
-                v-model="formLabelAlign1.createtor"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-                disabled
-              ></el-input>
+            <el-form-item label="创建人"
+                          v-if="this.role == '普通员工'"
+                          prop>
+              <el-input v-model="formLabelAlign1.createtor"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        disabled></el-input>
             </el-form-item>
-            <el-form-item label="创建人" v-else prop="createtor">
-              <el-input
-                v-model="formLabelAlign1.createtor"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+            <el-form-item label="创建人"
+                          v-else
+                          prop="createtor">
+              <el-input v-model="formLabelAlign1.createtor"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        :clearable="true"></el-input>
             </el-form-item>
           </el-form>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple">
-          <el-form
-            :label-position="labelPosition"
-            label-width="80px"
-            :model="formLabelAlign2"
-            ref="formLabelAlignref2"
-          >
-            <el-form-item label="Issue状态" prop="issuserank">
-              <el-select
-                v-model="formLabelAlign2.issuserank"
-                placeholder="请选择"
-                style="text-align: center; width: 200px"
-                clearable
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.label"
-                  :label="item.label"
-                  :value="item.label"
-                >
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign2"
+                   ref="formLabelAlignref2">
+            <el-form-item label="Issue状态"
+                          prop="issuserank">
+              <el-select v-model="formLabelAlign2.issuserank"
+                         placeholder="请选择"
+                         style="text-align: center; width: 200px"
+                         :clearable="true">
+                <el-option v-for="item in options"
+                           :key="item.label"
+                           :label="item.label"
+                           :value="item.label">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="修改人" prop="modifier">
-              <el-input
-                v-model="formLabelAlign2.modifier"
-                placeholder="请输入"
-                style="text-align: center; width: 200px"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+            <el-form-item label="修改人"
+                          prop="modifier">
+              <el-input v-model="formLabelAlign2.modifier"
+                        placeholder="请输入"
+                        style="text-align: center; width: 200px"
+                        maxlength="30"
+                        show-word-limit
+                        :clearable="true"></el-input>
             </el-form-item>
           </el-form>
         </div>
       </el-col>
       <el-col :span="3">
         <div class="grid-content bg-purple">
-          <el-form
-            :label-position="labelPosition"
-            label-width="80px"
-            :model="formLabelAlign3"
-            ref="formLabelAlignref3"
-          >
-            <el-form-item label="创建时间" prop="createtime">
-              <el-date-picker
-                v-model="formLabelAlign3.createtime"
-                type="date"
-                placeholder="选择日期"
-                :picker-options="pickerOptions0(formLabelAlign4.createtimeto)"
-                style="text-align: center; width: 150px"
-                clearable
-                value-format="yyyy-MM-dd"
-              ></el-date-picker>
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign3"
+                   ref="formLabelAlignref3">
+            <el-form-item label="创建时间"
+                          prop="createtime">
+              <el-date-picker v-model="formLabelAlign3.createtime"
+                              type="date"
+                              placeholder="选择日期"
+                              :picker-options="pickerOptions0(formLabelAlign4.createtimeto)"
+                              style="text-align: center; width: 150px"
+                              :clearable="true"
+                              value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
-            <el-form-item label="修改时间" prop="changetime">
-              <el-date-picker
-                v-model="formLabelAlign3.changetime"
-                type="date"
-                placeholder="选择日期"
-                :picker-options="pickerOptions0(formLabelAlign4.changetimeto)"
-                style="text-align: center; width: 150px"
-                clearable
-                value-format="yyyy-MM-dd"
-              ></el-date-picker>
+            <el-form-item label="修改时间"
+                          prop="changetime">
+              <el-date-picker v-model="formLabelAlign3.changetime"
+                              type="date"
+                              placeholder="选择日期"
+                              :picker-options="pickerOptions0(formLabelAlign4.changetimeto)"
+                              style="text-align: center; width: 150px"
+                              :clearable="true"
+                              value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
           </el-form>
         </div>
       </el-col>
       <el-col :span="3">
         <div class="grid-content bg-purple">
-          <el-form
-            :label-position="labelPosition"
-            label-width="80px"
-            :model="formLabelAlign4"
-            ref="formLabelAlignref4"
-          >
-            <el-form-item label="" prop="createtimeto">
-              <el-date-picker
-                v-model="formLabelAlign4.createtimeto"
-                type="date"
-                placeholder="至"
-                :picker-options="pickerOptione0(formLabelAlign3.createtime)"
-                style="text-align: center; width: 150px"
-                clearable
-                value-format="yyyy-MM-dd"
-              ></el-date-picker>
+          <el-form :label-position="labelPosition"
+                   label-width="80px"
+                   :model="formLabelAlign4"
+                   ref="formLabelAlignref4">
+            <el-form-item label=""
+                          prop="createtimeto">
+              <el-date-picker v-model="formLabelAlign4.createtimeto"
+                              type="date"
+                              placeholder="至"
+                              :picker-options="pickerOptione0(formLabelAlign3.createtime)"
+                              style="text-align: center; width: 150px"
+                              :clearable="true"
+                              value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
-            <el-form-item label="" prop="changetimeto">
-              <el-date-picker
-                v-model="formLabelAlign4.changetimeto"
-                type="date"
-                placeholder="至"
-                :picker-options="pickerOptione0(formLabelAlign3.changetime)"
-                style="text-align: center; width: 150px"
-                clearable
-                maxlength="30"
-                value-format="yyyy-MM-dd"
-              ></el-date-picker>
+            <el-form-item label=""
+                          prop="changetimeto">
+              <el-date-picker v-model="formLabelAlign4.changetimeto"
+                              type="date"
+                              placeholder="至"
+                              :picker-options="pickerOptione0(formLabelAlign3.changetime)"
+                              style="text-align: center; width: 150px"
+                              :clearable="true"
+                              maxlength="30"
+                              value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
           </el-form>
         </div>
@@ -150,16 +137,15 @@
     </el-row>
     <div>
       <el-row>
-        <el-col
-          :xs="22"
-          :sm="22"
-          :md="22"
-          :lg="22"
-          :xl="22"
-          style="text-align: center"
-        >
+        <el-col :xs="22"
+                :sm="22"
+                :md="22"
+                :lg="22"
+                :xl="22"
+                style="text-align: center">
           <div class="button">
-            <el-button type="primary" @click="searchClick">查询</el-button>
+            <el-button type="primary"
+                       @click="searchClick">查询</el-button>
             <el-button @click="clearvalues">清空</el-button>
           </div>
         </el-col>
@@ -167,74 +153,76 @@
     </div>
     <div>
       <el-row>
-        <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="3">
+        <el-col :xs="3"
+                :sm="3"
+                :md="3"
+                :lg="3"
+                :xl="3">
           <h1>Issue 列表</h1>
         </el-col>
       </el-row>
     </div>
     <div>
       <div>
-        <el-col
-          :xs="24"
-          :sm="24"
-          :md="24"
-          :lg="24"
-          :xl="24"
-          style="text-align: center"
-        >
+        <el-col :xs="24"
+                :sm="24"
+                :md="24"
+                :lg="24"
+                :xl="24"
+                style="text-align: center">
           <el-container>
-            <el-table
-              border
-              :data="tableData"
-              style="width: 100%"
-              :header-cell-style="getRowClass"
-            >
+            <el-table border
+                      :data="tableData"
+                      style="width: 100%"
+                      :header-cell-style="getRowClass">
               <el-table-column type="selection"></el-table-column>
-              <el-table-column type="index" label="序号"></el-table-column>
-              <el-table-column prop="issueID" label="Issue ID">
+              <el-table-column type="index"
+                               label="序号"></el-table-column>
+              <el-table-column prop="issueID"
+                               label="Issue ID">
               </el-table-column>
-              <el-table-column prop="title" label="Issue 标题">
+              <el-table-column prop="title"
+                               label="Issue 标题">
               </el-table-column>
-              <el-table-column prop="creater" label="创建人"> </el-table-column>
-              <el-table-column prop="createtime" label="创建时间">
+              <el-table-column prop="creater"
+                               label="创建人"> </el-table-column>
+              <el-table-column prop="createtime"
+                               label="创建时间">
               </el-table-column>
-              <el-table-column
-                prop="name"
-                v-if="this.role == '普通员工'"
-                label="修改人"
-              >
+              <el-table-column prop="name"
+                               v-if="this.role == '普通员工'"
+                               label="修改人">
               </el-table-column>
-              <el-table-column prop="name" v-else label="修改人">
+              <el-table-column prop="name"
+                               v-else
+                               label="修改人">
               </el-table-column>
-              <el-table-column prop="issuestate" label="Issue 状态">
+              <el-table-column prop="issuestate"
+                               label="Issue 状态">
               </el-table-column>
-              <el-table-column prop="plantime" label="计划完成时间">
+              <el-table-column prop="plantime"
+                               label="计划完成时间">
               </el-table-column>
-              <el-table-column prop="acttime" label="实际完成时间">
+              <el-table-column prop="acttime"
+                               label="实际完成时间">
               </el-table-column>
               <!--              <el-table-column prop="solution" label="解决方案" >-->
               <!--              </el-table-column>-->
-              <el-table-column fixed="right" label="操作" width="150">
+              <el-table-column fixed="right"
+                               label="操作"
+                               width="150">
                 <template scope="scope">
-                  <el-button
-                    @click="detailClick(scope.row.title, scope.$index)"
-                    type="info"
-                    size="mini"
-                    >详情</el-button
-                  >
-                  <el-button
-                    type="primary"
-                    size="mini"
-                    @click="checkClick(scope.row.issueID)"
-                    v-if="scope.row.issuestate == '待验证'"
-                    >验证</el-button
-                  >
-                  <el-dialog
-                    title="Issue详情"
-                    :visible.sync="dialogVisible"
-                    width="50%"
-                    :append-to-body="true"
-                  >
+                  <el-button @click="detailClick(scope.row.title, scope.$index)"
+                             type="info"
+                             size="mini">详情</el-button>
+                  <el-button type="primary"
+                             size="mini"
+                             @click="checkClick(scope.row.issueID)"
+                             v-if="scope.row.issuestate == '待验证'">验证</el-button>
+                  <el-dialog title="Issue详情"
+                             :visible.sync="dialogVisible"
+                             width="50%"
+                             :append-to-body="true">
                     <div>
                       <p>Issue名称：{{ issueName }}</p>
                       <p>解决方案：{{ solutionPlan }}</p>
@@ -249,38 +237,30 @@
                       </el-timeline-item>
                     </el-timeline> -->
 
-                    <span slot="footer" class="dialog-footer">
-                      <el-button type="primary" @click="dialogVisible = false"
-                        >关 闭</el-button
-                      >
+                    <span slot="footer"
+                          class="dialog-footer">
+                      <el-button type="primary"
+                                 @click="dialogVisible = false">关 闭</el-button>
                     </span>
                   </el-dialog>
 
-                  <el-dialog
-                    title="操作"
-                    :visible.sync="operate"
-                    width="20%"
-                    :append-to-body="true"
-                  >
+                  <el-dialog title="操作"
+                             :visible.sync="operate"
+                             width="20%"
+                             :append-to-body="true">
                     <div style="text-align: center">
-                      <el-button
-                        type="primary"
-                        round
-                        @click="changeIssueState(1)"
-                        >退回修改</el-button
-                      >
-                      <el-button
-                        type="primary"
-                        round
-                        @click="changeIssueState(0)"
-                        >关闭issue</el-button
-                      >
+                      <el-button type="primary"
+                                 round
+                                 @click="changeIssueState(1)">退回修改</el-button>
+                      <el-button type="primary"
+                                 round
+                                 @click="changeIssueState(0)">关闭issue</el-button>
                     </div>
 
-                    <span slot="footer" class="dialog-footer">
-                      <el-button type="primary" @click="operate = false"
-                        >关 闭</el-button
-                      >
+                    <span slot="footer"
+                          class="dialog-footer">
+                      <el-button type="primary"
+                                 @click="operate = false">关 闭</el-button>
                     </span>
                   </el-dialog>
                 </template>
@@ -289,24 +269,20 @@
           </el-container>
         </el-col>
         <div class="paginationClass">
-          <el-col
-            :xs="24"
-            :sm="24"
-            :md="24"
-            :lg="24"
-            :xl="24"
-            style="text-align: center"
-          >
-            <el-pagination
-              align="center"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[1, 5, 10, 20]"
-              :page-size="pageSize"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-            >
+          <el-col :xs="24"
+                  :sm="24"
+                  :md="24"
+                  :lg="24"
+                  :xl="24"
+                  style="text-align: center">
+            <el-pagination align="center"
+                           @size-change="handleSizeChange"
+                           @current-change="handleCurrentChange"
+                           :current-page="currentPage"
+                           :page-sizes="[1, 5, 10, 20]"
+                           :page-size="pageSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="total">
             </el-pagination>
           </el-col>
         </div>
@@ -319,7 +295,7 @@
 import { Dialog } from "element-ui";
 export default {
   name: "list",
-  data() {
+  data () {
     return {
       options: [
         {
@@ -391,23 +367,23 @@ export default {
       currentPage: 1, // 当前页码
       total: 0, // 总条数
       pageSize: 20, // 每页的数据条数
-      pickerOptions0(val) {
+      pickerOptions0 (val) {
         return {
-          disabledDate(time) {
+          disabledDate (time) {
             return time.getTime() > new Date(val).getTime();
           },
         };
       },
-      pickerOptione0(val) {
+      pickerOptione0 (val) {
         return {
-          disabledDate(time) {
+          disabledDate (time) {
             return time.getTime() < new Date(val).getTime();
           },
         };
       },
     };
   },
-  mounted() {
+  mounted () {
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
@@ -416,11 +392,11 @@ export default {
     this.searchIssueByLike();
   },
   methods: {
-    searchClick() {
+    searchClick () {
       this.currentPage = 1;
       this.searchIssueByLike();
     },
-    searchIssueByLike() {
+    searchIssueByLike () {
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
           params: {
@@ -445,38 +421,38 @@ export default {
           console.log(error);
         });
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
       this.searchIssueByLike();
     },
     //当前页改变时触发 跳转其他页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.searchIssueByLike();
     },
-    getRowClass({ rowIndex }) {
+    getRowClass ({ rowIndex }) {
       if (rowIndex == 0) {
         return "background:#81BEF7";
       } else {
         return "";
       }
     },
-    clearvalues() {
+    clearvalues () {
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
       this.$refs.formLabelAlignref3.resetFields();
       this.$refs.formLabelAlignref4.resetFields();
     },
     //点击验证
-    checkClick(issueID) {
+    checkClick (issueID) {
       this.operate = true;
       this.currentIssueId = issueID;
     },
     //更改issue状态 0：关闭 1：退回修改
-    changeIssueState(option) {
+    changeIssueState (option) {
       let state = "";
       console.log("id:" + this.currentIssueId);
       console.log("op:" + option);
@@ -514,7 +490,7 @@ export default {
         });
     },
     //详情点击
-    detailClick(title, inx) {
+    detailClick (title, inx) {
       let index = this.pageSize * (this.currentPage - 1) + inx;
       let sl = this.tableData[index].solution;
       if ((sl == "") | (sl == null)) {

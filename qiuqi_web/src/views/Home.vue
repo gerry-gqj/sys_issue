@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="background">
-      <img :src="imgSrc" width="100%" height="100%" alt="" />
+      <img :src="imgSrc"
+           width="100%"
+           height="100%"
+           alt="" />
     </div>
     <div class="front">
       <el-container>
@@ -9,38 +12,42 @@
         <!-- 登录模块 -->
         <el-card class="box-card">
           <h2 class="title">登录</h2>
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="100px"
-            class="demo-ruleForm"
-          >
-            <el-form-item label="姓名：" prop="id">
-              <el-input
-                v-model="ruleForm.id"
-                maxlength="30"
-                show-word-limit
-              ></el-input>
+          <el-form :model="ruleForm"
+                   :rules="rules"
+                   ref="ruleForm"
+                   label-width="100px"
+                   class="demo-ruleForm">
+            <el-form-item label="姓名："
+                          prop="id">
+              <el-input v-model="ruleForm.id"
+                        maxlength="30"
+                        show-word-limit
+                        style="width:290px"><i slot="prefix"
+                   class="el-input__icon el-icon-user-solid"></i></el-input>
             </el-form-item>
-            <el-form-item label="密码：" prop="pass1">
-              <el-input
-                type="password"
-                v-model="ruleForm.pass1"
-                autocomplete="off"
-                maxlength="30"
-                show-password
-              ></el-input>
+            <el-form-item label="密码："
+                          prop="pass1">
+              <el-input type="password"
+                        v-model="ruleForm.pass1"
+                        autocomplete="off"
+                        maxlength="30"
+                        show-password
+                        style="width:290px"> <i slot="prefix"
+                   class="el-input__icon el-icon-lock"></i></el-input>
             </el-form-item>
-            <el-form-item>
-              <!-- 按钮组 -->
-              <!-- 按钮组 -->
+            <!-- <el-form-item>
               <el-button type="primary" @click="Login('ruleForm')"
                 >登录
               </el-button>
               <el-button @click="FormRegistered()">注册</el-button>
-            </el-form-item>
+            </el-form-item> -->
           </el-form>
+          <div style="text-align:center">
+            <el-button type="primary"
+                       @click="Login('ruleForm')">登录
+            </el-button>
+            <el-button @click="FormRegistered()">注册</el-button>
+          </div>
         </el-card>
       </el-container>
     </div>
@@ -49,7 +56,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -85,12 +92,12 @@ export default {
     };
   },
   methods: {
-    FormRegistered() {
+    FormRegistered () {
       window.location.href = "/Registered";
       // this.$router.push("/Registered");
     },
     //用户登录
-    Login(formName) {
+    Login (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
@@ -150,7 +157,7 @@ export default {
 
 <style>
 .el-header {
-  color: gold;
+  color: rgb(218, 241, 9);
   text-align: center;
   line-height: 150px;
   font-style: inherit;
@@ -186,10 +193,11 @@ body > .el-container {
 }
 
 .box-card {
-  width: 450px;
-  height: 300px;
-  margin: 100px;
-  line-height: 50px;
+  width: 480px;
+  height: 380px;
+  /* margin: 10px;
+  padding: 30px; */
+  line-height: 80px;
   align-self: center;
   position: absolute;
   left: 0;
@@ -197,16 +205,19 @@ body > .el-container {
   bottom: 0;
   top: 0;
   margin: auto;
+  border-radius: 30px 30px 30px 30px;
 }
 .title {
   text-align: center;
+  /* font-size: 20px; */
+  font-weight: bold;
 }
 /* 图片背景样式 */
 .background {
   width: 100%;
   height: 100%; /**宽高100%是为了图片铺满屏幕 */
   z-index: -1;
-  position: absolute;
+  position: fixed;
   /* filter: alpha(Opacity=85);
   -moz-opacity: 0.85;
   opacity: 0.85; */
@@ -219,6 +230,6 @@ body > .el-container {
   /* 设置透明度 */
   filter: alpha(Opacity=85); /*兼容ie*/
   -moz-opacity: 0.85;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 </style>

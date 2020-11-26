@@ -20,6 +20,7 @@
                 style="text-align: center; width: 200px"
                 maxlength="30"
                 show-word-limit
+                :clearable="true"
               ></el-input>
             </el-form-item>
             <el-form-item label="创建人" prop="createtor">
@@ -29,6 +30,7 @@
                 style="text-align: center; width: 200px"
                 maxlength="30"
                 show-word-limit
+                :clearable="true"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -47,7 +49,7 @@
                 v-model="formLabelAlign2.issuserank"
                 placeholder="请选择"
                 style="text-align: center; width: 200px"
-                clearable
+                :clearable="true"
               >
                 <el-option
                   v-for="item in options"
@@ -73,6 +75,7 @@
                 placeholder="请输入"
                 style="text-align: center; width: 200px"
                 maxlength="30"
+                :clearable="true"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -93,7 +96,7 @@
                 placeholder="选择日期"
                 :picker-options="pickerOptions0(formLabelAlign4.createtimeto)"
                 style="text-align: center; width: 150px"
-                clearable
+                :clearable="true"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -104,7 +107,7 @@
                 placeholder="选择日期"
                 :picker-options="pickerOptions0(formLabelAlign4.changetimeto)"
                 style="text-align: center; width: 150px"
-                clearable
+                :clearable="true"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -126,7 +129,7 @@
                 placeholder="至"
                 :picker-options="pickerOptione0(formLabelAlign3.createtime)"
                 style="text-align: center; width: 150px"
-                clearable
+                :clearable="true"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>
             </el-form-item>
@@ -137,7 +140,7 @@
                 placeholder="至"
                 :picker-options="pickerOptione0(formLabelAlign3.changetime)"
                 style="text-align: center; width: 150px"
-                clearable
+                :clearable="true"
                 maxlength="30"
                 value-format="yyyy-MM-dd"
               ></el-date-picker>

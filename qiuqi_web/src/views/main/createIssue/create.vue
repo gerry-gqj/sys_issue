@@ -6,11 +6,13 @@
                 placeholder="内容"
                 v-model="title"
                 maxlength="80"
-                show-word-limit></el-input>
+                show-word-limit
+                :clearable="true"></el-input>
     </div>
     <!-- 基本信息栏 -->
     <h3>基本信息</h3>
-    <hr style="border: 1px dashed #000; height: 1px" />
+    <hr />
+    <!-- <hr style="border: 1px dashed #000; height: 1px" /> -->
 
     <el-row :gutter="50">
       <el-col :xs="12"
@@ -22,7 +24,7 @@
           <p>Issue No.</p>
           <p>
             <el-input v-model="issueid"
-                      placeholder="系统自动生成"
+                      placeholder=""
                       :disabled="true"></el-input>
           </p>
         </div>
@@ -36,7 +38,7 @@
           <p>创建时间</p>
           <p>
             <el-input v-model="createtime"
-                      placeholder="系统自动生成"
+                      placeholder=""
                       :disabled="true"></el-input>
           </p>
         </div>
@@ -52,7 +54,8 @@
             <el-input v-model="issusetype"
                       placeholder="内容"
                       maxlength="30"
-                      show-word-limit></el-input>
+                      show-word-limit
+                      :clearable="true"></el-input>
           </p>
         </div>
       </el-col>
@@ -66,7 +69,8 @@
           <p>
             <el-select v-model="issuserank"
                        filterable
-                       placeholder="请选择">
+                       placeholder="请选择"
+                       :clearable="true">
               <el-option v-for="item in options"
                          :key="item.value"
                          :label="item.label"
@@ -88,7 +92,8 @@
           <p>
             <el-input v-model="version"
                       maxlength="30"
-                      show-word-limit></el-input>
+                      show-word-limit
+                      :clearable="true"></el-input>
           </p>
         </div>
       </el-col>
@@ -105,7 +110,8 @@
                             placeholder="选择日期"
                             :picker-options="pickerOptions0"
                             format="yyyy 年 MM 月 dd 日"
-                            value-format="yyyy-MM-dd">
+                            value-format="yyyy-MM-dd"
+                            :clearable="true">
             </el-date-picker>
           </p>
         </div>
@@ -125,7 +131,8 @@
                     rows="5"
                     v-model="step"
                     maxlength="2000"
-                    show-word-limit></el-input>
+                    show-word-limit
+                    :clearable="true"></el-input>
         </div>
       </el-col>
     </div>
@@ -141,7 +148,8 @@
           <el-select v-model="modifier"
                      style="text-align:center"
                      filterable
-                     placeholder="请选择">
+                     placeholder="请选择"
+                     :clearable="true">
             <el-option v-for="item in modifierOptions"
                        :label="item.name"
                        :value="item.userID">
@@ -238,9 +246,9 @@ export default {
       this.$axios
         .get("http://120.78.176.2:8080/user/selectuserID")
         .then((res) => {
-          let op=[]
+          let op = []
           for (let i in res.data.list) {
-            if(res.data.list[i].userstate=='激活' && res.data.list[i].name!=this.username){
+            if (res.data.list[i].userstate == '激活' && res.data.list[i].name != this.username) {
               op.push(res.data.list[i])
             }
             // console.log(op)
@@ -254,55 +262,55 @@ export default {
     //新增Issue接口--post
     createIssue () {
       //验证是否为空
-      let msg=' ';
-      if(this.username==''){
-        msg='账号过期，请重新登录'
+      let msg = ' ';
+      if (this.username == '') {
+        msg = '账号过期，请重新登录'
         this.$message(
-            {
-              type: 'error',
-              message: msg
-            },
+          {
+            type: 'error',
+            message: msg
+          },
         );
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.href = "/"
-        },1000)
-      } else if(this.issuserank == '' || this.planTime == '' || this.step == '' || this.title == '' || this.modifier == ''||this.version==''){
-        msg='请填写完整信息'
+        }, 1000)
+      } else if (this.issuserank == '' || this.planTime == '' || this.step == '' || this.title == '' || this.modifier == '' || this.version == '') {
+        msg = '请填写完整信息'
         this.$message(
-            {
-              type: 'error',
-              message: msg
-            }
+          {
+            type: 'error',
+            message: msg
+          }
         );
         return
       }
       this.$axios.post('http://120.78.176.2:8080/issue/createIssue',
-          this.$qs.stringify({
-            creater: this.username,
-            level: this.issuserank,
-            plantime:this.planTime,
-            step:this.step,
-            title:this.title,
-            type:this.issuserank,
-            userID:this.modifier,
-            version:this.version
-          }))
-          .then((res) => {
-            console.log(res.data)
-            if (res.data.status === "创建成功") {
-              this.$message({
-                type: 'success',
-                message: '创建成功'
-              });
-            }else {
-              this.$message({
-                type: 'error',
-                message: '创建失败'
-              });
-            }
-          }).catch(function (error) {
-        console.log(error);
-      });
+        this.$qs.stringify({
+          creater: this.username,
+          level: this.issuserank,
+          plantime: this.planTime,
+          step: this.step,
+          title: this.title,
+          type: this.issuserank,
+          userID: this.modifier,
+          version: this.version
+        }))
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.status === "创建成功") {
+            this.$message({
+              type: 'success',
+              message: '创建成功'
+            });
+          } else {
+            this.$message({
+              type: 'error',
+              message: '创建失败'
+            });
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
     }
   }
 };
