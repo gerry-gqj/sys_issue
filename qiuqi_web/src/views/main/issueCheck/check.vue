@@ -396,7 +396,7 @@ export default {
     let queryParam = this.$route.query;
     if (Object.keys(queryParam).length == 0) {
       if (this.role == "普通员工") {
-        this.formLabelAlign2.modifier = this.userid;
+        this.formLabelAlign2.modifier = this.username;
       }
 
     } else {
@@ -447,28 +447,28 @@ export default {
       //   console.log(3);
       // }
       this.$axios
-        .get('http://120.78.176.2:8080/issue/selectLikeIssue', {
-          params: {
-            issueID: this.formLabelAlign1.issueno,
-            issuestate: this.formLabelAlign2.issuserank,
-            creater: this.formLabelAlign1.createtor,
-            createtime: this.formLabelAlign3.createtime,
-            createtime1: this.formLabelAlign4.createtimeto,
-            plantime: this.formLabelAlign3.changetime,
-            plantime1: this.formLabelAlign4.changetimeto,
-            userID: this.formLabelAlign2.modifier,
-            pageNum: this.currentPage,
-            pageSize: this.pageSize,
-          },
-        })
-        .then((res) => {
-          this.total = res.data.total
-          this.tableData = res.data.list;
-          console.log(this.tableData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .get('http://120.78.176.2:8080/issue/selectLikeIssue', {
+            params: {
+              issueID: this.formLabelAlign1.issueno,
+              issuestate: this.formLabelAlign2.issuserank,
+              creater: this.formLabelAlign1.createtor,
+              createtime: this.formLabelAlign3.createtime,
+              createtime1: this.formLabelAlign4.createtimeto,
+              plantime: this.formLabelAlign3.changetime,
+              plantime1: this.formLabelAlign4.changetimeto,
+              name: this.formLabelAlign2.modifier,//userid
+              pageNum: this.currentPage,
+              pageSize: this.pageSize,
+            },
+          })
+          .then((res) => {
+            this.total=res.data.total
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`);

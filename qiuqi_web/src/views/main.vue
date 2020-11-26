@@ -19,7 +19,9 @@
             <el-card class="box-card">
               <el-main>
                 <!-- main部分 -->
+                <keep-alive>
                 <router-view />
+                </keep-alive>
                 <!-- 路由容器 -->
               </el-main>
             </el-card>
