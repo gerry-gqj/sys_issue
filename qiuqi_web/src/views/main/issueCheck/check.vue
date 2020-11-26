@@ -499,6 +499,7 @@ export default {
     },
     //点击修改
     changeClick(id) {
+      this.solute=''
       this.change = true;
       this.currentIssueId = id;
     },
