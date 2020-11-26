@@ -203,6 +203,46 @@
               </el-table-column>
               <el-table-column prop="acttime" label="实际完成时间">
               </el-table-column>
+              <!--Issue详情弹窗-->
+              <el-dialog
+                  title="Issue详情"
+                  :visible.sync="dialogVisible"
+                  width="30%"
+                  :append-to-body="true">
+
+                <div>
+                  <p>IssueID：{{ tableData[currentIndex].issueID }}</p>
+                  <p>Issue名称：{{ tableData[currentIndex].title }}</p>
+                  <p>解决方案：{{ solutionPlan }}</p>
+                  <p>创建时间：{{ tableData[currentIndex].createtime }}</p>
+                  <p>等级：{{ tableData[currentIndex].level }}</p>
+                  <p>创建者：{{ tableData[currentIndex].creater }}</p>
+                  <p>状态：{{ tableData[currentIndex].issuestate }}</p>
+                </div>
+              </el-dialog>
+              <!--  修改方案弹窗-->
+              <el-dialog
+                  title="修改"
+                  :visible.sync="change"
+                  width="50%"
+                  :append-to-body="true"
+              >
+                <div>
+                  <h3>解决方案：</h3>
+                </div>
+                <div>
+                  <el-input
+                      type="textarea"
+                      :autosize="{ minRows: 4, maxRows: 6 }"
+                      placeholder="请输入内容"
+                      v-model="solute"
+                  >
+                  </el-input>
+                </div>
+                <div style="text-align: center">
+                  <el-button round @click="submit">提交方案</el-button>
+                </div>
+              </el-dialog>
               <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
                   <el-button
@@ -211,71 +251,17 @@
                     size="mini"
                     >详情
                   </el-button>
+
                   <el-button
                     type="warning"
                     size="mini"
                     @click="changeClick(scope.row.issueID)"
                     v-if="
-                      role == '普通员工' && scope.row.issuestate == '待修改'
-                    "
-                    >修改
+                      role == '普通员工' && scope.row.issuestate == '待修改'">修改
                   </el-button>
-                  <el-dialog
-                    title="提示"
-                    :visible.sync="dialogVisible"
-                    width="30%"
-                    :append-to-body="true"
-                  >
-                    <!-- <div>
-                      <el-timeline :reverse="reverse">
-                        <el-timeline-item
-                          v-for="(activity, index) in activities"
-                          :key="index"
-                          :timestamp="activity.timestamp"
-                        >
-                          {{ activity.content }}
-                        </el-timeline-item>
-                      </el-timeline>
-                    </div> -->
-                    <div>
-                      <p>Issue名称：{{ issueName }}</p>
-                      <p>解决方案：{{ solutionPlan }}</p>
-                    </div>
-                    <!--                    <span slot="footer" class="dialog-footer">-->
-                    <!--                      <el-button-->
-                    <!--                          type="info"-->
-                    <!--                          size="small"-->
-                    <!--                          round-->
-                    <!--                          @click="dialogVisible = false"-->
-                    <!--                      >关 闭</el-button>-->
-                    <!--                    </span>-->
-                  </el-dialog>
 
-                  <el-dialog
-                    title="修改"
-                    :visible.sync="change"
-                    width="50%"
-                    :append-to-body="true"
-                  >
-                    <div>
-                      <h3>解决方案：</h3>
-                    </div>
-                    <div>
-                      <el-input
-                        type="textarea"
-                        :autosize="{ minRows: 4, maxRows: 6 }"
-                        placeholder="请输入内容"
-                        v-model="solute"
-                      >
-                      </el-input>
-                    </div>
-                    <div style="text-align: center">
-                      <el-button round @click="submit">提交方案</el-button>
-                    </div>
-                    <!--                    <span slot="footer" class="dialog-footer">-->
-                    <!--                      <el-button type="primary" @click="changeClick">关 闭</el-button>-->
-                    <!--                    </span>-->
-                  </el-dialog>
+
+
                 </template>
               </el-table-column>
             </el-table>
@@ -351,9 +337,9 @@ export default {
       dialogFormVisible: false,
       change: false,
       solute: "",
-      issueName: "",
       solutionPlan: "",
       currentIssueId: 0,
+      currentIndex:0,
       reverse: true,
       test: "testIssssssue",
       solutePlan: "solutePlan",
@@ -426,10 +412,12 @@ export default {
     this.searchIssue();
   },
   methods: {
+    //处理搜索点击事件
     searchClick() {
       this.currentPage = 1;
       this.searchIssue();
     },
+    //获得Issue列表
     searchIssue() {
       this.$axios
         .get("http://120.78.176.2:8080/issue/selectLikeIssue", {
@@ -455,6 +443,7 @@ export default {
           console.log(error);
         });
     },
+    //页号改变事件
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.currentPage = 1;
@@ -475,6 +464,7 @@ export default {
       }
     },
     golist() {},
+    //清空输入框
     clearvalues() {
       this.$refs.formLabelAlignref1.resetFields();
       this.$refs.formLabelAlignref2.resetFields();
@@ -491,7 +481,7 @@ export default {
         this.solutionPlan = sl;
       }
 
-      this.issueName = title;
+      this.currentIndex=index
       this.dialogVisible = true;
     },
     //点击修改
@@ -531,6 +521,7 @@ export default {
           console.log(error);
         });
     },
+
   },
 };
 </script>
