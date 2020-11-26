@@ -1,12 +1,14 @@
 <template>
   <div>
     <el-row>
-      <el-col :xs="24"
-              :sm="24"
-              :md="24"
-              :lg="24"
-              :xl="24"
-              style="text-align: center">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="24"
+        :lg="24"
+        :xl="24"
+        style="text-align: center"
+      >
         <el-container>
           <!-- header部分 -->
           <el-header>
@@ -19,7 +21,9 @@
             <el-card class="box-card">
               <el-main>
                 <!-- main部分 -->
-                <router-view />
+                <keep-alive>
+                  <router-view />
+                </keep-alive>
                 <!-- 路由容器 -->
               </el-main>
             </el-card>
@@ -38,13 +42,13 @@ export default {
     navtop,
     leftNav,
   },
-  data () {
+  data() {
     return {};
   },
-  beforeCreate () {
-    const role = localStorage.getItem('role')
-    if (role == '' || role == null) {
-      this.$router.push('/');
+  beforeCreate() {
+    const role = localStorage.getItem("role");
+    if (role == "" || role == null) {
+      this.$router.push("/");
     }
   },
 };
