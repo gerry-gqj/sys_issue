@@ -5,7 +5,7 @@
       <p>{{ currentTime }}</p>
     </div> -->
     <el-row :gutter="0"
-            v-if="this.role == '普通员工'">
+            v-if="role == '普通员工'">
       <el-col :span="18"
               :offset="2">
         <div class="grid-content bg-purple-light">
@@ -37,6 +37,7 @@
         </div></el-col
       > -->
     </el-row>
+
   </div>
 </template>
 
@@ -50,7 +51,6 @@ export default {
     };
   },
   mounted () {
-    this.drawLine();
     this.role = localStorage.getItem("role");
     // this.name = localStorage.gettItem("username");
     this.user = localStorage.getItem("username");
@@ -58,6 +58,7 @@ export default {
     // this.timer = setInterval(() => {
     //   _this.date = new Date(); // 修改数据date
     // }, 1000)
+
   },
   //  beforeDestroy() {
   //   if (this.timer) {
@@ -65,46 +66,18 @@ export default {
   //   }
   // }
   methods: {
-    drawLine () {
-      // 基于准备好的dom，初始化echarts实例
-      let main = this.$echarts.init(document.getElementById('main'))
-      // 绘制图表
-      main.setOption({
-        title: { text: '在Vue中使用echarts' },
-        tooltip: {},
-        xAxis: {
-          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-        },
-        yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
-      });
-      month.setOption({
-        title: { text: '在Vue中使用echarts' },
-        tooltip: {},
-        xAxis: {
-          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-        },
-        yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
-      });
-    }
-  }
-};
 
+  }
+
+
+};
 </script>
-  
+
 <style>
 .el-col {
   border-radius: 4px;
 }
+
 /* .bg-purple-dark {
   background: #99a9bf;
 }

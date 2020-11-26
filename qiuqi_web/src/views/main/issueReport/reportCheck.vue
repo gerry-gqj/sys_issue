@@ -118,33 +118,34 @@ export default {
     };
   },
   mounted () {
-    this.getIssues();
+    // this.getIssues();
+    this.searchIssue();
   },
   methods: {
     clearvalues () {
       this.formInline.UserId = "";
       this.formInline.UserName = "";
     },
-    getIssues () {
-      this.$axios
-        .get("http://120.78.176.2:8080/issue/selectissuecount", {
-          params: {
-            pageNum: this.currentPage,
-            pageSize: this.pageSize,
-          },
-        })
-        .then((res) => {
-          this.total = res.data.total
-          this.tableData = res.data.list;
-          console.log(this.tableData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // getIssues () {
+    //   this.$axios
+    //     .get("http://120.78.176.2:8080/issue/selectissuecount", {
+    //       params: {
+    //         pageNum: this.currentPage,
+    //         pageSize: this.pageSize,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       this.total = res.data.total
+    //       this.tableData = res.data.list;
+    //       console.log(this.tableData);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
     searchClick () {
       this.currentPage = 1;
-      this.validate();
+      this.searchIssue()
     },
     searchIssue () {
       this.$axios
@@ -171,20 +172,21 @@ export default {
       this.pageSize = val;
       this.searchIssue()
     },
-    //验证是否输入信息
-    validate () {
-      if ((this.formInline.UserId == '' || this.formInline.UserId == null) &&
-        (this.formInline.UserName == '' || this.formInline.UserName == null)) {
-        this.getIssues()
-      } else {
-        this.searchIssue()
-      }
-    },
+    // //验证是否输入信息
+    // validate () {
+    //   if ((this.formInline.UserId == '' || this.formInline.UserId == null) &&
+    //     (this.formInline.UserName == '' || this.formInline.UserName == null)) {
+    //     this.getIssues()
+    //   } else {
+    //
+    //   }
+    //   this.searchIssue()
+    // },
     //当前页改变时触发 跳转其他页
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
-      this.validate()
+      this.searchIssue()
     },
     getRowClass ({ rowIndex }) {
       if (rowIndex == 0) {

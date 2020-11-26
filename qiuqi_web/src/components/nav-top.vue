@@ -26,10 +26,14 @@
               }}</span>
             </a></span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="userinfo"
-                              v-if="this.role != '超级Admin'">修改用户信息</el-dropdown-item>
-            <el-dropdown-item @click.native="logout"
-                              divided>退出登录</el-dropdown-item>
+            <el-dropdown-item
+              @click.native="userinfo"
+              v-if="role != '超级Admin'"
+              >修改用户信息</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="logout" divided
+              >退出登录</el-dropdown-item
+            >
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -42,6 +46,7 @@ import router from "@/router";
 export default {
   data () {
     return {
+      role:'',
       user: "user",
       activeIndex: "1",
     };
