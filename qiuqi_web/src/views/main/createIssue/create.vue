@@ -143,7 +143,7 @@
                      filterable
                      placeholder="请选择">
             <el-option v-for="item in modifierOptions"
-                       :label="item.userID"
+                       :label="item.name"
                        :value="item.userID">
             </el-option>
           </el-select>
@@ -241,7 +241,14 @@ export default {
       this.$axios
         .get("http://120.78.176.2:8080/user/selectuserID")
         .then((res) => {
-          this.modifierOptions = res.data.list;
+          let op=[]
+          for (let i in res.data.list) {
+            if(res.data.list[i].userstate=='激活'){
+              op.push(res.data.list[i])
+            }
+            console.log(op)
+          }
+          this.modifierOptions = op
         })
         .catch(function (error) {
           console.log(error);
