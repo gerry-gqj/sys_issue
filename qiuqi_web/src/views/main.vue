@@ -48,7 +48,8 @@ export default {
   beforeCreate() {
     const role = localStorage.getItem("role");
     if (role == "" || role == null) {
-      this.$router.push("/");
+      // this.$router.push("/");
+      window.location.href = "/";
     }
   },
 };
