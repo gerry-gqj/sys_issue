@@ -379,11 +379,12 @@ export default {
     };
   },
   mounted () {
-    this.searchIssueByLike();
+
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
     this.formLabelAlign1.createtor = this.username;
+    this.searchIssueByLike();
   },
   methods: {
     searchClick () {
