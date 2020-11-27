@@ -254,7 +254,7 @@
                              size="mini">详情</el-button>
                   <el-button type="primary"
                              size="mini"
-                             @click="operate = true"
+                             @click="checkClick(scope.$index)"
                              v-if="scope.row.issuestate == '待验证'">验证</el-button>
                 </template>
               </el-table-column>
@@ -459,9 +459,9 @@ export default {
       this.$refs.formLabelAlignref4.resetFields();
     },
     //点击验证
-    checkClick () {
+    checkClick (inx) {
       this.operate = true;
-      // this.currentIssueId = issueID;
+      this.currentIndex = inx;
     },
     //更改issue状态 0：关闭 1：退回修改
     changeIssueState (option) {
@@ -477,7 +477,7 @@ export default {
         .post(
           "http://120.78.176.2:8080/issue/updateIssueState",
           this.$qs.stringify({
-            issueID: this.currentIssueId,
+            issueID: this.tableData[this.currentIndex].issueID,
             issuestate: state,
           })
         )
