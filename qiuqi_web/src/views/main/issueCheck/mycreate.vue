@@ -22,7 +22,7 @@
                         :clearable="true"></el-input>
             </el-form-item>
             <el-form-item label="创建人"
-                          v-if="this.role == '普通员工'"
+                          v-if="role == '普通员工'"
                           prop>
               <el-input v-model="formLabelAlign1.createtor"
                         placeholder="请输入"
@@ -170,16 +170,18 @@
                 :lg="24"
                 :xl="24"
                 style="text-align: center">
+
           <el-container>
+
             <el-table border
                       :data="tableData"
                       style="width: 100%"
                       :header-cell-style="getRowClass">
+
               <el-table-column type="selection"></el-table-column>
               <el-table-column type="index"
                                label="序号"></el-table-column>
-              <el-table-column prop="issueID"
-                               label="Issue ID">
+              <el-table-column prop="issueID" label="Issue ID">
               </el-table-column>
               <el-table-column prop="title"
                                label="Issue 标题">
@@ -190,7 +192,7 @@
                                label="创建时间">
               </el-table-column>
               <el-table-column prop="name"
-                               v-if="this.role == '普通员工'"
+                               v-if="role == '普通员工'"
                                label="修改人">
               </el-table-column>
               <el-table-column prop="name"
@@ -206,65 +208,57 @@
               <el-table-column prop="acttime"
                                label="实际完成时间">
               </el-table-column>
-              <!--              <el-table-column prop="solution" label="解决方案" >-->
-              <!--              </el-table-column>-->
+              <!--Issue详情弹窗-->
+              <el-dialog
+                  title="Issue详情"
+                  :visible.sync="dialogVisible"
+                  width="30%"
+                  :append-to-body="true">
+                <div>
+                  <p>IssueID：{{ tableData[currentIndex].issueID }}</p>
+                  <p>Issue名称：{{ tableData[currentIndex].title }}</p>
+                  <p>解决方案：{{ solutionPlan }}</p>
+                  <p>创建时间：{{ tableData[currentIndex].createtime }}</p>
+                  <p>等级：{{ tableData[currentIndex].level }}</p>
+                  <p>创建者：{{ tableData[currentIndex].creater }}</p>
+                  <p>状态：{{ tableData[currentIndex].issuestate }}</p>
+                </div>
+              </el-dialog>
+              <!--操作弹窗-->
+              <el-dialog title="操作"
+                         :visible.sync="operate"
+                         width="20%"
+                         :append-to-body="true">
+                <div style="text-align: center">
+                  <el-button type="primary"
+                             round
+                             @click="changeIssueState(1)">退回修改</el-button>
+                  <el-button type="primary"
+                             round
+                             @click="changeIssueState(0)">关闭issue</el-button>
+                </div>
+
+                <span slot="footer"
+                      class="dialog-footer">
+                      <el-button type="primary"
+                                 @click="operate = false">关 闭</el-button>
+                    </span>
+              </el-dialog>
               <el-table-column fixed="right"
                                label="操作"
                                width="150">
+
                 <template scope="scope">
                   <el-button @click="detailClick(scope.row.title, scope.$index)"
                              type="info"
                              size="mini">详情</el-button>
                   <el-button type="primary"
                              size="mini"
-                             @click="checkClick(scope.row.issueID)"
+                             @click="operate = true"
                              v-if="scope.row.issuestate == '待验证'">验证</el-button>
-                  <el-dialog title="Issue详情"
-                             :visible.sync="dialogVisible"
-                             width="50%"
-                             :append-to-body="true">
-                    <div>
-                      <p>Issue名称：{{ issueName }}</p>
-                      <p>解决方案：{{ solutionPlan }}</p>
-                    </div>
-                    <!-- <el-timeline :reverse="reverse">
-                      <el-timeline-item
-                        v-for="(activity, index) in activities"
-                        :key="index"
-                        :timestamp="activity.timestamp"
-                      >
-                        {{ activity.content }}
-                      </el-timeline-item>
-                    </el-timeline> -->
-
-                    <span slot="footer"
-                          class="dialog-footer">
-                      <el-button type="primary"
-                                 @click="dialogVisible = false">关 闭</el-button>
-                    </span>
-                  </el-dialog>
-
-                  <el-dialog title="操作"
-                             :visible.sync="operate"
-                             width="20%"
-                             :append-to-body="true">
-                    <div style="text-align: center">
-                      <el-button type="primary"
-                                 round
-                                 @click="changeIssueState(1)">退回修改</el-button>
-                      <el-button type="primary"
-                                 round
-                                 @click="changeIssueState(0)">关闭issue</el-button>
-                    </div>
-
-                    <span slot="footer"
-                          class="dialog-footer">
-                      <el-button type="primary"
-                                 @click="operate = false">关 闭</el-button>
-                    </span>
-                  </el-dialog>
                 </template>
               </el-table-column>
+
             </el-table>
           </el-container>
         </el-col>
@@ -359,6 +353,7 @@ export default {
           cmpttrue: "",
         },
       ],
+      currentIndex:0,
       solutionPlan: "",
       issueName: "",
       role: "",
@@ -384,12 +379,11 @@ export default {
     };
   },
   mounted () {
+    this.searchIssueByLike();
     this.userid = localStorage.getItem("userID");
     this.username = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
     this.formLabelAlign1.createtor = this.username;
-
-    this.searchIssueByLike();
   },
   methods: {
     searchClick () {
@@ -403,7 +397,7 @@ export default {
             issueID: this.formLabelAlign1.issueno,
             creater: this.formLabelAlign1.createtor,
             issuestate: this.formLabelAlign2.issuserank,
-            name: this.formLabelAlign2.modifier, //userid
+            name: this.formLabelAlign2.modifier,
             plantime: this.formLabelAlign3.changetime,
             createtime: this.formLabelAlign3.createtime,
             createtime1: this.formLabelAlign4.createtimeto,
@@ -447,9 +441,9 @@ export default {
       this.$refs.formLabelAlignref4.resetFields();
     },
     //点击验证
-    checkClick (issueID) {
+    checkClick () {
       this.operate = true;
-      this.currentIssueId = issueID;
+      // this.currentIssueId = issueID;
     },
     //更改issue状态 0：关闭 1：退回修改
     changeIssueState (option) {
@@ -498,7 +492,7 @@ export default {
       } else {
         this.solutionPlan = sl;
       }
-      this.issueName = title;
+      this.currentIndex=index
       this.dialogVisible = true;
     },
   },
