@@ -3,28 +3,27 @@
     <el-row>
       <el-col :span="3">
         <a @click="gowelcome">
-          <img class="logo"
-               src="../assets/imgs/logo.png"
-               alt="Logo" />
+          <img class="logo" src="../assets/imgs/logo.png" alt="Logo" />
         </a>
       </el-col>
-      <el-col :span="10"
-              :offset="5">
+      <el-col :span="10" :offset="5">
         <h1>GBA Issue管理系统</h1>
       </el-col>
-      <el-col :span="3"
-              :offset="3">
-        <el-dropdown><span>
-            <a class="user"
-               @click="ModifyUserInformation"><span class="userimg">
-                <el-avatar icon="el-icon-user-solid"
-                           class="headerLogo"></el-avatar>
+      <el-col :span="3" :offset="3">
+        <el-dropdown
+          ><span>
+            <a class="user" @click="ModifyUserInformation"
+              ><span class="userimg">
+                <el-avatar
+                  icon="el-icon-user-solid"
+                  class="headerLogo"
+                ></el-avatar>
               </span>
-              <span class="username"
-                    style="color: #1e90ff; font-size: 15px">{{
+              <span class="username" style="color: #1e90ff; font-size: 15px">{{
                 user
               }}</span>
-            </a></span>
+            </a></span
+          >
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item
               @click.native="userinfo"
@@ -44,30 +43,30 @@
 <script>
 import router from "@/router";
 export default {
-  data () {
+  data() {
     return {
-      role:'',
+      role: "",
       user: "user",
       activeIndex: "1",
     };
   },
-  mounted () {
+  mounted() {
     this.user = localStorage.getItem("username");
     this.role = localStorage.getItem("role");
     console.log(this.role);
   },
   methods: {
-    gowelcome () {
+    gowelcome() {
       this.$router.push("/main/welcome");
     },
     // handleSelect (key, keyPath) {
     //   console.log(key, keyPath);
     // },
-    ModifyUserInformation () { },
-    userinfo () {
+    ModifyUserInformation() {},
+    userinfo() {
       window.location.href = "/userinfo";
     },
-    logout () {
+    logout() {
       this.$confirm("是否注销登录?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -135,6 +134,6 @@ section {
   font-size: 12px;
 }
 h1 {
-  color: #01010e;
+  color: #7ae2f0;
 }
 </style>
