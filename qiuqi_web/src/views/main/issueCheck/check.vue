@@ -439,8 +439,25 @@ export default {
         })
         .then((res) => {
           this.total = res.data.total;
-          this.tableData = res.data.list;
-          console.log(this.tableData);
+          if( Object.keys(res.data.list).length==0){
+            console.log('空')
+            this.total=0
+            this.tableData= [
+              {
+                id: "",
+                title: "",
+                founder: "",
+                timecreate: "",
+                modifier: "",
+                statement: "",
+                cmptplan: "",
+                cmpttrue: "",
+              },
+            ]
+          }else {
+            this.tableData = res.data.list;
+            console.log(this.tableData);
+          }
         })
         .catch(function (error) {
           console.log(error);
